@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import { ArrowDownRight, ArrowUpRight, Code, Briefcase, Play, BookOpen } from "lucide-react";
 import { socialLinks } from "@/data/site-config";
 
-const iconMap: Record<string, React.ComponentType<{ size?: number }>> = {
+const iconMap: Record<string, React.ComponentType<{ size?: string | number }>> = {
   LinkedIn: Briefcase,
   GitHub: Code,
   YouTube: Play,

@@ -29,7 +29,7 @@
     // Simplifies import paths using aliases
     "paths": {
       "@/*": [
-        "./*"
+        "./src/*"
       ]
     },
     // Enables Next.js TypeScript plugin for better DX (developer experience)
@@ -53,7 +53,9 @@
   ],
   // Files and directories to include in type checking
   "include": [
-    "**/*",
+    "src/**/*",
+    "next.config.ts",
+    "worker.js",
     ".next/types/**/*.ts"
   ]
 }
