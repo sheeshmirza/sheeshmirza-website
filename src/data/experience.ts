@@ -78,8 +78,7 @@ export interface EducationEntry {
   institution: string;
   dates: string;
   cgpa: string;
-  coursework?: string[];
-  certifications?: string[];
+  coursework: string[];
 }
 
 export const education: EducationEntry[] = [
