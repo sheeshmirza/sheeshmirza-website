@@ -19,7 +19,14 @@ export const experience: ExperienceEntry[] = [
       "Implemented ML-driven recommendation engine reducing churn by 25%",
       "Owned product strategy for the analytics module, collaborating with stakeholders",
     ],
-    technologies: ["TypeScript", "React", "Next.js", "PostgreSQL", "Python", "AWS"],
+    technologies: [
+      "TypeScript",
+      "React",
+      "Next.js",
+      "PostgreSQL",
+      "Python",
+      "AWS",
+    ],
     projects: [
       "Real-time analytics dashboard",
       "Recommendation engine",
@@ -36,7 +43,14 @@ export const experience: ExperienceEntry[] = [
       "Designed and implemented microservices architecture for better scalability",
       "Mentored 2 junior developers and conducted code reviews",
     ],
-    technologies: ["JavaScript", "React", "Node.js", "MongoDB", "Docker", "GCP"],
+    technologies: [
+      "JavaScript",
+      "React",
+      "Node.js",
+      "MongoDB",
+      "Docker",
+      "GCP",
+    ],
     projects: ["E-commerce platform", "Customer dashboard", "Admin portal"],
   },
   {
@@ -49,7 +63,14 @@ export const experience: ExperienceEntry[] = [
       "Contributed to infrastructure setup and DevOps pipeline improvements",
       "Participated in cross-functional product meetings with design and marketing teams",
     ],
-    technologies: ["JavaScript", "React", "Express.js", "PostgreSQL", "Jest", "CI/CD"],
+    technologies: [
+      "JavaScript",
+      "React",
+      "Express.js",
+      "PostgreSQL",
+      "Jest",
+      "CI/CD",
+    ],
   },
 ];
 
