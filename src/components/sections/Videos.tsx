@@ -1,36 +1,23 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import { ArrowUpRight, Play } from "lucide-react";
 import { type Video } from "@/data/videos";
 import { Section } from "@/components/ui/Section";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Reveal } from "@/components/ui/Reveal";
+import { FilterTabs } from "@/components/ui/FilterTabs";
+import { ExternalLink } from "@/components/ui/ExternalLink";
+
+import { useRemoteData } from "@/hooks/useRemoteData";
+
+type VideosResponse = { videos: Video[]; categories?: string[] };
 
 export function Videos() {
   const [active, setActive] = useState<string>("All");
-  const [videos, setVideos] = useState<Video[]>([]);
-  const [categories, setCategories] = useState<string[]>([]);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    async function fetchVideos() {
-      try {
-        const response = await fetch("/api/videos");
-        const data = await response.json();
-        if (data.success && data.videos) {
-          setVideos(data.videos);
-          setCategories(data.categories || []);
-        }
-      } catch (error) {
-        console.error("Failed to fetch videos:", error);
-      } finally {
-        setLoading(false);
-      }
-    }
-
-    fetchVideos();
-  }, []);
+  const { data, loading } = useRemoteData<VideosResponse>("/api/videos");
+  const videos = data?.videos ?? [];
+  const categories = data?.categories ?? [];
 
   const filtered = useMemo(
     () =>
@@ -50,20 +37,13 @@ export function Videos() {
         />
       </Reveal>
 
-      <Reveal delay={0.1} className="mt-8 flex flex-wrap gap-2">
-        {categoryList.map((cat) => (
-          <button
-            key={cat}
-            onClick={() => setActive(cat)}
-            className={`rounded-full border px-4 py-1.5 text-sm transition-colors ${
-              active === cat
-                ? "border-foreground bg-foreground text-background"
-                : "border-border text-muted hover:border-signal hover:text-signal"
-            }`}
-          >
-            {cat}
-          </button>
-        ))}
+      <Reveal delay={0.1} className="mt-8">
+        <FilterTabs
+          options={categoryList}
+          active={active}
+          onChange={setActive}
+          variant="signal"
+        />
       </Reveal>
 
       {loading ? (
@@ -76,10 +56,8 @@ export function Videos() {
         <div className="mt-10 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {filtered.map((video, i) => (
             <Reveal key={video.slug} delay={i * 0.05}>
-              <a
+              <ExternalLink
                 href={video.href}
-                target="_blank"
-                rel="noopener noreferrer"
                 className="group flex h-full flex-col overflow-hidden border border-border bg-surface transition-[transform,border-color] hover:-translate-y-1 hover:border-signal"
               >
                 <div className="relative aspect-video w-full overflow-hidden bg-foreground">
@@ -87,6 +65,8 @@ export function Videos() {
                     <img
                       src={video.thumbnail}
                       alt={video.title}
+                      loading="lazy"
+                      decoding="async"
                       className="h-full w-full object-cover transition-transform group-hover:scale-105"
                     />
                   ) : (
@@ -114,7 +94,7 @@ export function Videos() {
                     </span>
                   </div>
                 </div>
-              </a>
+              </ExternalLink>
             </Reveal>
           ))}
         </div>

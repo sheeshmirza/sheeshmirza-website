@@ -1,6 +1,5 @@
 "use client";
 
-import { motion } from "framer-motion";
 import { curiosityAreas } from "@/data/site-config";
 import { Section } from "@/components/ui/Section";
 import { SectionHeading } from "@/components/ui/SectionHeading";
@@ -19,11 +18,7 @@ export function CuriosityGrid() {
       <div className="mt-12 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-5">
         {curiosityAreas.map((area, i) => (
           <Reveal key={area.key} delay={i * 0.06}>
-            <motion.div
-              whileHover={{ y: -6 }}
-              transition={{ duration: 0.25 }}
-              className="h-full border border-border bg-surface p-6"
-            >
+            <div className="h-full border border-border bg-surface p-6 transition-transform duration-300 hover:-translate-y-1">
               <p className="text-xs font-semibold tracking-widest text-accent uppercase">
                 {String(i + 1).padStart(2, "0")}
               </p>
@@ -33,7 +28,7 @@ export function CuriosityGrid() {
               <p className="mt-3 text-sm leading-relaxed text-muted">
                 {area.description}
               </p>
-            </motion.div>
+            </div>
           </Reveal>
         ))}
       </div>

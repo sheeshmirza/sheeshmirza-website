@@ -1,33 +1,19 @@
 "use client";
 
-import { useEffect, useState } from "react";
 import { ArrowUpRight } from "lucide-react";
 import { type Article } from "@/data/articles";
 import { Section } from "@/components/ui/Section";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Reveal } from "@/components/ui/Reveal";
+import { ExternalLink } from "@/components/ui/ExternalLink";
+import { useRemoteData } from "@/hooks/useRemoteData";
+import { Card } from "@/components/ui/Card";
+
+type ArticlesResponse = { articles: Article[] };
 
 export function FeaturedWriting() {
-  const [articles, setArticles] = useState<Article[]>([]);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    async function fetchArticles() {
-      try {
-        const response = await fetch("/api/articles");
-        const data = await response.json();
-        if (data.success && data.articles) {
-          setArticles(data.articles);
-        }
-      } catch (error) {
-        console.error("Failed to fetch articles:", error);
-      } finally {
-        setLoading(false);
-      }
-    }
-
-    fetchArticles();
-  }, []);
+  const { data, loading } = useRemoteData<ArticlesResponse>("/api/articles");
+  const articles = data?.articles ?? [];
 
   const featured = articles.filter((a) => a.featured);
 
@@ -49,11 +35,10 @@ export function FeaturedWriting() {
         <div className="mt-12 grid grid-cols-1 gap-6 lg:grid-cols-3">
           {featured.map((article, i) => (
             <Reveal key={article.slug} delay={i * 0.08}>
-              <a
+              <Card interactive className="h-full p-0">
+                <ExternalLink
                 href={article.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group flex h-full flex-col justify-between border border-border bg-surface p-7 transition-[transform,border-color] hover:-translate-y-1 hover:border-signal"
+                className="group flex h-full flex-col justify-between p-7"
               >
                 <div>
                   <span className="text-xs font-semibold tracking-widest text-signal uppercase">
@@ -69,7 +54,8 @@ export function FeaturedWriting() {
                 <span className="mt-8 flex items-center gap-1 text-sm text-foreground transition-colors group-hover:text-accent">
                   Read the note <ArrowUpRight size={14} />
                 </span>
-              </a>
+                </ExternalLink>
+              </Card>
             </Reveal>
           ))}
         </div>

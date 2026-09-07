@@ -1,3 +1,5 @@
+//Reviewed
+
 import type { MetadataRoute } from "next";
 import { site } from "@/data/site-config";
 

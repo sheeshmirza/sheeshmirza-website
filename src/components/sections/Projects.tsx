@@ -6,6 +6,8 @@ import { projects, projectCategories, type ProjectCategory } from "@/data/projec
 import { Section } from "@/components/ui/Section";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Reveal } from "@/components/ui/Reveal";
+import { FilterTabs } from "@/components/ui/FilterTabs";
+import { Card } from "@/components/ui/Card";
 
 export function Projects() {
   const [active, setActive] = useState<ProjectCategory | "All">("All");
@@ -21,20 +23,12 @@ export function Projects() {
         <SectionHeading eyebrow="Work" title="Things I've Built" />
       </Reveal>
 
-      <Reveal delay={0.1} className="mt-8 flex flex-wrap gap-2">
-        {(["All", ...projectCategories] as const).map((cat) => (
-          <button
-            key={cat}
-            onClick={() => setActive(cat)}
-            className={`rounded-full border px-4 py-1.5 text-sm transition-colors ${
-              active === cat
-                ? "border-accent bg-accent text-accent-foreground"
-                : "border-border text-muted hover:border-accent hover:text-accent"
-            }`}
-          >
-            {cat}
-          </button>
-        ))}
+      <Reveal delay={0.1} className="mt-8">
+        <FilterTabs
+          options={["All", ...projectCategories] as const}
+          active={active}
+          onChange={setActive}
+        />
       </Reveal>
 
       {filtered.length === 0 ? (
@@ -44,9 +38,10 @@ export function Projects() {
       ) : (
         <div className="mt-10 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {filtered.map((project) => (
-            <div
+            <Card
               key={project.name}
-              className="flex h-full flex-col border border-border bg-surface p-6 transition-transform hover:-translate-y-1"
+              interactive
+              className="flex h-full flex-col p-6"
             >
               <span className="text-xs font-semibold tracking-widest text-accent uppercase">
                 {project.category}
@@ -75,7 +70,7 @@ export function Projects() {
                   </a>
                 )}
               </div>
-            </div>
+            </Card>
           ))}
         </div>
       )}

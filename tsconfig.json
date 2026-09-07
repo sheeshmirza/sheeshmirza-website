@@ -54,8 +54,7 @@
   // Files and directories to include in type checking
   "include": [
     "src/**/*",
-    "next.config.ts",
-    "worker.js",
+    "next-env.d.ts",
     ".next/types/**/*.ts"
   ]
 }

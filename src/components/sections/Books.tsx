@@ -3,6 +3,7 @@ import { books } from "@/data/books";
 import { Section } from "@/components/ui/Section";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Reveal } from "@/components/ui/Reveal";
+import { Card } from "@/components/ui/Card";
 
 export function Books() {
   return (
@@ -19,7 +20,7 @@ export function Books() {
       ) : (
         <div className="mt-10 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {books.map((book) => (
-            <div key={book.title} className="border border-border bg-surface p-6 transition-transform hover:-translate-y-1">
+            <Card key={book.title} interactive className="p-6">
               <span className="text-xs font-semibold tracking-widest text-accent uppercase">
                 {book.topic}
               </span>
@@ -35,7 +36,7 @@ export function Books() {
                   />
                 ))}
               </div>
-            </div>
+            </Card>
           ))}
         </div>
       )}

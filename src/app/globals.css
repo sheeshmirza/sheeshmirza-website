@@ -86,6 +86,32 @@ body::before {
   background: linear-gradient(90deg, var(--signal) 0 20%, var(--border) 20% 100%);
 }
 
+.hero-enter {
+  animation: hero-enter 700ms ease-out both;
+}
+
+.hero-enter-1 { animation-delay: 0ms; }
+.hero-enter-2 { animation-delay: 100ms; }
+.hero-enter-3 { animation-delay: 200ms; }
+.hero-enter-4 { animation-delay: 300ms; }
+.hero-enter-5 { animation-delay: 400ms; }
+
+@keyframes hero-enter {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 600ms ease-out var(--reveal-delay, 0s), transform 600ms ease-out var(--reveal-delay, 0s);
+}
+
+.reveal-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
@@ -97,5 +123,14 @@ body::before {
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
+  }
+
+  .reveal {
+    opacity: 1;
+    transform: none;
+  }
+
+  .hero-enter {
+    animation: none;
   }
 }

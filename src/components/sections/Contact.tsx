@@ -5,6 +5,7 @@ import { calendlyUrl, socialLinks } from "@/data/site-config";
 import { Section } from "@/components/ui/Section";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Reveal } from "@/components/ui/Reveal";
+import { ExternalLink } from "@/components/ui/ExternalLink";
 
 export function Contact() {
   const [status, setStatus] = useState<"idle" | "sent">("idle");
@@ -68,22 +69,18 @@ export function Contact() {
               >
                 Send Message
               </button>
-              <a
+              <ExternalLink
                 href={linkedIn?.href}
-                target="_blank"
-                rel="noopener noreferrer"
                 className="border-b-2 border-signal px-1 py-3 text-sm font-semibold text-foreground hover:text-signal"
               >
                 Connect on LinkedIn
-              </a>
-              <a
+              </ExternalLink>
+              <ExternalLink
                 href={calendlyUrl}
-                target="_blank"
-                rel="noopener noreferrer"
                 className="border-b-2 border-accent px-1 py-3 text-sm font-semibold text-foreground hover:text-accent"
               >
                 Book a 30-minute call
-              </a>
+              </ExternalLink>
             </div>
           </form>
         )}
