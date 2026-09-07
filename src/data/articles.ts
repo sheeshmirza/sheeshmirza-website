@@ -1,6 +1,8 @@
+//Reviewed
+
 export interface Article {
   slug: string;
-  category: string; // Dynamically determined from Medium articles
+  category: string;
   title: string;
   description: string;
   date: string;
@@ -8,5 +10,3 @@ export interface Article {
   featured?: boolean;
   href: string;
 }
-
-// Articles are fetched dynamically from Medium RSS via /api/articles.
