@@ -2,6 +2,7 @@ import { ArrowUpRight } from "lucide-react";
 import { unfilteredCategories } from "@/data/site-config";
 import { Section } from "@/components/ui/Section";
 import { Reveal } from "@/components/ui/Reveal";
+import { ExternalLink } from "@/components/ui/ExternalLink";
 
 export function Unfiltered() {
   return (
@@ -31,14 +32,12 @@ export function Unfiltered() {
       </Reveal>
 
       <Reveal delay={0.2}>
-        <a
+        <ExternalLink
           href="https://www.youtube.com/@Sheesh.Unfiltered"
-          target="_blank"
-          rel="noopener noreferrer"
           className="mt-10 inline-flex items-center gap-2 rounded-full bg-accent px-6 py-3 text-sm font-medium text-accent-foreground"
         >
           Watch Sheesh Unfiltered <ArrowUpRight size={14} />
-        </a>
+        </ExternalLink>
       </Reveal>
     </Section>
   );
