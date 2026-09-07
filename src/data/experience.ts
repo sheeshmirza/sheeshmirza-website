@@ -78,7 +78,7 @@ export interface EducationEntry {
   degree: string;
   institution: string;
   dates: string;
-  cgpa?: string;
+  cgpa: string;
   coursework?: string[];
   certifications?: string[];
 }
