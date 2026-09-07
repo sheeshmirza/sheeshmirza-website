@@ -7,7 +7,6 @@ export interface ExperienceEntry {
   projects?: string[];
 }
 
-// Add real roles here in reverse-chronological order.
 export const experience: ExperienceEntry[] = [
   {
     role: "Lead Software Engineer",
