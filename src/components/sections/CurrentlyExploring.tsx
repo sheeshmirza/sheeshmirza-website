@@ -1,5 +1,6 @@
 "use client";
 
+import type { CSSProperties } from "react";
 import { exploringTopics } from "@/data/site-config";
 import { Section } from "@/components/ui/Section";
 import { SectionHeading } from "@/components/ui/SectionHeading";
@@ -17,7 +18,7 @@ export function CurrentlyExploring() {
         {exploringTopics.map((topic, i) => (
           <TopicPill
             key={topic}
-            style={{ "--reveal-delay": `${i * 0.04}s` } as React.CSSProperties}
+            style={{ "--reveal-delay": `${i * 0.04}s` } as CSSProperties}
             className="reveal reveal-visible transition-transform duration-300 hover:-translate-y-1"
           >
             {topic}

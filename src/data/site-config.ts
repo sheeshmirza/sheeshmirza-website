@@ -111,14 +111,4 @@ export const businessTopics = [
   "Business Models",
 ];
 
-export const unfilteredCategories = [
-  "Tech",
-  "AI",
-  "Business",
-  "Startups",
-  "Life",
-  "Opinions",
-  "Experiences",
-  "Conversations",
-];
 

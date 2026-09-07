@@ -9,6 +9,4 @@ export interface Article {
   href: string;
 }
 
-// Fetched dynamically from Medium RSS feed via /api/articles
-// No static articles - all content is pulled from https://sheeshmirza.medium.com
-export const articles: Article[] = [];
+// Articles are fetched dynamically from Medium RSS via /api/articles.

@@ -98,11 +98,3 @@ export const books: Book[] = [
   },
 ];
 
-export const bookCategories: BookCategory[] = [
-  "Psychology",
-  "Business",
-  "Startups",
-  "Technology",
-  "AI",
-  "Human Behavior",
-];
