@@ -11,8 +11,8 @@ export function Psychology() {
       <Reveal>
         <SectionHeading
           eyebrow="Human Behavior"
-          title="Understanding People"
-          subtitle="Technology changes what people can do. Psychology helps explain why they do it."
+          title="Designing for how people really behave"
+          subtitle="Technology changes what people can do. Psychology helps explain what they notice, want, trust, and choose."
         />
       </Reveal>
 
@@ -38,7 +38,9 @@ export function Psychology() {
       </div>
 
       <p className="mt-8 text-sm text-muted">
-        Future articles and research on human behavior will be added here.
+        The pattern I keep returning to: attention creates awareness, emotion
+        creates meaning, desire creates momentum, and trust makes action feel
+        safe.
       </p>
     </Section>
   );

@@ -10,7 +10,8 @@ export function AISection() {
       <Reveal>
         <SectionHeading
           eyebrow="Artificial Intelligence"
-          title="Where Technology Gets Interesting"
+          title="Where software starts to reason"
+          subtitle="The interesting question is not whether AI is powerful. It is where that power becomes genuinely useful."
         />
       </Reveal>
 
@@ -23,8 +24,9 @@ export function AISection() {
       </div>
 
       <p className="mt-10 max-w-2xl text-muted">
-        Experiments and projects exploring generative AI, agents and applied
-        machine learning will live here as they&apos;re built.
+        I&apos;m exploring generative AI, agents, and applied machine learning
+        through small experiments that make the trade-offs visible: capability,
+        reliability, cost, and human judgment.
       </p>
     </Section>
   );

@@ -21,7 +21,7 @@ export const books: Book[] = [
     author: "Daniel Kahneman",
     topic: "Psychology",
     takeaway:
-      "Understanding cognitive biases and heuristics is essential for building products and businesses that align with how people actually think.",
+      "A product is experienced by a fast brain first. Reduce the friction, ambiguity, and decisions that make the right action harder than it needs to be.",
     rating: 5,
   },
   {
@@ -29,7 +29,7 @@ export const books: Book[] = [
     author: "Peter Thiel",
     topic: "Startups",
     takeaway:
-      "Creating monopolistic businesses through unique value requires contrarian thinking and technology that doesn't just incrementally improve.",
+      "The useful question is not whether an idea sounds contrarian. It is whether the product creates a durable advantage that customers can feel.",
     rating: 5,
   },
   {
@@ -37,7 +37,7 @@ export const books: Book[] = [
     author: "Clayton Christensen",
     topic: "Business",
     takeaway:
-      "Disruption happens when new entrants deliver simpler, cheaper solutions that eventually outperform incumbents.",
+      "Healthy businesses can be disrupted by serving a smaller, ignored use case better. Scale is not protection when the customer experience is misaligned.",
     rating: 4,
   },
   {
@@ -45,7 +45,7 @@ export const books: Book[] = [
     author: "Robert Cialdini",
     topic: "Psychology",
     takeaway:
-      "There are six universal principles of persuasion: reciprocity, commitment, social proof, authority, liking, and scarcity.",
+      "Persuasion works best when it lowers uncertainty without hiding the trade-off. Trust is not a trick in the interface; it is the product of the whole experience.",
     rating: 5,
   },
   {
@@ -53,7 +53,7 @@ export const books: Book[] = [
     author: "Don Norman",
     topic: "Technology",
     takeaway:
-      "Good design solves user problems through invisible, intuitive systems that work with human psychology, not against it.",
+      "When an interface needs a manual, the design has probably handed its complexity to the user. Good tools make the next action legible.",
     rating: 4,
   },
   {
@@ -61,7 +61,7 @@ export const books: Book[] = [
     author: "Eric Ries",
     topic: "Startups",
     takeaway:
-      "Build-measure-learn feedback loops let you validate assumptions quickly and waste less time on ideas that don't work.",
+      "The goal of an early product is not to look complete. It is to expose the riskiest assumption quickly enough to learn before it becomes expensive.",
     rating: 4,
   },
   {
@@ -69,7 +69,7 @@ export const books: Book[] = [
     author: "Dan Ariely",
     topic: "Human Behavior",
     takeaway:
-      "People are predictably irrational in consistent ways. Understanding these patterns helps predict behavior at scale.",
+      "People are not random; context changes what feels reasonable. Better products design the context instead of blaming the user for the outcome.",
     rating: 4,
   },
   {
@@ -77,7 +77,7 @@ export const books: Book[] = [
     author: "Brian Christian",
     topic: "AI",
     takeaway:
-      "As AI systems become more powerful, ensuring they're aligned with human values is one of the most critical technical challenges.",
+      "An AI system can be technically impressive and still be wrong for the people relying on it. Capability needs evaluation, boundaries, and a clear account of who bears the risk.",
     rating: 5,
   },
   {
@@ -85,7 +85,7 @@ export const books: Book[] = [
     author: "Yuval Noah Harari",
     topic: "Human Behavior",
     takeaway:
-      "Understanding how humans created shared fiction (money, nations, laws) helps explain why group dynamics override logic.",
+      "Shared stories coordinate people at a scale that individual logic cannot. Products, brands, and institutions all depend on the meaning people agree to carry together.",
     rating: 5,
   },
   {
@@ -93,7 +93,7 @@ export const books: Book[] = [
     author: "Edmond Lau",
     topic: "Technology",
     takeaway:
-      "Impact is a function of leverage, execution, and how you allocate your limited time. Smart engineers optimize for these.",
+      "Engineering impact comes from choosing leverage deliberately: solve the expensive problem, remove recurring work, and spend craft where users can feel it.",
     rating: 4,
   },
 ];

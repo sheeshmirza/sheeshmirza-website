@@ -47,10 +47,10 @@ export function Videos() {
       </Reveal>
 
       {loading ? (
-        <p className="mt-12 border-l-2 border-signal pl-4 text-sm text-muted">Finding the latest conversations...</p>
+        <p className="mt-12 border-l-2 border-signal pl-4 text-sm text-muted">Loading the latest conversations...</p>
       ) : filtered.length === 0 ? (
         <p className="mt-12 text-muted">
-          New conversations on {active} are on the way.
+          No conversations in {active} yet. The next one is still being shaped.
         </p>
       ) : (
         <div className="mt-10 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">

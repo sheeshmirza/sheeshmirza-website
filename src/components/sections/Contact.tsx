@@ -22,8 +22,8 @@ export function Contact() {
       <Reveal>
         <SectionHeading
           eyebrow="Contact"
-          title="Bring a good question."
-          subtitle="Building something interesting, exploring AI, or thinking about a startup? The best conversations usually begin before the answer is obvious."
+          title="Let&apos;s talk before the answer is obvious."
+          subtitle="Building something interesting, exploring AI, or thinking through a startup? Send a question, an idea, or simply a note to start the conversation."
         />
       </Reveal>
 

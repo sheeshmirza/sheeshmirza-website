@@ -7,8 +7,8 @@ export function Footer() {
         <div>
           <p className="font-serif text-lg font-semibold">{site.name}</p>
           <p className="mt-1 max-w-xs text-sm leading-relaxed text-muted">
-            A public notebook on building useful things and understanding why
-            people do what they do.
+            A public notebook on building useful things, studying behavior, and
+            making complicated ideas easier to use.
           </p>
         </div>
         <div className="flex flex-wrap gap-x-6 gap-y-2">

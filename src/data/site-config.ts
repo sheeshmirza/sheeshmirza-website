@@ -2,7 +2,7 @@ export const site = {
   name: "Sheesh Mirza",
   title: "Sheesh Mirza — Notes on Building, Thinking & Human Behavior",
   description:
-    "Notes from Sheesh Mirza on building software, understanding people, and turning complicated ideas into useful things.",
+    "A working notebook from Sheesh Mirza on building software, understanding people, and making complicated ideas useful.",
   // TODO: replace with the production domain once available.
   url: "https://sheeshmirza.com",
 };
@@ -23,38 +23,38 @@ export const socialLinks = [
 ];
 
 export const calendlyUrl =
-  "https://calendly.com/sheesh-mirza/30min?month=2026-09";
+  "https://calendly.com/sheesh-mirza/30min";
 
 export const curiosityAreas = [
   {
     key: "technology",
     title: "Technology",
     description:
-      "Software engineering, system design, programming, infrastructure and emerging technologies.",
+      "Software engineering, system design, programming, infrastructure, and the tools that change how we work.",
   },
   {
     key: "ai",
     title: "AI",
     description:
-      "Generative AI, LLMs, AI Agents, Machine Learning, automation and the future of intelligent systems.",
+      "Generative AI, LLMs, agents, machine learning, automation, and the future of intelligent systems.",
   },
   {
     key: "startups",
     title: "Startups",
     description:
-      "Products, founders, markets, distribution, competition, experimentation and building from zero.",
+      "Products, founders, markets, distribution, competition, experimentation, and building from zero.",
   },
   {
     key: "business",
     title: "Business",
     description:
-      "Strategy, marketing, sales, consumer behavior, pricing, growth and value creation.",
+      "Strategy, marketing, sales, consumer behavior, pricing, growth, and value creation.",
   },
   {
     key: "psychology",
     title: "Psychology",
     description:
-      "Human behavior, decision-making, persuasion, motivation, cognitive biases, consumer psychology and why people do what they do.",
+      "Human behavior, decision-making, persuasion, motivation, cognitive biases, and why people do what they do.",
   },
 ] as const;
 

@@ -20,7 +20,11 @@ export function Projects() {
   return (
     <Section id="work" className="border-t border-border">
       <Reveal>
-        <SectionHeading eyebrow="Work" title="Things I've Built" />
+        <SectionHeading
+          eyebrow="Work"
+          title="Projects & experiments"
+          subtitle="A working shelf of software, prototypes, and ideas being turned into something useful."
+        />
       </Reveal>
 
       <Reveal delay={0.1} className="mt-8">
@@ -33,7 +37,7 @@ export function Projects() {
 
       {filtered.length === 0 ? (
         <p className="mt-12 text-muted">
-          Projects are being added here as they&apos;re built — check back soon.
+          Nothing in this category yet. The next experiment is still being built.
         </p>
       ) : (
         <div className="mt-10 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">

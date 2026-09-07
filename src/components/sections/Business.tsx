@@ -10,7 +10,8 @@ export function Business() {
       <Reveal>
         <SectionHeading
           eyebrow="Startups & Business"
-          title="Building & Understanding Businesses"
+          title="Building businesses people choose"
+          subtitle="Products succeed at the intersection of a real problem, a clear promise, and a reason to come back."
         />
       </Reveal>
 
@@ -21,7 +22,10 @@ export function Business() {
           </Reveal>
         ))}
       </div>
-
+      <p className="mt-10 max-w-2xl text-muted">
+        I&apos;m interested in the full loop: finding demand, shaping a product,
+        earning attention, and learning what customers actually value.
+      </p>
     </Section>
   );
 }

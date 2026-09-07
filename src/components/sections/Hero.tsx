@@ -16,7 +16,7 @@ export function Hero() {
       <div className="mx-auto grid max-w-7xl gap-12 px-6 pb-16 pt-16 sm:px-10 sm:pb-24 sm:pt-24 lg:grid-cols-[1.15fr_0.85fr] lg:items-end lg:gap-20 lg:px-12 lg:pt-28">
         <p className="hero-enter hero-enter-1 col-span-full flex items-center gap-3 text-[0.68rem] font-semibold uppercase tracking-[0.28em] text-muted">
           <span className="h-2 w-2 rounded-full bg-signal shadow-[0_0_0_5px_color-mix(in_srgb,var(--signal)_15%,transparent)]" />
-          Independent notes / 2026
+          Field notes on building, thinking, and human behavior
         </p>
 
         <h1 className="hero-enter hero-enter-2 max-w-4xl font-serif text-[3.25rem] leading-[0.98] tracking-[-0.04em] text-foreground sm:text-7xl lg:text-[6.6rem]">
@@ -26,10 +26,9 @@ export function Hero() {
         </h1>
 
         <p className="hero-enter hero-enter-3 max-w-md self-end text-base leading-relaxed text-muted sm:text-lg lg:pb-2">
-          I&apos;m Sheesh, a software engineer and entrepreneur studying the
-          space between systems and behavior. This is where I collect the
-          useful parts: ideas, experiments, essays, and the occasional strong
-          opinion.
+          I&apos;m a software engineer and entrepreneur studying the space between
+          systems and behavior. This is where I collect the useful parts:
+          ideas, experiments, essays, and the occasional strong opinion.
         </p>
 
         <div className="hero-enter hero-enter-4 flex flex-wrap items-center gap-3">
@@ -37,7 +36,7 @@ export function Hero() {
             href="/about"
             className="inline-flex items-center gap-2 bg-foreground px-5 py-3 text-sm font-semibold text-background transition-transform hover:-translate-y-1"
           >
-            Start with the field notes <ArrowUpRight size={15} />
+            Explore the field notes <ArrowUpRight size={15} />
           </a>
           <a
             href="/contact"

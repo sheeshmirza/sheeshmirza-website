@@ -33,7 +33,11 @@ export function Thinking() {
   return (
     <Section id="thinking" className="border-t border-border">
       <Reveal>
-        <SectionHeading eyebrow="Thinking" title="What I'm Learning" />
+        <SectionHeading
+          eyebrow="Thinking"
+          title="What I&apos;m learning in public"
+          subtitle="Short notes on technology, startups, psychology, and the ideas that make building clearer."
+        />
       </Reveal>
 
       <Reveal delay={0.1} className="mt-8">
@@ -44,7 +48,7 @@ export function Thinking() {
         <p className="mt-12 text-muted">Loading articles...</p>
       ) : filtered.length === 0 ? (
         <p className="mt-12 text-muted">
-          New thoughts on {active} are on the way.
+          No notes in {active} yet. The next useful idea is still being worked out.
         </p>
       ) : (
         <div className="mt-10 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">

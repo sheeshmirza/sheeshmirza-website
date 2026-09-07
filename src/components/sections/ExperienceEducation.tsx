@@ -9,7 +9,11 @@ export function ExperienceEducation() {
       <div className="grid grid-cols-1 gap-16 lg:grid-cols-2">
         <div>
           <Reveal>
-            <SectionHeading eyebrow="Career" title="Experience" />
+            <SectionHeading
+              eyebrow="Career"
+              title="Experience"
+              subtitle="A record of the roles that shaped how I build and think."
+            />
           </Reveal>
           {experience.length === 0 ? (
             <p className="mt-8 text-muted">Roles will be listed here.</p>
@@ -23,18 +27,22 @@ export function ExperienceEducation() {
                   <h3 className="mt-2 font-serif text-xl text-foreground">
                     {role.role} · {role.company}
                   </h3>
-                  <ul className="mt-3 list-disc space-y-1 pl-4 text-sm text-muted">
-                    {role.responsibilities.map((r) => (
-                      <li key={r}>{r}</li>
-                    ))}
-                  </ul>
-                  <div className="mt-3 flex flex-wrap gap-2">
-                    {role.technologies.map((t) => (
-                      <span key={t} className="rounded-full border border-border px-3 py-1 text-xs text-muted">
-                        {t}
-                      </span>
-                    ))}
-                  </div>
+                  {!!role.responsibilities?.length && (
+                    <ul className="mt-3 list-disc space-y-1 pl-4 text-sm text-muted">
+                      {role.responsibilities.map((r) => (
+                        <li key={r}>{r}</li>
+                      ))}
+                    </ul>
+                  )}
+                  {!!role.technologies?.length && (
+                    <div className="mt-3 flex flex-wrap gap-2">
+                      {role.technologies.map((t) => (
+                        <span key={t} className="rounded-full border border-border px-3 py-1 text-xs text-muted">
+                          {t}
+                        </span>
+                      ))}
+                    </div>
+                  )}
                 </div>
               ))}
             </div>
@@ -43,7 +51,11 @@ export function ExperienceEducation() {
 
         <div>
           <Reveal>
-            <SectionHeading eyebrow="Academics" title="Education" />
+            <SectionHeading
+              eyebrow="Academics"
+              title="Education"
+              subtitle="The formal foundations behind the practical work."
+            />
           </Reveal>
           <div className="mt-8 space-y-8">
             {education.map((entry) => (
@@ -56,11 +68,6 @@ export function ExperienceEducation() {
                 {!!entry.coursework?.length && (
                   <p className="mt-3 text-sm text-muted">
                     Coursework: {entry.coursework.join(", ")}
-                  </p>
-                )}
-                {!!entry.certifications?.length && (
-                  <p className="mt-1 text-sm text-muted">
-                    Certifications: {entry.certifications.join(", ")}
                   </p>
                 )}
               </div>
