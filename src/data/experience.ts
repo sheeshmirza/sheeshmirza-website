@@ -1,75 +1,46 @@
+//Reviewed
+
 export interface ExperienceEntry {
   role: string;
   company: string;
   dates: string;
-  responsibilities: string[];
-  technologies: string[];
+  responsibilities?: string[];
+  technologies?: string[];
   projects?: string[];
 }
 
 export const experience: ExperienceEntry[] = [
   {
-    role: "Lead Software Engineer",
-    company: "TechStartup Inc.",
-    dates: "2023 - Present",
-    responsibilities: [
-      "Architected and built the core platform serving 50K+ users using Next.js and PostgreSQL",
-      "Led a team of 3 engineers, mentoring junior developers on system design and best practices",
-      "Implemented ML-driven recommendation engine reducing churn by 25%",
-      "Owned product strategy for the analytics module, collaborating with stakeholders",
-    ],
-    technologies: [
-      "TypeScript",
-      "React",
-      "Next.js",
-      "PostgreSQL",
-      "Python",
-      "AWS",
-    ],
-    projects: [
-      "Real-time analytics dashboard",
-      "Recommendation engine",
-      "API rate limiting system",
-    ],
+    role: "Software Development Engineer",
+    company: "Freecharge Payment Technologies, IN",
+    dates: "Aug 2024 - Present",
+    responsibilities: [],
+    technologies: [],
+    projects: [],
   },
   {
-    role: "Full Stack Engineer",
-    company: "Digital Solutions Ltd.",
-    dates: "2021 - 2023",
-    responsibilities: [
-      "Built customer-facing web applications using React and Node.js serving 100K+ monthly users",
-      "Optimized database queries and API performance, reducing load times by 40%",
-      "Designed and implemented microservices architecture for better scalability",
-      "Mentored 2 junior developers and conducted code reviews",
-    ],
-    technologies: [
-      "JavaScript",
-      "React",
-      "Node.js",
-      "MongoDB",
-      "Docker",
-      "GCP",
-    ],
-    projects: ["E-commerce platform", "Customer dashboard", "Admin portal"],
+    role: "Backend Developer",
+    company: "Quantum Dynamics Corp., FR",
+    dates: "Mar 2023 - Jun 2024",
+    responsibilities: [],
+    technologies: [],
+    projects: [],
   },
   {
-    role: "Software Engineer",
-    company: "StartupXYZ",
-    dates: "2020 - 2021",
-    responsibilities: [
-      "Developed full-stack features for web application from requirements to deployment",
-      "Built automated testing suite, improving code coverage from 20% to 80%",
-      "Contributed to infrastructure setup and DevOps pipeline improvements",
-      "Participated in cross-functional product meetings with design and marketing teams",
-    ],
-    technologies: [
-      "JavaScript",
-      "React",
-      "Express.js",
-      "PostgreSQL",
-      "Jest",
-      "CI/CD",
-    ],
+    role: "Full Stack Developer Intern",
+    company: "Innovation Incubator Advisory, IN",
+    dates: "Nov 2022 - Mar 2023",
+    responsibilities: [],
+    technologies: [],
+    projects: [],
+  },
+  {
+    role: "Software Developer Intern",
+    company: "Full Creative, IN",
+    dates: "Sep 2022 - Oct 2022",
+    responsibilities: [],
+    technologies: [],
+    projects: [],
   },
 ];
 
@@ -84,7 +55,7 @@ export interface EducationEntry {
 export const education: EducationEntry[] = [
   {
     degree: "Master of Computer Applications",
-    institution: "Chandigarh University, India",
+    institution: "Chandigarh University, IN",
     dates: "2024 - 2026",
     cgpa: "8.95/10",
     coursework: [
