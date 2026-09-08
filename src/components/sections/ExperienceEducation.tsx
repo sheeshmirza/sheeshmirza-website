@@ -34,6 +34,11 @@ export function ExperienceEducation() {
                       ))}
                     </ul>
                   )}
+                  {!!role.projects?.length && (
+                    <p className="mt-3 text-xs text-muted">
+                      <span className="font-medium text-foreground">Key initiatives:</span> {role.projects.join(" · ")}
+                    </p>
+                  )}
                   {!!role.technologies?.length && (
                     <div className="mt-3 flex flex-wrap gap-2">
                       {role.technologies.map((t) => (

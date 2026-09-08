@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { ArrowDownRight, ArrowUpRight, Code, Briefcase, Play, BookOpen } from "lucide-react";
 import { socialLinks } from "@/data/site-config";
 
@@ -26,24 +27,30 @@ export function Hero() {
         </h1>
 
         <p className="hero-enter hero-enter-3 max-w-md self-end text-base leading-relaxed text-muted sm:text-lg lg:pb-2">
-          I&apos;m a software engineer and entrepreneur studying the space between
-          systems and behavior. This is where I collect the useful parts:
-          ideas, experiments, essays, and the occasional strong opinion.
+          I&apos;m a software engineer exploring where reliable systems, practical
+          AI, and human behavior meet. I currently build backend payment
+          infrastructure at Freecharge.
         </p>
 
         <div className="hero-enter hero-enter-4 flex flex-wrap items-center gap-3">
-          <a
+          <Link
             href="/about"
             className="inline-flex items-center gap-2 bg-foreground px-5 py-3 text-sm font-semibold text-background transition-transform hover:-translate-y-1"
           >
-            Explore the field notes <ArrowUpRight size={15} />
-          </a>
-          <a
+            About & Experience <ArrowUpRight size={15} />
+          </Link>
+          <Link
+            href="/blog"
+            className="inline-flex items-center gap-2 border border-border bg-surface px-5 py-3 text-sm font-semibold text-foreground transition-colors hover:border-signal hover:text-signal"
+          >
+            Read Field Notes <ArrowUpRight size={15} />
+          </Link>
+          <Link
             href="/contact"
             className="inline-flex items-center gap-2 border-b-2 border-signal px-1 py-3 text-sm font-semibold text-foreground transition-colors hover:text-signal"
           >
             Say hello <ArrowUpRight size={15} />
-          </a>
+          </Link>
         </div>
 
         <div className="hero-enter hero-enter-5 flex flex-wrap items-center gap-3 border-t border-border pt-5 lg:col-start-1">
@@ -70,16 +77,16 @@ export function Hero() {
           </div>
           <div className="paper-rule mt-7 h-1 w-full" />
           <p className="mt-7 max-w-sm font-serif text-3xl leading-tight sm:text-4xl">
-            The best products make a complicated thing feel obvious.
+            The best products make the hard part feel simple.
           </p>
           <div className="mt-12 grid grid-cols-2 gap-5 border-t border-background/20 pt-5 text-xs text-background/60">
             <div>
               <p className="text-background">01 / Build</p>
-              <p className="mt-1">Software, products, businesses</p>
+              <p className="mt-1">Reliable software and useful products</p>
             </div>
             <div>
               <p className="text-background">02 / Study</p>
-              <p className="mt-1">Motivation, attention, trust</p>
+              <p className="mt-1">Attention, motivation, and trust</p>
             </div>
           </div>
         </aside>

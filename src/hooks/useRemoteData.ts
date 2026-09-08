@@ -14,9 +14,9 @@ export function useRemoteData<T>(url: string): RemoteState<T> {
     loading: true,
     error: null,
   });
-
   useEffect(() => {
     const controller = new AbortController();
+    setState({ data: null, loading: true, error: null });
 
     async function load() {
       try {
@@ -25,9 +25,15 @@ export function useRemoteData<T>(url: string): RemoteState<T> {
           throw new Error(`Request failed with status ${response.status}`);
         }
         const data = (await response.json()) as T;
+        if (controller.signal.aborted) return;
         setState({ data, loading: false, error: null });
       } catch (error) {
-        if (error instanceof DOMException && error.name === "AbortError") return;
+        if (
+          controller.signal.aborted ||
+          (error instanceof Error && error.name === "AbortError")
+        ) {
+          return;
+        }
         setState({
           data: null,
           loading: false,
@@ -35,10 +41,8 @@ export function useRemoteData<T>(url: string): RemoteState<T> {
         });
       }
     }
-
     load();
     return () => controller.abort();
   }, [url]);
-
   return state;
 }

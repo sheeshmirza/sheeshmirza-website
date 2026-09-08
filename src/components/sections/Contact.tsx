@@ -24,6 +24,7 @@ export function Contact() {
           eyebrow="Contact"
           title="Let&apos;s talk before the answer is obvious."
           subtitle="Building something interesting, exploring AI, or thinking through a startup? Send a question, an idea, or simply a note to start the conversation."
+          level="h1"
         />
       </Reveal>
 

@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { articles as fallbackArticles } from "@/data/articles";
 
 export const revalidate = 3600;
 
@@ -179,6 +180,9 @@ async function parseMediumFeed(): Promise<MediumArticle[]> {
 export async function GET() {
   try {
     const articles = await parseMediumFeed();
+    if (articles.length === 0) {
+      throw new Error("No articles parsed from Medium feed");
+    }
     const tags = [...new Set(articles.flatMap((article) => article.tags))].sort(
       (a, b) => a.localeCompare(b),
     );
@@ -207,16 +211,23 @@ export async function GET() {
       },
     );
   } catch (error) {
-    console.error("Failed to fetch Medium articles:", error);
+    console.warn("Using fallback articles due to fetch error:", error);
+    const fallbackTags = [
+      ...new Set(fallbackArticles.map((a) => a.category)),
+    ].sort();
     return NextResponse.json(
       {
-        success: false,
-        error: "Failed to fetch articles",
-        articles: [],
-        tags: [],
-        count: 0,
+        success: true,
+        articles: fallbackArticles,
+        tags: fallbackTags,
+        count: fallbackArticles.length,
+        fallback: true,
       },
-      { status: 500 },
+      {
+        headers: {
+          "Cache-Control": `public, s-maxage=300, stale-while-revalidate=3600`,
+        },
+      },
     );
   }
 }

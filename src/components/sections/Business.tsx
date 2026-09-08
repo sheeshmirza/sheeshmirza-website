@@ -11,7 +11,7 @@ export function Business() {
         <SectionHeading
           eyebrow="Startups & Business"
           title="Building businesses people choose"
-          subtitle="Products succeed at the intersection of a real problem, a clear promise, and a reason to come back."
+          subtitle="A product earns its place when it solves a real problem, makes a clear promise, and gives people a reason to return."
         />
       </Reveal>
 
@@ -23,8 +23,8 @@ export function Business() {
         ))}
       </div>
       <p className="mt-10 max-w-2xl text-muted">
-        I&apos;m interested in the full loop: finding demand, shaping a product,
-        earning attention, and learning what customers actually value.
+        I&apos;m interested in the full loop: understanding demand, shaping a
+        product, earning attention, and learning what customers value enough to choose again.
       </p>
     </Section>
   );

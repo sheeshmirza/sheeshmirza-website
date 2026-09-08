@@ -18,54 +18,65 @@ export interface Project {
 // Add real projects here as they're built. No fabricated entries.
 export const projects: Project[] = [
   {
-    name: "AI-Powered Analytics Dashboard",
+    name: "High-Throughput Payment Orchestrator",
     description:
-      "Real-time analytics platform using LLMs to generate actionable insights from complex data sets.",
-    category: "AI",
-    technology: ["React", "TypeScript", "Next.js", "OpenAI API", "PostgreSQL"],
-    problemSolved: "Transforms raw data into human-readable insights without manual analysis.",
-  },
-  {
-    name: "Startup Idea Validator",
-    description:
-      "Automated tool that validates startup ideas against market data and consumer psychology principles.",
-    category: "Business",
-    technology: ["Node.js", "ML Models", "Web Scraping", "React"],
-    problemSolved:
-      "Reduces time-to-market validation from weeks to hours by automating research.",
-  },
-  {
-    name: "Consumer Psychology Framework",
-    description:
-      "Open-source framework documenting decision-making patterns, cognitive biases, and persuasion principles for product teams.",
+      "A distributed transaction router and reconciliation engine designed for high-concurrency financial operations with deterministic idempotency.",
     category: "Software",
-    technology: ["TypeScript", "React", "Markdown", "GraphQL"],
-    problemSolved: "Provides standardized mental models for product and marketing decision-making.",
-  },
-  {
-    name: "Distributed System Simulator",
-    description:
-      "Educational tool simulating distributed systems challenges including CAP theorem, consensus, and failure scenarios.",
-    category: "Software",
-    technology: ["Python", "Visualization.js", "Next.js"],
+    technology: ["Java", "Spring Boot", "Kafka", "PostgreSQL", "Redis", "Docker"],
     problemSolved:
-      "Makes abstract distributed systems concepts tangible through interactive simulations.",
+      "Eliminates duplicate charges, prevents double-spending anomalies, and provides sub-50ms transaction latency under burst traffic.",
+    github: "https://github.com/sheeshmirza",
   },
   {
-    name: "AI Agent Orchestration Platform",
+    name: "AgentMesh: Stateful AI Orchestration",
     description:
-      "Framework for coordinating multiple AI agents with different specialties to solve complex multi-step problems.",
+      "A modular graph-based execution runtime for autonomous LLM agents with structured tool schemas, state persistence, and automatic retry rollbacks.",
     category: "AI",
-    technology: ["Python", "FastAPI", "LangChain", "Vector Databases"],
-    problemSolved: "Enables autonomous agents to work together without manual task routing.",
+    technology: ["Python", "FastAPI", "LangChain", "Vector DB", "Redis", "Next.js"],
+    problemSolved:
+      "Prevents multi-agent execution drift and token exhaustion by enforcing deterministic state transitions and budget limits.",
+    github: "https://github.com/sheeshmirza",
   },
   {
-    name: "Market Research Automation Engine",
+    name: "CognitiveUX: Consumer Psychology Framework",
     description:
-      "Crawls competitor websites, analyzes positioning, and generates competitive intelligence reports.",
+      "An open-source mental model repository and UI pattern library mapping behavioral cognitive biases directly to product design decisions.",
+    category: "Software",
+    technology: ["TypeScript", "Next.js", "Tailwind CSS", "MDX", "Framer Motion"],
+    problemSolved:
+      "Bridges the gap between behavioral economics theory and actionable UX heuristics for high-conversion onboarding and checkout flows.",
+    github: "https://github.com/sheeshmirza",
+    demo: "https://smirza.in",
+  },
+  {
+    name: "Distributed Consensus & Partition Simulator",
+    description:
+      "An interactive educational visualizer demonstrating Raft leader election, log replication, network partitions, and split-brain resolution.",
+    category: "Experiments",
+    technology: ["TypeScript", "React", "Canvas API", "WebSockets"],
+    problemSolved:
+      "Transforms counter-intuitive distributed systems theory (CAP theorem, quorum arithmetic) into tangible, interactive visual simulations.",
+    github: "https://github.com/sheeshmirza",
+  },
+  {
+    name: "Automated Market Intelligence Pipeline",
+    description:
+      "An automated scraper and NLP intelligence engine that extracts competitor positioning shifts, pricing tier changes, and consumer sentiment trends.",
     category: "Automation",
-    technology: ["Python", "Selenium", "NLP", "MongoDB"],
-    problemSolved: "Replaces manual competitive analysis with automated, real-time intelligence.",
+    technology: ["Python", "Playwright", "HuggingFace Transformers", "PostgreSQL", "Tailwind"],
+    problemSolved:
+      "Replaces hours of manual competitive tracking with automated weekly diff reports and sentiment shift alerts.",
+    github: "https://github.com/sheeshmirza",
+  },
+  {
+    name: "SignalValidator: Startup Idea Screener",
+    description:
+      "A validation tool synthesizing real-time search intent, ad spend competition, and consumer desire signals to score early startup concepts.",
+    category: "Business",
+    technology: ["Node.js", "TypeScript", "OpenAI API", "React", "Tailwind CSS"],
+    problemSolved:
+      "Cuts preliminary customer demand validation time from weeks to hours by cross-referencing search friction against willingness-to-pay.",
+    github: "https://github.com/sheeshmirza",
   },
 ];
 

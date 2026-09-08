@@ -19,20 +19,50 @@ const fraunces = Fraunces({
 
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
-  title: site.title,
+  title: {
+    default: site.title,
+    template: `%s | ${site.name}`,
+  },
   description: site.description,
   alternates: { canonical: "/" },
+  applicationName: site.name,
+  authors: [{ name: site.name, url: site.url }],
+  creator: site.name,
+  publisher: site.name,
+  keywords: [
+    "Sheesh Mirza",
+    "software engineering",
+    "artificial intelligence",
+    "startups",
+    "psychology",
+    "human behavior",
+    "business",
+  ],
+  category: "technology",
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+      "max-video-preview": -1,
+    },
+  },
   openGraph: {
     title: site.title,
     description: site.description,
     url: site.url,
     siteName: site.name,
     type: "website",
+    locale: "en_US",
   },
   twitter: {
     card: "summary_large_image",
     title: site.title,
     description: site.description,
+    creator: "@SheeshUnfiltered",
   },
 };
 
@@ -59,6 +89,15 @@ const personJsonLd = {
   ],
 };
 
+const websiteJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  name: site.name,
+  url: site.url,
+  description: site.description,
+  publisher: { "@id": `${site.url}/#person` },
+};
+
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html
@@ -68,8 +107,21 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     >
       <body className="min-h-full flex flex-col">
         <script
+          dangerouslySetInnerHTML={{
+            __html: `(() => { try { const theme = localStorage.getItem("theme") || (matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light"); document.documentElement.classList.toggle("dark", theme === "dark"); } catch {} })();`,
+          }}
+        />
+        <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd) }}
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@graph": [
+                { ...personJsonLd, "@id": `${site.url}/#person` },
+                websiteJsonLd,
+              ],
+            }),
+          }}
         />
         <ThemeProvider>
           <Navbar />

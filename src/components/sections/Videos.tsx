@@ -34,6 +34,7 @@ export function Videos() {
           eyebrow="Sheesh Unfiltered"
           title="Thinking out loud."
           subtitle="Conversations and experiments on technology, startups, business, and the human side of building."
+          level="h1"
         />
       </Reveal>
 

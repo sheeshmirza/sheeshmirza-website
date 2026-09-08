@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { videos as fallbackVideos } from "@/data/videos";
 
 export const revalidate = 3600; // Revalidate every hour
 
@@ -206,6 +207,10 @@ function formatDate(dateString: string): string {
 }
 
 export async function GET() {
+  const fallbackCategories = Array.from(
+    new Set(fallbackVideos.map((v) => v.category || "Ideas")),
+  ).sort();
+
   try {
     // Resolve channel ID from handle or use manual channel ID
     let channelId: string | null = MANUAL_CHANNEL_ID || null;
@@ -217,13 +222,17 @@ export async function GET() {
     if (!channelId) {
       return NextResponse.json(
         {
-          success: false,
-          error:
-            "Could not resolve YouTube channel ID. Set YOUTUBE_CHANNEL_ID env variable with your channel ID.",
-          videos: [],
-          categories: [],
+          success: true,
+          videos: fallbackVideos,
+          categories: fallbackCategories,
+          count: fallbackVideos.length,
+          fallback: true,
         },
-        { status: 500 }
+        {
+          headers: {
+            "Cache-Control": `public, s-maxage=300, stale-while-revalidate=3600`,
+          },
+        },
       );
     }
 
@@ -233,12 +242,17 @@ export async function GET() {
     if (videos.length === 0) {
       return NextResponse.json(
         {
-          success: false,
-          error: "No videos found in the RSS feed",
-          videos: [],
-          categories: [],
+          success: true,
+          videos: fallbackVideos,
+          categories: fallbackCategories,
+          count: fallbackVideos.length,
+          fallback: true,
         },
-        { status: 404 }
+        {
+          headers: {
+            "Cache-Control": `public, s-maxage=300, stale-while-revalidate=3600`,
+          },
+        },
       );
     }
 
@@ -265,15 +279,20 @@ export async function GET() {
       count: formattedVideos.length,
     });
   } catch (error) {
-    console.error("API error:", error);
+    console.warn("Using fallback videos due to API error:", error);
     return NextResponse.json(
       {
-        success: false,
-        error: "Failed to fetch videos",
-        videos: [],
-        categories: [],
+        success: true,
+        videos: fallbackVideos,
+        categories: fallbackCategories,
+        count: fallbackVideos.length,
+        fallback: true,
       },
-      { status: 500 }
+      {
+        headers: {
+          "Cache-Control": `public, s-maxage=300, stale-while-revalidate=3600`,
+        },
+      },
     );
   }
 }

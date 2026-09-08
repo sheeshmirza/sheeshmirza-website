@@ -22,15 +22,16 @@ export function FeaturedWriting() {
       <Reveal>
         <SectionHeading
           eyebrow="Featured Writing"
-          title="Notes for people who build."
-          subtitle="Essays about technology, business, psychology, and the strange work of making useful things people want to use."
+          title="Notes from the work of building."
+          subtitle="Essays on technology, business, psychology, and the decisions that make useful products easier to build and trust."
+          level="h1"
         />
       </Reveal>
 
       {loading ? (
         <p className="mt-12 border-l-2 border-signal pl-4 text-sm text-muted">Loading the latest notes...</p>
       ) : featured.length === 0 ? (
-        <p className="mt-12 border border-border bg-surface p-6 text-sm text-muted">The next featured notes are taking shape. Read the latest essays on Medium while they are edited.</p>
+        <p className="mt-12 border border-border bg-surface p-6 text-sm text-muted">New essays are in progress. In the meantime, explore the latest notes on Medium.</p>
       ) : (
         <div className="mt-12 grid grid-cols-1 gap-6 lg:grid-cols-3">
           {featured.map((article, i) => (

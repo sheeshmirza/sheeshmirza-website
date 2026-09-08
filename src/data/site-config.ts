@@ -2,9 +2,8 @@ export const site = {
   name: "Sheesh Mirza",
   title: "Sheesh Mirza — Notes on Building, Thinking & Human Behavior",
   description:
-    "A working notebook from Sheesh Mirza on building software, understanding people, and making complicated ideas useful.",
-  // TODO: replace with the production domain once available.
-  url: "https://sheeshmirza.com",
+    "Notes from Sheesh Mirza on reliable software, practical AI, and the human choices behind products people trust.",
+  url: "https://smirza.in",
 };
 
 export const navLinks = [
@@ -30,31 +29,31 @@ export const curiosityAreas = [
     key: "technology",
     title: "Technology",
     description:
-      "Software engineering, system design, programming, infrastructure, and the tools that change how we work.",
+      "Distributed systems, dependable APIs, and the quiet engineering work that keeps critical products trustworthy under load.",
   },
   {
     key: "ai",
     title: "AI",
     description:
-      "Generative AI, LLMs, agents, machine learning, automation, and the future of intelligent systems.",
+      "Applied LLMs, agent workflows, and the evaluation practices that turn promising demos into dependable tools.",
   },
   {
     key: "startups",
     title: "Startups",
     description:
-      "Products, founders, markets, distribution, competition, experimentation, and building from zero.",
+      "Small teams, sharp distribution, and the patient work of turning a real customer problem into a durable business.",
   },
   {
     key: "business",
     title: "Business",
     description:
-      "Strategy, marketing, sales, consumer behavior, pricing, growth, and value creation.",
+      "Positioning, pricing, retention, and the choices that help a useful product become a healthy business.",
   },
   {
     key: "psychology",
     title: "Psychology",
     description:
-      "Human behavior, decision-making, persuasion, motivation, cognitive biases, and why people do what they do.",
+      "Attention, motivation, cognitive bias, and why people notice, trust, hesitate, and ultimately decide.",
   },
 ] as const;
 
@@ -110,5 +109,4 @@ export const businessTopics = [
   "Entrepreneurship",
   "Business Models",
 ];
-
 

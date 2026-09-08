@@ -10,8 +10,8 @@ export function AISection() {
       <Reveal>
         <SectionHeading
           eyebrow="Artificial Intelligence"
-          title="Where software starts to reason"
-          subtitle="The interesting question is not whether AI is powerful. It is where that power becomes genuinely useful."
+          title="Making AI useful enough to trust"
+          subtitle="The important question is not whether AI is capable, but where it can be useful, dependable, and responsibly applied."
         />
       </Reveal>
 
@@ -24,9 +24,9 @@ export function AISection() {
       </div>
 
       <p className="mt-10 max-w-2xl text-muted">
-        I&apos;m exploring generative AI, agents, and applied machine learning
-        through small experiments that make the trade-offs visible: capability,
-        reliability, cost, and human judgment.
+        I explore generative AI, agents, and applied machine learning through
+        small experiments that reveal the real trade-offs: capability,
+        reliability, cost, and the need for human judgment.
       </p>
     </Section>
   );
