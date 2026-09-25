@@ -1,15 +1,17 @@
 export const site = {
   name: "Sheesh Mirza",
-  title: "Sheesh Mirza — Notes on Building, Thinking & Human Behavior",
+  title: "Sheesh Mirza — Software Engineer, AI Builder & Creator",
   description:
-    "Notes from Sheesh Mirza on reliable software, practical AI, and the human choices behind products people trust.",
+    "Official website of Sheesh Mirza — software engineer, AI builder, writer, and creator exploring software engineering, artificial intelligence, product building, and entrepreneurship.",
   url: "https://smirza.in",
+  image: "https://github.com/sheeshmirza.png",
 };
 
 export const navLinks = [
   { label: "Home", href: "/" },
   { label: "About", href: "/about" },
-  { label: "Blog", href: "/blog" },
+  { label: "Projects", href: "/projects" },
+  { label: "Writing", href: "/blog" },
   { label: "Videos", href: "/videos" },
   { label: "Contact", href: "/contact" },
 ];
@@ -18,6 +20,7 @@ export const socialLinks = [
   { label: "LinkedIn", href: "https://www.linkedin.com/in/sheeshmirza" },
   { label: "GitHub", href: "https://github.com/sheeshmirza" },
   { label: "Medium", href: "https://sheeshmirza.medium.com" },
+  { label: "Instagram", href: "https://www.instagram.com/_mir_zey/" },
   { label: "YouTube", href: "https://www.youtube.com/@Sheesh.Unfiltered" },
 ];
 
@@ -27,62 +30,59 @@ export const calendlyUrl =
 export const curiosityAreas = [
   {
     key: "technology",
-    title: "Technology",
+    title: "Software Engineering",
     description:
-      "Distributed systems, dependable APIs, and the quiet engineering work that keeps critical products trustworthy under load.",
+      "Backend systems, distributed systems, APIs, reliability, and the engineering decisions that make software dependable.",
   },
   {
     key: "ai",
-    title: "AI",
+    title: "Artificial Intelligence",
     description:
-      "Applied LLMs, agent workflows, and the evaluation practices that turn promising demos into dependable tools.",
+      "LLMs, AI agents, evaluation, automation, and the engineering work required to turn useful AI ideas into working systems.",
   },
   {
-    key: "startups",
-    title: "Startups",
+    key: "building",
+    title: "Building Products",
     description:
-      "Small teams, sharp distribution, and the patient work of turning a real customer problem into a durable business.",
+      "Turning real problems into useful software through experiments, iteration, user feedback, and shipping.",
   },
   {
-    key: "business",
-    title: "Business",
+    key: "entrepreneurship",
+    title: "Entrepreneurship",
     description:
-      "Positioning, pricing, retention, and the choices that help a useful product become a healthy business.",
+      "Finding problems worth solving, testing ideas quickly, and learning how technology becomes a real product or business.",
   },
   {
-    key: "psychology",
-    title: "Psychology",
+    key: "creator",
+    title: "Creator Journey",
     description:
-      "Attention, motivation, cognitive bias, and why people notice, trust, hesitate, and ultimately decide.",
+      "Documenting what I build, test, learn, and change my mind about across LinkedIn, YouTube, Instagram, Medium, and this site.",
   },
 ] as const;
 
 export const exploringTopics = [
-  "Agentic AI",
   "AI Engineering",
   "Generative AI",
-  "Startup Building",
-  "Consumer Psychology",
-  "Human Behavior",
-  "Product Strategy",
-  "Marketing",
-  "Business Models",
+  "LLMs",
+  "AI Agents",
+  "Agentic AI",
+  "Software Engineering",
   "System Design",
+  "Distributed Systems",
+  "Product Building",
   "Entrepreneurship",
-  "Emerging Technology",
+  "Building in Public",
+  "Creator Economy",
 ];
 
 export const psychologyTopics = [
   "Human Motivation",
-  "Consumer Psychology",
   "Decision Making",
   "Cognitive Biases",
   "Persuasion",
-  "Social Behavior",
-  "Buying Behavior",
   "Attention",
   "Trust",
-  "Incentives",
+  "Buying Behavior",
 ];
 
 export const aiTopics = [
@@ -94,7 +94,7 @@ export const aiTopics = [
   "AI Automation",
   "AI Products",
   "AI Startups",
-  "Future of Work",
+  "AI Engineering",
 ];
 
 export const businessTopics = [
@@ -102,7 +102,6 @@ export const businessTopics = [
   "Growth",
   "Marketing",
   "Sales",
-  "Consumer Psychology",
   "Pricing",
   "Distribution",
   "Strategy",
