@@ -21,22 +21,27 @@ export const metadata: Metadata = {
   metadataBase: new URL(site.url),
   title: {
     default: site.title,
-    template: `%s | ${site.name}`,
+    template: "%s | Sheesh Mirza",
   },
   description: site.description,
   alternates: { canonical: "/" },
-  applicationName: site.name,
-  authors: [{ name: site.name, url: site.url }],
-  creator: site.name,
-  publisher: site.name,
+  applicationName: "Sheesh Mirza",
+  authors: [{ name: "Sheesh Mirza", url: site.url }],
+  creator: "Sheesh Mirza",
+  publisher: "Sheesh Mirza",
   keywords: [
     "Sheesh Mirza",
+    "Sheesh Unfiltered",
+    "software engineer",
     "software engineering",
+    "AI engineer",
     "artificial intelligence",
-    "startups",
-    "psychology",
-    "human behavior",
-    "business",
+    "AI agents",
+    "LLMs",
+    "system design",
+    "product building",
+    "entrepreneurship",
+    "building in public",
   ],
   category: "technology",
   robots: {
@@ -54,48 +59,54 @@ export const metadata: Metadata = {
     title: site.title,
     description: site.description,
     url: site.url,
-    siteName: site.name,
+    siteName: "Sheesh Mirza",
     type: "website",
-    locale: "en_US",
+    locale: "en_IN",
+    images: [{ url: site.image, width: 512, height: 512, alt: "Sheesh Mirza" }],
   },
   twitter: {
     card: "summary_large_image",
     title: site.title,
     description: site.description,
     creator: "@SheeshUnfiltered",
+    images: [site.image],
   },
 };
 
 const personJsonLd = {
   "@context": "https://schema.org",
   "@type": "Person",
-  name: site.name,
+  "@id": `${site.url}/#person`,
+  name: "Sheesh Mirza",
   url: site.url,
+  image: site.image,
+  jobTitle: "Software Engineer, AI Builder & Creator",
   description: site.description,
-  sameAs: socialLinks
-    .filter((s) => s.href !== "#")
-    .map((s) => s.href),
+  sameAs: socialLinks.map((s) => s.href),
   knowsAbout: [
     "Software Engineering",
     "Artificial Intelligence",
-    "Machine Learning",
-    "Startups",
+    "AI Engineering",
+    "Large Language Models",
+    "AI Agents",
+    "System Design",
+    "Distributed Systems",
+    "Product Building",
     "Entrepreneurship",
-    "Business",
-    "Psychology",
-    "Human Behavior",
-    "Consumer Psychology",
-    "Technology",
+    "Building in Public",
+    "Content Creation",
   ],
 };
 
 const websiteJsonLd = {
   "@context": "https://schema.org",
   "@type": "WebSite",
-  name: site.name,
+  "@id": `${site.url}/#website`,
+  name: "Sheesh Mirza",
   url: site.url,
   description: site.description,
   publisher: { "@id": `${site.url}/#person` },
+  inLanguage: "en-IN",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
@@ -117,7 +128,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             __html: JSON.stringify({
               "@context": "https://schema.org",
               "@graph": [
-                { ...personJsonLd, "@id": `${site.url}/#person` },
+                personJsonLd,
                 websiteJsonLd,
               ],
             }),
@@ -132,4 +143,3 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     </html>
   );
 }
-
