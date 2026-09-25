@@ -4,8 +4,15 @@ import { site } from "@/data/site-config";
 export default function sitemap(): MetadataRoute.Sitemap {
   const routes = [
     "",
+    "/sheesh-mirza",
     "/about",
     "/projects",
+    "/ai-engineering",
+    "/software-engineering",
+    "/system-design",
+    "/entrepreneurship",
+    "/building-in-public",
+    "/media",
     "/blog",
     "/videos",
     "/contact",
@@ -18,7 +25,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority:
       route === ""
         ? 1
-        : route === "/about" || route === "/projects"
+        : ["/sheesh-mirza", "/about", "/projects"].includes(route)
           ? 0.9
           : 0.8,
   }));
