@@ -13,6 +13,7 @@ export const navLinks = [
   { label: "Projects", href: "/projects" },
   { label: "Writing", href: "/blog" },
   { label: "Videos", href: "/videos" },
+  { label: "Topics", href: "/ai-engineering" },
   { label: "Contact", href: "/contact" },
 ];
 
@@ -108,4 +109,3 @@ export const businessTopics = [
   "Entrepreneurship",
   "Business Models",
 ];
-
