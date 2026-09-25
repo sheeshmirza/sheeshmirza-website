@@ -1,89 +1,59 @@
-export type ProjectCategory =
-  | "Software"
-  | "AI"
-  | "Automation"
-  | "Experiments"
-  | "Business";
-
-export interface Project {
+export type Project = {
   name: string;
   description: string;
-  category: ProjectCategory;
-  technology: string[];
-  problemSolved: string;
-  github?: string;
-  demo?: string;
-}
+  category: string;
+  technologies: string[];
+  href: string;
+};
 
-// Add real projects here as they're built. No fabricated entries.
 export const projects: Project[] = [
   {
-    name: "High-Throughput Payment Orchestrator",
+    name: "Ollama Adapter",
     description:
-      "A distributed transaction router and reconciliation engine designed for high-concurrency financial operations with deterministic idempotency.",
-    category: "Software",
-    technology: ["Java", "Spring Boot", "Kafka", "PostgreSQL", "Redis", "Docker"],
-    problemSolved:
-      "Eliminates duplicate charges, prevents double-spending anomalies, and provides sub-50ms transaction latency under burst traffic.",
-    github: "https://github.com/sheeshmirza",
+      "A lightweight Python command-line example for querying a local Ollama chat model through LangChain.",
+    category: "AI / Local LLM",
+    technologies: ["Python", "LangChain", "Ollama"],
+    href: "https://github.com/sheeshmirza/ollama-with-langchain",
   },
   {
-    name: "AgentMesh: Stateful AI Orchestration",
+    name: "AI Wrapper",
     description:
-      "A modular graph-based execution runtime for autonomous LLM agents with structured tool schemas, state persistence, and automatic retry rollbacks.",
+      "A small public repository exploring an AI wrapper implementation.",
     category: "AI",
-    technology: ["Python", "FastAPI", "LangChain", "Vector DB", "Redis", "Next.js"],
-    problemSolved:
-      "Prevents multi-agent execution drift and token exhaustion by enforcing deterministic state transitions and budget limits.",
-    github: "https://github.com/sheeshmirza",
+    technologies: ["AI", "Software"],
+    href: "https://github.com/sheeshmirza/ai-wrapper",
   },
   {
-    name: "CognitiveUX: Consumer Psychology Framework",
+    name: "LLM Course",
     description:
-      "An open-source mental model repository and UI pattern library mapping behavioral cognitive biases directly to product design decisions.",
-    category: "Software",
-    technology: ["TypeScript", "Next.js", "Tailwind CSS", "MDX", "Framer Motion"],
-    problemSolved:
-      "Bridges the gap between behavioral economics theory and actionable UX heuristics for high-conversion onboarding and checkout flows.",
-    github: "https://github.com/sheeshmirza",
-    demo: "https://smirza.in",
+      "A public learning repository covering LLM concepts, RAG, agents, inference, deployment, and security.",
+    category: "AI / Learning",
+    technologies: ["LLMs", "RAG", "Agents", "Inference"],
+    href: "https://github.com/sheeshmirza/llm-course",
   },
   {
-    name: "Distributed Consensus & Partition Simulator",
+    name: "AI Agents for Beginners",
     description:
-      "An interactive educational visualizer demonstrating Raft leader election, log replication, network partitions, and split-brain resolution.",
+      "A repository used while studying and working through practical AI-agent concepts, patterns, tools, and production concerns.",
+    category: "AI Agents",
+    technologies: ["AI Agents", "Agentic AI"],
+    href: "https://github.com/sheeshmirza/ai-agents-for-beginners",
+  },
+  {
+    name: "LeetCode 30 Days of JavaScript",
+    description:
+      "A public coding repository focused on JavaScript problem-solving practice.",
+    category: "Software Engineering",
+    technologies: ["JavaScript", "Algorithms"],
+    href: "https://github.com/sheeshmirza/leetcode-30-days-of-javascript",
+  },
+  {
+    name: "FC Hackathon 2026",
+    description:
+      "A public repository from a 2026 hackathon project.",
     category: "Experiments",
-    technology: ["TypeScript", "React", "Canvas API", "WebSockets"],
-    problemSolved:
-      "Transforms counter-intuitive distributed systems theory (CAP theorem, quorum arithmetic) into tangible, interactive visual simulations.",
-    github: "https://github.com/sheeshmirza",
-  },
-  {
-    name: "Automated Market Intelligence Pipeline",
-    description:
-      "An automated scraper and NLP intelligence engine that extracts competitor positioning shifts, pricing tier changes, and consumer sentiment trends.",
-    category: "Automation",
-    technology: ["Python", "Playwright", "HuggingFace Transformers", "PostgreSQL", "Tailwind"],
-    problemSolved:
-      "Replaces hours of manual competitive tracking with automated weekly diff reports and sentiment shift alerts.",
-    github: "https://github.com/sheeshmirza",
-  },
-  {
-    name: "SignalValidator: Startup Idea Screener",
-    description:
-      "A validation tool synthesizing real-time search intent, ad spend competition, and consumer desire signals to score early startup concepts.",
-    category: "Business",
-    technology: ["Node.js", "TypeScript", "OpenAI API", "React", "Tailwind CSS"],
-    problemSolved:
-      "Cuts preliminary customer demand validation time from weeks to hours by cross-referencing search friction against willingness-to-pay.",
-    github: "https://github.com/sheeshmirza",
+    technologies: ["Software", "Hackathon"],
+    href: "https://github.com/sheeshmirza/FC-Hackathon-2026",
   },
 ];
 
-export const projectCategories: ProjectCategory[] = [
-  "Software",
-  "AI",
-  "Automation",
-  "Experiments",
-  "Business",
-];
