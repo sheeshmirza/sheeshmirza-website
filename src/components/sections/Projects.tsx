@@ -54,23 +54,17 @@ export function Projects() {
                 {project.name}
               </h3>
               <p className="mt-3 text-sm text-muted">{project.description}</p>
-              <p className="mt-3 text-xs text-muted">{project.problemSolved}</p>
               <div className="mt-4 flex flex-wrap gap-2">
-                {project.technology.map((t) => (
-                  <span key={t} className="rounded-full border border-border px-3 py-1 text-xs text-muted">
-                    {t}
+                {project.technologies.map((technology) => (
+                  <span key={technology} className="rounded-full border border-border px-3 py-1 text-xs text-muted">
+                    {technology}
                   </span>
                 ))}
               </div>
               <div className="mt-6 flex gap-4 text-sm">
-                {project.github && (
-                  <a href={project.github} className="flex items-center gap-1 text-foreground hover:text-accent">
+                {project.href && (
+                  <a href={project.href} className="flex items-center gap-1 text-foreground hover:text-accent">
                     <Code size={14} /> Code
-                  </a>
-                )}
-                {project.demo && (
-                  <a href={project.demo} className="flex items-center gap-1 text-foreground hover:text-accent">
-                    <ArrowUpRight size={14} /> Live
                   </a>
                 )}
               </div>
