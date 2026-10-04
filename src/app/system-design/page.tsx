@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { TopicPage } from "@/components/sections/TopicPage";
 
 export const metadata: Metadata = {
-  title: "System Design — Sheesh Mirza",
+  title: "System Design",
   description:
     "System design notes by Sheesh Mirza on distributed systems, scalability, reliability, queues, retries, idempotency, APIs, and engineering trade-offs.",
   alternates: { canonical: "/system-design" },

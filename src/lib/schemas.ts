@@ -7,7 +7,7 @@ export const ArticleSchema = z.object({
   description: z.string(),
   date: z.string(),
   readingTime: z.string(),
-  featured: z.boolean().default(false),
+  featured: z.boolean().optional(),
   href: z.string().url(),
   tags: z.array(z.string()).optional(),
 });

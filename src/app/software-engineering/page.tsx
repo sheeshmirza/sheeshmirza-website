@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { TopicPage } from "@/components/sections/TopicPage";
 
 export const metadata: Metadata = {
-  title: "Software Engineering — Sheesh Mirza",
+  title: "Software Engineering",
   description:
     "Software engineering notes from Sheesh Mirza covering backend systems, APIs, reliability, distributed systems, debugging, and engineering judgment.",
   alternates: { canonical: "/software-engineering" },

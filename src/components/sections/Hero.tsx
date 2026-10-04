@@ -16,7 +16,7 @@ export function Hero() {
 
       <div className="mx-auto grid max-w-7xl gap-12 px-6 pb-16 pt-16 sm:px-10 sm:pb-24 sm:pt-24 lg:grid-cols-[1.15fr_0.85fr] lg:items-end lg:gap-20 lg:px-12 lg:pt-28">
         <p className="hero-enter hero-enter-1 col-span-full flex items-center gap-3 text-[0.68rem] font-semibold uppercase tracking-[0.28em] text-muted">
-          <span className="h-2 w-2 rounded-full bg-signal shadow-[0_0_0_5px_color-mix(in_srgb,var(--signal)_15%,transparent)]" />
+          <span aria-hidden="true" className="h-2 w-2 rounded-full bg-signal shadow-[0_0_0_5px_color-mix(in_srgb,var(--signal)_15%,transparent)]" />
           Sheesh Mirza · Software Engineer · AI Builder · Creator
         </p>
 

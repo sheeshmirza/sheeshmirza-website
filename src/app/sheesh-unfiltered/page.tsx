@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { TopicPage } from "@/components/sections/TopicPage";
 
 export const metadata: Metadata = {
-  title: "Sheesh Unfiltered — YouTube by Sheesh Mirza",
+  title: "Sheesh Unfiltered",
   description:
     "Sheesh Unfiltered is the YouTube media property of Sheesh Mirza covering technology, AI, career, business, experiments, stories, and unfiltered conversations.",
   alternates: { canonical: "/sheesh-unfiltered" },

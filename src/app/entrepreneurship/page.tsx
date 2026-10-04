@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { TopicPage } from "@/components/sections/TopicPage";
 
 export const metadata: Metadata = {
-  title: "Entrepreneurship & Product Building — Sheesh Mirza",
+  title: "Entrepreneurship & Product Building",
   description:
     "Sheesh Mirza explores entrepreneurship, product building, customer problems, distribution, validation, and the technology behind useful businesses.",
   alternates: { canonical: "/entrepreneurship" },

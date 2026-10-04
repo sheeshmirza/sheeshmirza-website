@@ -11,7 +11,7 @@ export function Card({ children, className, interactive = false }: CardProps) {
     <div
       className={`border border-border bg-surface ${
         interactive
-          ? "transition-[transform,border-color] hover:-translate-y-1 hover:border-signal"
+          ? "transition-[transform,border-color] hover:-translate-y-1 hover:border-signal focus-within:border-signal active:translate-y-0"
           : ""
       } ${className ?? ""}`}
     >

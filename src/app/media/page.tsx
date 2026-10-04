@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { TopicPage } from "@/components/sections/TopicPage";
 
 export const metadata: Metadata = {
-  title: "Media & Profiles — Sheesh Mirza",
+  title: "Media & Profiles",
   description:
     "Official links and profiles for Sheesh Mirza across LinkedIn, GitHub, Medium, Instagram, and YouTube.",
   alternates: { canonical: "/media" },

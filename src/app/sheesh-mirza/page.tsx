@@ -3,7 +3,7 @@ import { TopicPage } from "@/components/sections/TopicPage";
 import { site, socialLinks } from "@/data/site-config";
 
 export const metadata: Metadata = {
-  title: "Sheesh Mirza — Official Profile",
+  title: "Official Profile",
   description:
     "Official profile for Sheesh Mirza, a software engineer, AI builder, writer, and creator.",
   alternates: { canonical: "/sheesh-mirza" },

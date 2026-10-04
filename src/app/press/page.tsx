@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { ArrowUpRight } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "Press Kit & Bio — Sheesh Mirza",
+  title: "Press Kit & Bio",
   description:
     "Press kit, short bio, long bio, profile links, and official brand description for Sheesh Mirza.",
   alternates: { canonical: "/press" },
