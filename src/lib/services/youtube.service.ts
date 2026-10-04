@@ -65,33 +65,49 @@ function formatDate(dateString: string): string {
   }
 }
 
+const VERIFIED_CHANNEL_ID = "UCqTAh-n3Tqg0Ui9joxAcfCA";
+
 async function resolveChannelId(): Promise<string | null> {
   if (MANUAL_CHANNEL_ID) return MANUAL_CHANNEL_ID;
+  return VERIFIED_CHANNEL_ID;
+}
 
+async function fetchFromRss2Json(channelId: string): Promise<Video[] | null> {
   try {
-    const res = await fetch(`https://www.youtube.com/@${YOUTUBE_HANDLE}`, {
-      headers: {
-        "User-Agent":
-          "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
-      },
-      next: { revalidate: 86400 },
-    });
-
+    const rssUrl = `https://www.youtube.com/feeds/videos.xml?channel_id=${channelId}`;
+    const res = await fetch(
+      `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(rssUrl)}`,
+    );
     if (!res.ok) return null;
-    const html = await res.text();
-
-    const patterns = [
-      /"externalChannelId":"([^"]+)"/,
-      /"channelId":"([^"]+)"/,
-      /\/channel\/([^"\/]+)/,
-      /"canonicalBaseUrl":"\/channel\/([^"]+)"/,
-    ];
-
-    for (const pattern of patterns) {
-      const match = html.match(pattern);
-      if (match?.[1]) return match[1];
+    const json = await res.json();
+    if (json.status !== "ok" || !Array.isArray(json.items) || json.items.length === 0) {
+      return null;
     }
-    return null;
+
+    return json.items.map((item: any, index: number) => {
+      const title = sanitizeHtmlToPlainText(item.title || "Untitled");
+      const link = item.link || "";
+      const videoIdMatch = link.match(/v=([a-zA-Z0-9_-]{11})/);
+      const videoId = videoIdMatch ? videoIdMatch[1] : "";
+      const description = sanitizeHtmlToPlainText(
+        item.description || item.content || "",
+      ).slice(0, 200);
+      const category = detectCategory(title, description);
+      const thumbnail =
+        item.thumbnail ||
+        (videoId ? `https://img.youtube.com/vi/${videoId}/hqdefault.jpg` : undefined);
+
+      return {
+        slug: videoId || title.toLowerCase().replace(/\s+/g, "-"),
+        title,
+        description: description ? `${description}…` : "",
+        category,
+        date: formatDate(item.pubDate || new Date().toISOString()),
+        thumbnail,
+        featured: index < 3,
+        href: link,
+      };
+    });
   } catch {
     return null;
   }
@@ -106,22 +122,22 @@ export async function fetchYouTubeVideos(): Promise<{
     new Set(fallbackVideos.map((v) => v.category || "Ideas")),
   ).sort();
 
-  try {
-    const channelId = await resolveChannelId();
-    if (!channelId) {
-      return { videos: fallbackVideos, categories: fallbackCategories, fallback: true };
-    }
+  const channelId = await resolveChannelId();
+  if (!channelId) {
+    return { videos: fallbackVideos, categories: fallbackCategories, fallback: true };
+  }
 
+  try {
     const rssUrl = `https://www.youtube.com/feeds/videos.xml?channel_id=${channelId}`;
     const response = await fetch(rssUrl, { next: { revalidate: 3600 } });
     if (!response.ok) {
-      return { videos: fallbackVideos, categories: fallbackCategories, fallback: true };
+      throw new Error(`YouTube RSS returned HTTP ${response.status}`);
     }
 
     const xml = await response.text();
     const itemMatches = [...xml.matchAll(/<entry>([\s\S]*?)<\/entry>/g)];
     if (!itemMatches.length) {
-      return { videos: fallbackVideos, categories: fallbackCategories, fallback: true };
+      throw new Error("No video entries found in YouTube RSS XML");
     }
 
     const videos: Video[] = [];
@@ -170,7 +186,20 @@ export async function fetchYouTubeVideos(): Promise<{
       categories: Array.from(categoriesSet).sort(),
       fallback: false,
     };
-  } catch {
+  } catch (err) {
+    // Attempt CORS-friendly RSS JSON proxy for browser environments
+    const proxyVideos = await fetchFromRss2Json(channelId);
+    if (proxyVideos && proxyVideos.length > 0) {
+      const categoriesSet = new Set<string>();
+      proxyVideos.forEach((v) => categoriesSet.add(v.category));
+      return {
+        videos: proxyVideos,
+        categories: Array.from(categoriesSet).sort(),
+        fallback: false,
+      };
+    }
+
+    console.warn("YouTube fetch failed, using fallback videos:", err);
     return {
       videos: fallbackVideos,
       categories: fallbackCategories,

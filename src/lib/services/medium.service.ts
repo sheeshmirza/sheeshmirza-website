@@ -75,6 +75,42 @@ function formatDate(dateString: string): string {
   }).format(date);
 }
 
+async function fetchFromRss2Json(): Promise<Article[] | null> {
+  try {
+    const res = await fetch(
+      `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(MEDIUM_FEED_URL)}`,
+    );
+    if (!res.ok) return null;
+    const json = await res.json();
+    if (json.status !== "ok" || !Array.isArray(json.items) || json.items.length === 0) {
+      return null;
+    }
+
+    return json.items.map((item: any, index: number) => {
+      const title = sanitizeHtmlToPlainText(item.title || "Untitled");
+      const desc = createDescription(item.description || item.content || "");
+      const link = item.link || "";
+      const categories: string[] = Array.isArray(item.categories)
+        ? item.categories.map((c: string) => sanitizeHtmlToPlainText(c))
+        : [];
+
+      return {
+        slug: getSlug(link, title),
+        title,
+        description: desc,
+        category: categories[0] || "Engineering",
+        tags: categories,
+        date: formatDate(item.pubDate || new Date().toISOString()),
+        readingTime: estimateReadingTime(item.content || item.description || ""),
+        featured: index < 3,
+        href: link,
+      };
+    });
+  } catch {
+    return null;
+  }
+}
+
 export async function fetchMediumArticles(): Promise<{
   articles: Article[];
   tags: string[];
@@ -142,6 +178,18 @@ export async function fetchMediumArticles(): Promise<{
       fallback: false,
     };
   } catch (err) {
+    // Attempt CORS-friendly RSS JSON proxy for browser environments
+    const proxyArticles = await fetchFromRss2Json();
+    if (proxyArticles && proxyArticles.length > 0) {
+      const allTags = new Set<string>();
+      proxyArticles.forEach((a) => a.tags?.forEach((t) => allTags.add(t)));
+      return {
+        articles: proxyArticles,
+        tags: Array.from(allTags).sort(),
+        fallback: false,
+      };
+    }
+
     console.warn("Medium feed fetch failed, using verified fallback articles:", err);
     const tags = Array.from(new Set(fallbackArticles.map((a) => a.category))).sort();
     return {

@@ -57,3 +57,26 @@ export const ContactFormSchema = z.object({
 });
 
 export type ContactFormData = z.infer<typeof ContactFormSchema>;
+
+export const ProjectSchema = z.object({
+  name: z.string().min(1),
+  description: z.string(),
+  category: z.string().min(1),
+  technologies: z.array(z.string()),
+  href: z.string().url(),
+  stars: z.number().optional(),
+  forks: z.number().optional(),
+  updatedAt: z.string().optional(),
+});
+
+export type ValidatedProject = z.infer<typeof ProjectSchema>;
+
+export const ProjectsResponseSchema = z.object({
+  success: z.boolean(),
+  projects: z.array(ProjectSchema),
+  categories: z.array(z.string()).optional(),
+  count: z.number(),
+  fallback: z.boolean().optional(),
+});
+
+export type ValidatedProjectsResponse = z.infer<typeof ProjectsResponseSchema>;
