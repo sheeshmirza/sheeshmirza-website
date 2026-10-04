@@ -43,6 +43,120 @@ function setSessionCached(url: string, data: unknown) {
   }
 }
 
+async function fetchDirectFallback(targetUrl: string, signal?: AbortSignal): Promise<unknown | null> {
+  try {
+    if (targetUrl.includes("/api/projects")) {
+      const res = await fetch("https://api.github.com/users/sheeshmirza/repos?sort=updated&per_page=100", {
+        headers: { Accept: "application/vnd.github.v3+json" },
+        signal,
+      });
+      if (!res.ok) return null;
+      const repos = await res.json();
+      if (!Array.isArray(repos) || repos.length === 0) return null;
+
+      const projects = repos
+        .filter((r) => r.name !== "sheeshmirza")
+        .map((r) => {
+          const lang = r.language || null;
+          const topics = Array.isArray(r.topics) ? r.topics : [];
+          const name = r.name.replace(/-/g, " ").replace(/\b\w/g, (c: string) => c.toUpperCase());
+          const description = r.description || "Public software repository and code exploration by Sheesh Mirza.";
+          const combined = `${r.name} ${description} ${lang || ""}`.toLowerCase();
+          let category = "Web & Engineering";
+          if (/\b(ai|llm|agents?|gpt|langchain|ollama|vision|ml)\b/i.test(combined)) category = "AI & Machine Learning";
+          else if (/\b(docker|backend|go|c\+\+|systems?)\b/i.test(combined)) category = "Systems & Backend";
+          else if (/\b(leetcode|data-structures?)\b/i.test(combined)) category = "Algorithms & Learning";
+
+          const technologies = [lang, ...topics].filter(Boolean) as string[];
+          if (!technologies.length) technologies.push("Software");
+
+          return {
+            name,
+            description,
+            category,
+            technologies,
+            href: r.html_url,
+            stars: r.stargazers_count ?? 0,
+            forks: r.forks_count ?? 0,
+            updatedAt: r.updated_at,
+          };
+        });
+
+      const categories = Array.from(new Set(projects.map((p) => p.category))).sort();
+      return { success: true, projects, categories, count: projects.length, fallback: false };
+    }
+
+    if (targetUrl.includes("/api/articles")) {
+      const res = await fetch("https://api.rss2json.com/v1/api.json?rss_url=https%3A%2F%2Fmedium.com%2Ffeed%2F%40sheeshmirza", { signal });
+      if (!res.ok) return null;
+      const json = await res.json();
+      if (json.status !== "ok" || !Array.isArray(json.items) || json.items.length === 0) return null;
+
+      const articles = json.items.map((item: any, idx: number) => {
+        const rawContent = (item.description || item.content || "").replace(/<[^>]+>/g, " ").trim();
+        const description = rawContent.length > 200 ? `${rawContent.slice(0, 200)}…` : rawContent;
+        const categories = Array.isArray(item.categories) ? item.categories : [];
+        let category = "Engineering";
+        const text = `${item.title} ${categories.join(" ")}`.toLowerCase();
+        if (/\b(psychology|behavior|buy)\b/.test(text)) category = "Psychology";
+        else if (/\b(ai|llm|agent|mcp)\b/.test(text)) category = "AI";
+        else if (/\b(data|mining|seaborn)\b/.test(text)) category = "Data";
+        else if (/\b(queues|streaming|distributed)\b/.test(text)) category = "Systems";
+
+        return {
+          slug: item.link?.split("/").pop() || `article-${idx}`,
+          category,
+          title: item.title,
+          description,
+          date: new Date(item.pubDate || Date.now()).toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" }),
+          readingTime: `${Math.max(1, Math.ceil(rawContent.split(/\s+/).length / 200))} min`,
+          featured: idx < 3,
+          href: item.link,
+          tags: categories,
+        };
+      });
+
+      const tags = Array.from(new Set(articles.map((a: any) => a.category))).sort();
+      return { success: true, articles, tags, categories: tags, count: articles.length, fallback: false };
+    }
+
+    if (targetUrl.includes("/api/videos")) {
+      const res = await fetch("https://api.rss2json.com/v1/api.json?rss_url=https%3A%2F%2Fwww.youtube.com%2Ffeeds%2Fvideos.xml%3Fchannel_id%3DUCqTAh-n3Tqg0Ui9joxAcfCA", { signal });
+      if (!res.ok) return null;
+      const json = await res.json();
+      if (json.status !== "ok" || !Array.isArray(json.items) || json.items.length === 0) return null;
+
+      const videos = json.items.map((item: any, idx: number) => {
+        const videoIdMatch = item.link?.match(/v=([a-zA-Z0-9_-]{11})/);
+        const videoId = videoIdMatch ? videoIdMatch[1] : "";
+        const rawContent = (item.description || item.content || "").replace(/<[^>]+>/g, " ").trim();
+        const description = rawContent.length > 200 ? `${rawContent.slice(0, 200)}…` : rawContent;
+        let category = "Ideas";
+        const text = `${item.title} ${description}`.toLowerCase();
+        if (/\b(ai|llm|agent|business)\b/.test(text)) category = "AI";
+        else if (/\b(tech|code|system)\b/.test(text)) category = "Tech";
+
+        return {
+          slug: videoId || `video-${idx}`,
+          category,
+          title: item.title,
+          description,
+          date: new Date(item.pubDate || Date.now()).toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" }),
+          featured: idx < 3,
+          href: item.link,
+          thumbnail: item.thumbnail || (videoId ? `https://img.youtube.com/vi/${videoId}/hqdefault.jpg` : undefined),
+        };
+      });
+
+      const categories = Array.from(new Set(videos.map((v: any) => v.category))).sort();
+      return { success: true, videos, categories, count: videos.length, fallback: false };
+    }
+  } catch {
+    return null;
+  }
+  return null;
+}
+
 export function useRemoteData<T>(
   url: string,
   options?: {
@@ -103,6 +217,12 @@ export function useRemoteData<T>(
           }
           lastError = err instanceof Error ? err : new Error(String(err));
         }
+      }
+
+      // Try direct provider fallback if API route returned 404 or failed
+      const directData = await fetchDirectFallback(targetUrl, abortControllerRef.current?.signal);
+      if (directData) {
+        return schema ? schema.parse(directData) : (directData as T);
       }
 
       throw lastError ?? new Error("Fetch failed after retries");
