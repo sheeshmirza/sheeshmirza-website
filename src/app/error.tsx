@@ -5,6 +5,8 @@ import Link from "next/link";
 import { AlertCircle, RefreshCw } from "lucide-react";
 import { Section } from "@/components/ui/Section";
 
+import { captureClientError } from "@/lib/telemetry";
+
 export default function ErrorBoundary({
   error,
   reset,
@@ -13,8 +15,7 @@ export default function ErrorBoundary({
   reset: () => void;
 }) {
   useEffect(() => {
-    // In production, log to centralized error monitoring service (e.g. Sentry)
-    console.error("Application runtime error:", error);
+    captureClientError(error, { digest: error.digest });
   }, [error]);
 
   return (

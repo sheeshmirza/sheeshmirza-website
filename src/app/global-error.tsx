@@ -3,6 +3,8 @@
 import { useEffect } from "react";
 import { AlertCircle, RefreshCw } from "lucide-react";
 
+import { captureClientError } from "@/lib/telemetry";
+
 export default function GlobalError({
   error,
   reset,
@@ -11,7 +13,7 @@ export default function GlobalError({
   reset: () => void;
 }) {
   useEffect(() => {
-    console.error("Global application error:", error);
+    captureClientError(error, { digest: error.digest, scope: "global" });
   }, [error]);
 
   return (

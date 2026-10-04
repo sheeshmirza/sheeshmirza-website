@@ -11,10 +11,37 @@ type RemoteState<T> = {
   refetch: () => Promise<void>;
 };
 
-// Global in-memory cache and in-flight promise map for deduplication
+// Global in-memory cache and in-flight promise map for request deduplication
 const responseCache = new Map<string, { data: unknown; timestamp: number }>();
 const inFlightRequests = new Map<string, Promise<unknown>>();
-const CACHE_TTL_MS = 60 * 1000; // 60 seconds client cache
+const CACHE_TTL_MS = 60 * 1000; // 60 seconds memory cache
+
+function getSessionCached<T>(url: string, ttl: number): T | null {
+  if (typeof window === "undefined") return null;
+  try {
+    const raw = window.sessionStorage.getItem(`remote_cache:${url}`);
+    if (!raw) return null;
+    const parsed = JSON.parse(raw);
+    if (Date.now() - parsed.timestamp < ttl) {
+      return parsed.data as T;
+    }
+  } catch {
+    // Ignore storage quota or serialization errors
+  }
+  return null;
+}
+
+function setSessionCached(url: string, data: unknown) {
+  if (typeof window === "undefined") return;
+  try {
+    window.sessionStorage.setItem(
+      `remote_cache:${url}`,
+      JSON.stringify({ data, timestamp: Date.now() }),
+    );
+  } catch {
+    // Ignore storage quota errors
+  }
+}
 
 export function useRemoteData<T>(
   url: string,
@@ -31,14 +58,18 @@ export function useRemoteData<T>(
   const ttlMs = options?.ttlMs ?? CACHE_TTL_MS;
 
   const cachedEntry = responseCache.get(url);
-  const isFresh = cachedEntry && Date.now() - cachedEntry.timestamp < ttlMs;
+  const isFreshInMemory = cachedEntry && Date.now() - cachedEntry.timestamp < ttlMs;
 
-  const [data, setData] = useState<T | null>(
-    isFresh ? (cachedEntry.data as T) : fallbackData ?? null,
-  );
-  const [loading, setLoading] = useState<boolean>(!isFresh && !fallbackData);
+  const [data, setData] = useState<T | null>(() => {
+    if (isFreshInMemory) return cachedEntry.data as T;
+    const sessionData = getSessionCached<T>(url, ttlMs * 5);
+    if (sessionData) return sessionData;
+    return fallbackData ?? null;
+  });
+
+  const [loading, setLoading] = useState<boolean>(!isFreshInMemory && !fallbackData);
   const [error, setError] = useState<Error | null>(null);
-  const [isStale, setIsStale] = useState<boolean>(!isFresh);
+  const [isStale, setIsStale] = useState<boolean>(!isFreshInMemory);
 
   const abortControllerRef = useRef<AbortController | null>(null);
 
@@ -49,7 +80,7 @@ export function useRemoteData<T>(
       for (let attempt = 0; attempt <= retries; attempt++) {
         try {
           if (attempt > 0) {
-            // Exponential backoff delay
+            // Exponential backoff
             await new Promise((res) =>
               setTimeout(res, Math.min(1000 * 2 ** attempt, 4000)),
             );
@@ -86,6 +117,7 @@ export function useRemoteData<T>(
       fetchPromise = fetchDataWithRetry(url, maxRetries)
         .then((result) => {
           responseCache.set(url, { data: result, timestamp: Date.now() });
+          setSessionCached(url, result);
           return result;
         })
         .finally(() => {
@@ -111,7 +143,7 @@ export function useRemoteData<T>(
   useEffect(() => {
     executeFetch();
 
-    // Revalidate on network reconnect
+    // Auto-revalidate on network reconnect
     const handleOnline = () => {
       executeFetch();
     };

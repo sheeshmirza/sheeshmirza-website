@@ -17,8 +17,10 @@ export function Contact() {
     message: "",
   });
   const [errors, setErrors] = useState<Record<string, string>>({});
+  const [honeypot, setHoneypot] = useState<string>("");
   const [status, setStatus] = useState<"idle" | "submitting" | "sent" | "error">("idle");
   const [errorMessage, setErrorMessage] = useState<string>("");
+  const lastSubmitTime = useState<{ current: number }>({ current: 0 })[0];
 
   const linkedIn = socialLinks.find((link) => link.label === "LinkedIn");
 
@@ -40,6 +42,20 @@ export function Contact() {
     e.preventDefault();
     setErrors({});
     setErrorMessage("");
+
+    // Bot honeypot trap
+    if (honeypot) {
+      setStatus("sent");
+      return;
+    }
+
+    // Client-side rate limiting (4 seconds between submissions)
+    const now = Date.now();
+    if (now - lastSubmitTime.current < 4000) {
+      setErrorMessage("Please wait a few seconds before submitting again.");
+      return;
+    }
+    lastSubmitTime.current = now;
 
     // 1. Client-side Zod validation
     const validation = ContactFormSchema.safeParse(formData);
@@ -122,6 +138,18 @@ export function Contact() {
           </div>
         ) : (
           <form onSubmit={handleSubmit} noValidate className="space-y-4">
+            {/* Hidden Bot Honeypot */}
+            <input
+              type="text"
+              name="_gotcha"
+              tabIndex={-1}
+              aria-hidden="true"
+              autoComplete="off"
+              value={honeypot}
+              onChange={(e) => setHoneypot(e.target.value)}
+              className="sr-only hidden"
+            />
+
             {errorMessage && (
               <div className="flex items-center gap-2 border border-signal/30 bg-signal/10 p-3 text-xs text-signal">
                 <AlertCircle size={16} />
