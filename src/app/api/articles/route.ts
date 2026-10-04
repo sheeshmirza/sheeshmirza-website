@@ -143,7 +143,6 @@ async function parseMediumFeed(): Promise<MediumArticle[]> {
     const contentXml = getXmlValue(itemXml, "content:encoded");
     const link = getXmlValue(itemXml, "link");
     const pubDate = getXmlValue(itemXml, "pubDate");
-    const creatorXml = getXmlValue(itemXml, "creator");
     if (!title || !link) {
       continue;
     }

@@ -1,5 +1,3 @@
-//Reviewed
-
 export interface Video {
   slug: string;
   category: string;
@@ -14,28 +12,28 @@ export interface Video {
 
 export const videos: Video[] = [
   {
-    slug: "reality-of-building-one-person-ai-business",
-    category: "Startups",
-    title: "The Reality of Building a One-Person AI Business",
+    slug: "6LFtCxlUiNQ",
+    category: "AI",
+    title: "How to Make Money With AI: 7 AI Businesses That Actually Work",
     description:
-      "A no-BS breakdown of unit economics, toolchains, customer acquisition, and what it actually takes to run a high-margin software business as a solo engineer.",
-    date: "February 2025",
+      "A no-BS breakdown of unit economics, toolchains, customer acquisition, and what it actually takes to run a high-margin software business as an engineer.",
+    date: "August 17, 2024",
     duration: "18:42",
     featured: true,
-    href: "https://www.youtube.com/@Sheesh.Unfiltered",
-    thumbnail: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=800&auto=format&fit=crop",
+    href: "https://www.youtube.com/watch?v=6LFtCxlUiNQ",
+    thumbnail: "https://img.youtube.com/vi/6LFtCxlUiNQ/maxresdefault.jpg",
   },
   {
-    slug: "why-most-engineers-build-products-nobody-wants",
-    category: "Psychology",
-    title: "Why Most Engineers Build Products Nobody Wants",
+    slug: "FKIuRMq90uc",
+    category: "Ideas",
+    title: "Why I Started Sheesh Unfiltered | No Script, No Filter",
     description:
-      "The engineering trap: solving fascinating technical problems that have zero commercial demand. How to evaluate buyer psychology before committing code.",
-    date: "January 2025",
+      "The engineering philosophy behind documenting building in public, experimenting without vanity metrics, and sharing candid career perspectives.",
+    date: "August 15, 2024",
     duration: "14:15",
     featured: true,
-    href: "https://www.youtube.com/@Sheesh.Unfiltered",
-    thumbnail: "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?q=80&w=800&auto=format&fit=crop",
+    href: "https://www.youtube.com/watch?v=FKIuRMq90uc",
+    thumbnail: "https://img.youtube.com/vi/FKIuRMq90uc/maxresdefault.jpg",
   },
   {
     slug: "agentic-ai-in-production-works-vs-hype",
@@ -47,7 +45,7 @@ export const videos: Video[] = [
     duration: "21:03",
     featured: true,
     href: "https://www.youtube.com/@Sheesh.Unfiltered",
-    thumbnail: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=800&auto=format&fit=crop",
+    thumbnail: "https://img.youtube.com/vi/6LFtCxlUiNQ/hqdefault.jpg",
   },
   {
     slug: "getting-fired-pivoting-compounding-career-lessons",
@@ -59,7 +57,7 @@ export const videos: Video[] = [
     duration: "16:50",
     featured: false,
     href: "https://www.youtube.com/@Sheesh.Unfiltered",
-    thumbnail: "https://images.unsplash.com/photo-1507679799987-c73779587ccf?q=80&w=800&auto=format&fit=crop",
+    thumbnail: "https://img.youtube.com/vi/FKIuRMq90uc/hqdefault.jpg",
   },
   {
     slug: "system-design-vs-product-design",
@@ -71,7 +69,7 @@ export const videos: Video[] = [
     duration: "15:28",
     featured: false,
     href: "https://www.youtube.com/@Sheesh.Unfiltered",
-    thumbnail: "https://images.unsplash.com/photo-1531403009284-440f080d1e12?q=80&w=800&auto=format&fit=crop",
+    thumbnail: "https://img.youtube.com/vi/6LFtCxlUiNQ/hqdefault.jpg",
   },
   {
     slug: "how-to-learn-complex-tech-faster",
@@ -83,6 +81,6 @@ export const videos: Video[] = [
     duration: "12:34",
     featured: false,
     href: "https://www.youtube.com/@Sheesh.Unfiltered",
-    thumbnail: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=800&auto=format&fit=crop",
+    thumbnail: "https://img.youtube.com/vi/FKIuRMq90uc/hqdefault.jpg",
   },
 ];

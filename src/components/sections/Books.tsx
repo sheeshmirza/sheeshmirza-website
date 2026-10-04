@@ -24,17 +24,22 @@ export function Books() {
               <span className="text-xs font-semibold tracking-widest text-accent uppercase">
                 {book.topic}
               </span>
-              <h3 className="mt-3 font-serif text-xl text-foreground">{book.title}</h3>
+              <h3 className="mt-3 font-serif text-xl font-semibold text-foreground">{book.title}</h3>
               <p className="mt-1 text-sm text-muted">{book.author}</p>
-              <p className="mt-4 text-sm text-muted">{book.takeaway}</p>
-              <div className="mt-4 flex gap-1">
+              <p className="mt-4 text-sm leading-relaxed text-muted">{book.takeaway}</p>
+              <div
+                className="mt-4 flex items-center gap-1"
+                aria-label={`Rating: ${book.rating} out of 5 stars`}
+              >
                 {Array.from({ length: 5 }).map((_, i) => (
                   <Star
                     key={i}
                     size={14}
+                    aria-hidden="true"
                     className={i < book.rating ? "fill-accent text-accent" : "text-border"}
                   />
                 ))}
+                <span className="sr-only">{book.rating} of 5 stars</span>
               </div>
             </Card>
           ))}

@@ -36,11 +36,17 @@ export function MentalModel() {
             >
               {step}
             </span>
-            {i < flow.length - 1 && <span className="text-accent">↓</span>}
+            {i < flow.length - 1 && (
+              <span aria-hidden="true" className="text-accent font-bold">
+                ↓
+              </span>
+            )}
           </div>
         ))}
-        <span className="text-accent">↓</span>
-        <span className="rounded-full bg-accent px-8 py-3 font-serif text-lg text-accent-foreground">
+        <span aria-hidden="true" className="text-accent font-bold">
+          ↓
+        </span>
+        <span className="rounded-full bg-accent px-8 py-3 font-serif text-lg font-semibold text-accent-foreground">
           People
         </span>
       </Reveal>

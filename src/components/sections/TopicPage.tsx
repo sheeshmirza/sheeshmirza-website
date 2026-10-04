@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
+import { ExternalLink } from "@/components/ui/ExternalLink";
 
 type TopicPageProps = {
   eyebrow: string;
@@ -22,7 +23,7 @@ export function TopicPage({
         <p className="text-[0.68rem] font-semibold uppercase tracking-[0.28em] text-muted">
           {eyebrow}
         </p>
-        <h1 className="mt-5 font-serif text-5xl leading-[0.98] tracking-[-0.04em] sm:text-7xl">
+        <h1 className="mt-5 font-serif text-5xl font-semibold leading-[0.98] tracking-[-0.04em] text-foreground sm:text-7xl">
           {title}
         </h1>
         <p className="mt-7 max-w-3xl text-lg leading-relaxed text-muted">
@@ -44,15 +45,29 @@ export function TopicPage({
           Explore more from Sheesh Mirza
         </p>
         <div className="mt-5 flex flex-wrap gap-3">
-          {related.map((item) => (
-            <Link
-              key={item.href}
-              href={item.href}
-              className="inline-flex items-center gap-2 border border-border bg-surface px-4 py-3 text-sm font-semibold transition-colors hover:border-signal hover:text-signal"
-            >
-              {item.label} <ArrowUpRight size={14} />
-            </Link>
-          ))}
+          {related.map((item) => {
+            const isExternal = item.href.startsWith("http");
+            if (isExternal) {
+              return (
+                <ExternalLink
+                  key={item.href}
+                  href={item.href}
+                  className="inline-flex items-center gap-2 border border-border bg-surface px-4 py-3 text-sm font-semibold transition-colors hover:border-signal hover:text-signal"
+                >
+                  {item.label} <ArrowUpRight size={14} />
+                </ExternalLink>
+              );
+            }
+            return (
+              <Link
+                key={item.href}
+                href={item.href}
+                className="inline-flex items-center gap-2 border border-border bg-surface px-4 py-3 text-sm font-semibold transition-colors hover:border-signal hover:text-signal"
+              >
+                {item.label} <ArrowUpRight size={14} />
+              </Link>
+            );
+          })}
         </div>
       </div>
     </section>

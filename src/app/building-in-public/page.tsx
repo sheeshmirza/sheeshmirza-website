@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { TopicPage } from "@/components/sections/TopicPage";
 
 export const metadata: Metadata = {
-  title: "Building in Public — Sheesh Mirza",
+  title: "Building in Public",
   description:
     "Sheesh Mirza's building-in-public approach: document real work, experiments, failures, technical lessons, and the journey of becoming a better builder.",
   alternates: { canonical: "/building-in-public" },

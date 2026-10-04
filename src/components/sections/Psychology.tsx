@@ -22,7 +22,11 @@ export function Psychology() {
             <span className="rounded-full border border-border px-4 py-2 text-sm text-foreground">
               {step}
             </span>
-            {i < flow.length - 1 && <span className="text-accent">→</span>}
+            {i < flow.length - 1 && (
+              <span aria-hidden="true" className="text-accent font-bold">
+                →
+              </span>
+            )}
           </span>
         ))}
       </Reveal>
@@ -30,14 +34,14 @@ export function Psychology() {
       <div className="mt-10 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-5">
         {psychologyTopics.map((topic, i) => (
           <Reveal key={topic} delay={i * 0.04}>
-            <div className="border border-border bg-surface px-4 py-5 text-center text-sm text-foreground transition-colors hover:border-signal hover:text-signal">
+            <div className="border border-border bg-surface px-4 py-5 text-center text-sm font-medium text-foreground transition-colors hover:border-signal hover:text-signal">
               {topic}
             </div>
           </Reveal>
         ))}
       </div>
 
-      <p className="mt-8 text-sm text-muted">
+      <p className="mt-8 text-sm leading-relaxed text-muted">
         The pattern I keep returning to: attention creates awareness, emotion
         creates meaning, desire creates momentum, and trust makes action feel
         safe.

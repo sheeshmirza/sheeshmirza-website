@@ -1,5 +1,3 @@
-"use client";
-
 import type { CSSProperties } from "react";
 import { exploringTopics } from "@/data/site-config";
 import { Section } from "@/components/ui/Section";

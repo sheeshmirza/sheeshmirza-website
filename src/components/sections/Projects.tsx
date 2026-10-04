@@ -1,13 +1,14 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { ArrowUpRight, Code } from "lucide-react";
+import { Code } from "lucide-react";
 import { projects, projectCategories, type ProjectCategory } from "@/data/projects";
 import { Section } from "@/components/ui/Section";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Reveal } from "@/components/ui/Reveal";
 import { FilterTabs } from "@/components/ui/FilterTabs";
 import { Card } from "@/components/ui/Card";
+import { ExternalLink } from "@/components/ui/ExternalLink";
 
 export function Projects() {
   const [active, setActive] = useState<ProjectCategory | "All">("All");
@@ -32,6 +33,7 @@ export function Projects() {
           options={["All", ...projectCategories] as const}
           active={active}
           onChange={setActive}
+          ariaLabel="Filter projects by category"
         />
       </Reveal>
 
@@ -50,10 +52,10 @@ export function Projects() {
               <span className="text-xs font-semibold tracking-widest text-accent uppercase">
                 {project.category}
               </span>
-              <h3 className="mt-3 font-serif text-xl text-foreground">
+              <h3 className="mt-3 font-serif text-xl font-semibold text-foreground">
                 {project.name}
               </h3>
-              <p className="mt-3 text-sm text-muted">{project.description}</p>
+              <p className="mt-3 text-sm leading-relaxed text-muted">{project.description}</p>
               <div className="mt-4 flex flex-wrap gap-2">
                 {project.technologies.map((technology) => (
                   <span key={technology} className="rounded-full border border-border px-3 py-1 text-xs text-muted">
@@ -63,9 +65,12 @@ export function Projects() {
               </div>
               <div className="mt-6 flex gap-4 text-sm">
                 {project.href && (
-                  <a href={project.href} className="flex items-center gap-1 text-foreground hover:text-accent">
-                    <Code size={14} /> Code
-                  </a>
+                  <ExternalLink
+                    href={project.href}
+                    className="flex items-center gap-1 font-medium text-foreground transition-colors hover:text-signal"
+                  >
+                    <Code size={14} /> View Code
+                  </ExternalLink>
                 )}
               </div>
             </Card>

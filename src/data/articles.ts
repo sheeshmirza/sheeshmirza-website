@@ -1,5 +1,3 @@
-//Reviewed
-
 export interface Article {
   slug: string;
   category: string;
@@ -9,73 +7,80 @@ export interface Article {
   readingTime: string;
   featured?: boolean;
   href: string;
+  tags?: string[];
 }
 
 export const articles: Article[] = [
   {
-    slug: "10-fundamental-human-desires-that-drive-consumer-behavior",
+    slug: "the-psychology-of-why-people-buy-10-fundamental-human-desires-that-drive-consumer-behavior-ec22f16f9a1b",
     category: "Psychology",
-    title: "10 Fundamental Human Desires That Drive Consumer Behavior",
+    title: "The Psychology of Why People Buy: 10 Fundamental Human Desires That Drive Consumer Behavior",
     description:
-      "People don't buy products for their specifications. They buy to satisfy underlying evolutionary desires: status, security, belonging, mastery, and autonomy.",
-    date: "January 14, 2025",
+      "Why do people really buy? Explore the psychology behind survival, security, pleasure, status, belonging, attraction, achievement, freedom, identity, and curiosity.",
+    date: "September 4, 2024",
+    readingTime: "17 min",
+    featured: true,
+    href: "https://sheeshmirza.medium.com/the-psychology-of-why-people-buy-10-fundamental-human-desires-that-drive-consumer-behavior-ec22f16f9a1b",
+    tags: ["Psychology", "Marketing", "Business"],
+  },
+  {
+    slug: "the-complete-guide-to-model-context-protocol-mcp-mcp-servers-with-javascript-and-build-ai-agents-b881354debec",
+    category: "AI",
+    title: "The Complete Guide to Model Context Protocol (MCP): MCP Servers with JavaScript and AI Agents",
+    description:
+      "Learn what Model Context Protocol (MCP) is, why it matters, how MCP servers work, how AI agents communicate with tools, and how to build MCP servers.",
+    date: "July 30, 2024",
     readingTime: "7 min",
     featured: true,
-    href: "https://sheeshmirza.medium.com/10-fundamental-human-desires-that-drive-consumer-behavior",
+    href: "https://sheeshmirza.medium.com/the-complete-guide-to-model-context-protocol-mcp-mcp-servers-with-javascript-and-build-ai-agents-b881354debec",
+    tags: ["AI", "Software Engineering", "AI Agents"],
   },
   {
-    slug: "architecture-of-payment-systems-high-throughput-engineering",
+    slug: "the-complete-guide-to-message-queues-and-event-streaming-54d3ce065c58",
     category: "Technology",
-    title: "The Architecture of Payment Systems: Lessons from Engineering at Scale",
+    title: "The Complete Guide to Message Queues and Event Streaming: Scalable Distributed Systems",
     description:
-      "A deep dive into distributed transaction integrity, idempotency keys, two-phase commits, and designing zero-downtime ledger reconciliation in financial microservices.",
-    date: "February 2, 2025",
-    readingTime: "9 min",
+      "A deep dive into distributed systems, queues, event brokers, delivery semantics, Kafka, RabbitMQ, idempotency, and asynchronous reliability.",
+    date: "July 30, 2024",
+    readingTime: "6 min",
     featured: true,
-    href: "https://sheeshmirza.medium.com",
+    href: "https://sheeshmirza.medium.com/the-complete-guide-to-message-queues-and-event-streaming-54d3ce065c58",
+    tags: ["Technology", "System Design", "Distributed Systems"],
   },
   {
-    slug: "building-autonomous-ai-agents-that-dont-break",
+    slug: "understanding-generative-ai-the-complete-beginners-guide-to-artificial-intelligence-llms-74872222e091",
     category: "AI",
-    title: "Building Autonomous AI Agents That Don't Break in Production",
+    title: "Understanding Generative AI: The Complete Beginner's Guide to AI & LLMs",
     description:
-      "Moving past brittle prompt chains: how to implement deterministic guardrails, structured tool validation, and stateful multi-agent orchestration that holds up in real workflows.",
-    date: "March 18, 2025",
-    readingTime: "8 min",
-    featured: true,
-    href: "https://sheeshmirza.medium.com",
-  },
-  {
-    slug: "psychology-of-product-positioning",
-    category: "Business",
-    title: "The Psychology of Product Positioning: Why Perception Beats Features",
-    description:
-      "How cognitive anchoring, contrast effects, and category creation dictate willingness-to-pay long before a customer ever tests your feature list.",
-    date: "November 29, 2024",
+      "An engineer's breakdown of foundational models, tokens, embeddings, fine-tuning, retrieval-augmented generation (RAG), and generative application architecture.",
+    date: "July 28, 2024",
     readingTime: "6 min",
     featured: false,
-    href: "https://sheeshmirza.medium.com",
+    href: "https://sheeshmirza.medium.com/understanding-generative-ai-the-complete-beginners-guide-to-artificial-intelligence-llms-74872222e091",
+    tags: ["AI", "LLMs"],
   },
   {
-    slug: "fast-numerical-computing-numpy-pandas-guide",
+    slug: "understanding-agentic-ai-and-its-architecture-the-complete-beginners-guide-to-autonomous-ai-aaf3c01cde20",
+    category: "AI",
+    title: "Understanding Agentic AI and Its Architecture: The Guide to Autonomous AI Systems",
+    description:
+      "Examining tool usage, planning loops, state management, reflection, guardrails, and deterministic verification in production AI agents.",
+    date: "July 16, 2024",
+    readingTime: "7 min",
+    featured: false,
+    href: "https://sheeshmirza.medium.com/understanding-agentic-ai-and-its-architecture-the-complete-beginners-guide-to-autonomous-ai-aaf3c01cde20",
+    tags: ["AI", "AI Agents"],
+  },
+  {
+    slug: "why-chatgpt-gives-different-answers-to-the-same-question-understanding-randomness-4bdee41c25fb",
     category: "Technology",
-    title: "Fast Numerical Computing in Python: An Engineer's Guide to NumPy & Pandas",
+    title: "Why ChatGPT Gives Different Answers to the Same Question: Understanding Randomness",
     description:
-      "Understanding memory strides, C-contiguous arrays, vectorization patterns, and how to eliminate the hidden performance bottlenecks in production data pipelines.",
-    date: "October 12, 2024",
-    readingTime: "11 min",
+      "Explaining temperature, top_p sampling, log probabilities, and non-deterministic behavior in modern language model inferences.",
+    date: "July 17, 2024",
+    readingTime: "6 min",
     featured: false,
-    href: "https://sheeshmirza.medium.com",
-  },
-  {
-    slug: "solopreneur-stack-one-person-ai-businesses",
-    category: "Startups",
-    title: "The Solopreneur Stack: Engineering One-Person AI Businesses",
-    description:
-      "Why agentic workflows and automated distribution are rewriting the minimum viable team size. A blueprint for building hyper-lean software enterprises with zero bloated headcount.",
-    date: "April 5, 2025",
-    readingTime: "8 min",
-    featured: false,
-    href: "https://sheeshmirza.medium.com",
+    href: "https://sheeshmirza.medium.com/why-chatgpt-gives-different-answers-to-the-same-question-understanding-randomness-4bdee41c25fb",
+    tags: ["Technology", "AI"],
   },
 ];
