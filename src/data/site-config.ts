@@ -17,6 +17,17 @@ export const navLinks = [
   { label: "Contact", href: "/contact" },
 ];
 
+export const topicLinks = [
+  { label: "AI Engineering", href: "/ai-engineering", description: "LLMs, agents & production systems" },
+  { label: "Software Engineering", href: "/software-engineering", description: "APIs, reliability & backend design" },
+  { label: "System Design", href: "/system-design", description: "Distributed systems & trade-offs" },
+  { label: "Entrepreneurship", href: "/entrepreneurship", description: "Problem discovery & product validation" },
+  { label: "Building in Public", href: "/building-in-public", description: "Transparent experiments & lessons" },
+  { label: "Sheesh Unfiltered", href: "/sheesh-unfiltered", description: "Conversations & video essays" },
+  { label: "Media & Profiles", href: "/media", description: "Official public profiles & links" },
+  { label: "Press Kit & Bio", href: "/press", description: "Official bios and public assets" },
+];
+
 export const socialLinks = [
   { label: "LinkedIn", href: "https://www.linkedin.com/in/sheeshmirza" },
   { label: "GitHub", href: "https://github.com/sheeshmirza" },
