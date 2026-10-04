@@ -1,22 +1,49 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { Code } from "lucide-react";
-import { projects, projectCategories, type ProjectCategory } from "@/data/projects";
+import { Code, GitFork, RefreshCw, Star } from "lucide-react";
+import { projects as fallbackProjects, projectCategories as fallbackCategories } from "@/data/projects";
 import { Section } from "@/components/ui/Section";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Reveal } from "@/components/ui/Reveal";
 import { FilterTabs } from "@/components/ui/FilterTabs";
 import { Card } from "@/components/ui/Card";
 import { ExternalLink } from "@/components/ui/ExternalLink";
+import { useRemoteData } from "@/hooks/useRemoteData";
+import { ErrorBoundary } from "@/components/ui/ErrorBoundary";
+import { ProjectsResponseSchema, type ValidatedProjectsResponse } from "@/lib/schemas";
 
-export function Projects() {
-  const [active, setActive] = useState<ProjectCategory | "All">("All");
+function ProjectsContent() {
+  const [active, setActive] = useState<string>("All");
+
+  const initialData: ValidatedProjectsResponse = useMemo(
+    () => ({
+      success: true,
+      projects: fallbackProjects,
+      categories: fallbackCategories,
+      count: fallbackProjects.length,
+      fallback: true,
+    }),
+    [],
+  );
+
+  const { data, loading, error, refetch } = useRemoteData<ValidatedProjectsResponse>(
+    "/api/projects",
+    {
+      schema: ProjectsResponseSchema,
+      fallbackData: initialData,
+    },
+  );
+
+  const projects = data?.projects ?? fallbackProjects;
+  const categories = data?.categories ?? fallbackCategories;
 
   const filtered = useMemo(
     () => (active === "All" ? projects : projects.filter((p) => p.category === active)),
-    [active],
+    [active, projects],
   );
+
+  const categoryOptions = ["All", ...categories] as const;
 
   return (
     <Section id="work" className="border-t border-border">
@@ -24,59 +51,114 @@ export function Projects() {
         <SectionHeading
           eyebrow="Work"
           title="Projects and experiments"
-          subtitle="Software, prototypes, and small explorations aimed at making a useful idea tangible."
+          subtitle="Software, prototypes, and open source repositories fetched live from GitHub."
         />
       </Reveal>
 
       <Reveal delay={0.1} className="mt-8">
         <FilterTabs
-          options={["All", ...projectCategories] as const}
+          options={categoryOptions}
           active={active}
           onChange={setActive}
           ariaLabel="Filter projects by category"
         />
       </Reveal>
 
-      {filtered.length === 0 ? (
+      {error && !projects.length && (
+        <div className="mt-12 border border-border bg-surface p-6">
+          <p className="text-sm text-signal">Failed to load projects from GitHub.</p>
+          <button
+            type="button"
+            onClick={() => refetch()}
+            className="mt-3 inline-flex items-center gap-2 border border-border px-4 py-2 text-xs font-semibold uppercase tracking-wider text-foreground hover:border-signal"
+          >
+            <RefreshCw size={13} /> Retry Loading
+          </button>
+        </div>
+      )}
+
+      {loading && !projects.length ? (
+        <div className="mt-10 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          {[1, 2, 3].map((i) => (
+            <div key={i} className="h-64 border border-border bg-surface p-6 animate-pulse">
+              <div className="h-3 w-20 bg-border/60 rounded" />
+              <div className="mt-4 h-6 w-3/4 bg-border/60 rounded" />
+              <div className="mt-4 h-16 w-full bg-border/30 rounded" />
+            </div>
+          ))}
+        </div>
+      ) : filtered.length === 0 ? (
         <p className="mt-12 text-muted">
-          Nothing to show in this category yet. The next experiment is underway.
+          Nothing to show in {active} yet. The next experiment is underway.
         </p>
       ) : (
         <div className="mt-10 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {filtered.map((project) => (
-            <Card
-              key={project.name}
-              interactive
-              className="flex h-full flex-col p-6"
-            >
-              <span className="text-xs font-semibold tracking-widest text-accent uppercase">
-                {project.category}
-              </span>
-              <h3 className="mt-3 font-serif text-xl font-semibold text-foreground">
-                {project.name}
-              </h3>
-              <p className="mt-3 text-sm leading-relaxed text-muted">{project.description}</p>
-              <div className="mt-4 flex flex-wrap gap-2">
-                {project.technologies.map((technology) => (
-                  <span key={technology} className="rounded-full border border-border px-3 py-1 text-xs text-muted">
-                    {technology}
-                  </span>
-                ))}
-              </div>
-              <div className="mt-6 flex gap-4 text-sm">
-                {project.href && (
-                  <ExternalLink
-                    href={project.href}
-                    className="flex items-center gap-1 font-medium text-foreground transition-colors hover:text-signal"
-                  >
-                    <Code size={14} /> View Code
-                  </ExternalLink>
-                )}
-              </div>
-            </Card>
+          {filtered.map((project, i) => (
+            <Reveal key={project.name} delay={i * 0.04}>
+              <Card interactive className="flex h-full flex-col justify-between p-6">
+                <div>
+                  <div className="flex items-center justify-between gap-2">
+                    <span className="text-xs font-semibold tracking-widest text-accent uppercase">
+                      {project.category}
+                    </span>
+                    {project.stars !== undefined && project.stars > 0 && (
+                      <span className="inline-flex items-center gap-1 text-xs text-muted">
+                        <Star size={12} className="fill-accent text-accent" />
+                        {project.stars}
+                      </span>
+                    )}
+                  </div>
+                  <h3 className="mt-3 font-serif text-xl font-semibold text-foreground">
+                    {project.name}
+                  </h3>
+                  <p className="mt-3 text-sm leading-relaxed text-muted line-clamp-3">
+                    {project.description}
+                  </p>
+                  <div className="mt-4 flex flex-wrap gap-1.5">
+                    {project.technologies.slice(0, 5).map((technology) => (
+                      <span
+                        key={technology}
+                        className="rounded border border-border bg-surface/80 px-2 py-0.5 text-[0.7rem] text-muted"
+                      >
+                        {technology}
+                      </span>
+                    ))}
+                    {project.technologies.length > 5 && (
+                      <span className="rounded border border-border bg-surface/80 px-2 py-0.5 text-[0.7rem] text-muted">
+                        +{project.technologies.length - 5}
+                      </span>
+                    )}
+                  </div>
+                </div>
+                <div className="mt-6 flex items-center justify-between pt-4 border-t border-border/50 text-sm">
+                  {project.href && (
+                    <ExternalLink
+                      href={project.href}
+                      className="flex items-center gap-1.5 font-medium text-foreground transition-colors hover:text-signal"
+                    >
+                      <Code size={14} /> View on GitHub
+                    </ExternalLink>
+                  )}
+                  {project.forks !== undefined && project.forks > 0 && (
+                    <span className="inline-flex items-center gap-1 text-xs text-muted">
+                      <GitFork size={12} />
+                      {project.forks}
+                    </span>
+                  )}
+                </div>
+              </Card>
+            </Reveal>
           ))}
         </div>
       )}
     </Section>
+  );
+}
+
+export function Projects() {
+  return (
+    <ErrorBoundary fallbackTitle="Projects Unavailable">
+      <ProjectsContent />
+    </ErrorBoundary>
   );
 }

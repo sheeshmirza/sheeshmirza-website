@@ -231,8 +231,27 @@ async function syncGitHub() {
     throw new Error("No GitHub repositories returned");
   }
 
-  const cleanRepoName = (raw) =>
-    raw.replace(/-/g, " ").replace(/\b\w/g, (c) => c.toUpperCase());
+  const cleanRepoName = (raw) => {
+    const overrides = {
+      "sheeshmirza-website": "sheeshmirza.com",
+      "mailhost-frontend": "MailHost Web Client",
+      "mailhost-backend": "MailHost API Service",
+      "ollama-with-langchain": "Ollama LangChain Client",
+      "ai-agents-for-beginners": "AI Agents for Beginners",
+      "Hands-On-Large-Language-Models": "Hands-On LLMs Code",
+      "llm-course": "LLM Course & Notebooks",
+      "Made-With-ML": "Made With ML Applications",
+      "ai-wrapper": "AI Model Gateway & Wrapper",
+      "FC-Hackathon-2026": "FreeCharge Hackathon Project",
+      "Docker": "Local DevOps & Docker Environment",
+      "data-structures": "Data Structures in JavaScript",
+      "leetcode-30-days-of-javascript": "LeetCode 30 Days of JS",
+      "opencv-object-detection": "OpenCV Vision & Detection",
+      "languages": "Polyglot Systems Programming",
+    };
+    if (overrides[raw]) return overrides[raw];
+    return raw.replace(/-/g, " ").replace(/\b\w/g, (c) => c.toUpperCase());
+  };
 
   const getRepoDesc = (name, desc) => {
     if (desc && desc.trim().length > 0) return desc.trim();
@@ -247,15 +266,19 @@ async function syncGitHub() {
   };
 
   const categorize = (name, desc, lang, topics) => {
+    const n = name.toLowerCase();
+    if (n === "docker") return "Systems & Backend";
+    if (n.includes("leetcode") || n.includes("data-structures")) return "Algorithms & Learning";
+    if (n.includes("languages")) return "Systems & Backend";
+    if (n.includes("mailhost-backend") || n.includes("backend")) return "Systems & Backend";
+    if (n.includes("mailhost-frontend") || n.includes("website") || n.includes("hackathon")) return "Web & Engineering";
+
     const combined = `${name} ${desc} ${lang || ""} ${topics.join(" ")}`.toLowerCase();
     if (/\b(ai|agentic|agents?|llm|llms|gpt|langchain|ollama|machine-learning|ml|deep-learning|vision|opencv|pytorch)\b/i.test(combined)) {
       return "AI & Machine Learning";
     }
     if (/\b(go|golang|docker|backend|c\+\+|systems?|microservice|server|kafka|redis|elasticsearch|postgresql)\b/i.test(combined)) {
       return "Systems & Backend";
-    }
-    if (/\b(data-structures?|algorithms?|leetcode)\b/i.test(combined)) {
-      return "Algorithms & Learning";
     }
     return "Web & Engineering";
   };

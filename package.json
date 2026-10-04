@@ -4,6 +4,8 @@
   "private": true,
   "type": "module",
   "scripts": {
+    "sync": "node scripts/sync-live-data.mjs",
+    "prebuild": "node scripts/sync-live-data.mjs",
     "build": "next build",
     "start": "next start -p 3000",
     "start:dev": "next dev -p 3000",
