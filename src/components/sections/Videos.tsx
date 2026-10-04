@@ -1,6 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
+import Image from "next/image";
 import { ArrowUpRight, Play, RefreshCw } from "lucide-react";
 import { videos as fallbackVideos } from "@/data/videos";
 import { Section } from "@/components/ui/Section";
@@ -107,11 +108,12 @@ function VideosContent() {
               >
                 <div className="relative aspect-video w-full overflow-hidden bg-foreground">
                   {video.thumbnail ? (
-                    <img
+                    <Image
                       src={video.thumbnail}
                       alt={video.title}
-                      loading={i < 2 ? "eager" : "lazy"}
-                      decoding="async"
+                      fill
+                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                      priority={i < 2}
                       className="h-full w-full object-cover transition-transform group-hover:scale-105"
                     />
                   ) : (
