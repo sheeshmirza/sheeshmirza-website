@@ -4,7 +4,7 @@ const nextConfig = {
   // Optimize static images by disabling Next.js server-side image optimization
   images: {
     domains: [],
-    unoptimized: true,
+    unoptimized: true
   },
   // Output as a static HTML export (required for fully static deployments)
   output: "export",
@@ -16,9 +16,9 @@ const nextConfig = {
   trailingSlash: true,
   // Custom Webpack alias for simpler imports using "@"
   webpack: (config) => {
-    config.resolve.alias["@"] = path.resolve(process.cwd());
+    config.resolve.alias["@"] = path.resolve(process.cwd(), "src");
     return config;
-  },
+  }
 };
 
 export default nextConfig;
