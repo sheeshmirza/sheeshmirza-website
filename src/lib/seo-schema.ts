@@ -118,3 +118,102 @@ export function createSeriesSchema({ name, description, url }: SeriesSchemaParam
     url,
   };
 }
+
+export interface CollectionSchemaParams {
+  name: string;
+  description: string;
+  path: string;
+  items: unknown[];
+}
+
+/**
+ * Generates Schema.org CollectionPage structured data with an ItemList.
+ */
+export function createCollectionSchema({
+  name,
+  description,
+  path,
+  items,
+}: CollectionSchemaParams) {
+  const url = `${site.url}${path.startsWith("/") ? path : `/${path}`}`;
+  return {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    name,
+    description,
+    url,
+    mainEntity: {
+      "@type": "ItemList",
+      itemListElement: items,
+    },
+  };
+}
+
+export interface ContactSchemaParams {
+  name?: string;
+  description?: string;
+  path?: string;
+  email?: string;
+}
+
+/**
+ * Generates Schema.org ContactPage structured data.
+ */
+export function createContactSchema({
+  name = `Contact ${site.name}`,
+  description = "Get in touch with Sheesh Mirza.",
+  path = "/contact",
+  email = "sheesh@smirza.in",
+}: ContactSchemaParams = {}) {
+  const url = `${site.url}${path.startsWith("/") ? path : `/${path}`}`;
+  return {
+    "@context": "https://schema.org",
+    "@type": "ContactPage",
+    name,
+    description,
+    url,
+    mainEntity: {
+      "@type": "Person",
+      name: site.name,
+      url: site.url,
+      email,
+    },
+  };
+}
+
+export interface WebPageSchemaParams {
+  name: string;
+  description: string;
+  path?: string;
+  about?: string[];
+  parts?: { name: string; path: string }[];
+}
+
+/**
+ * Generates Schema.org WebPage structured data with topics and page components.
+ */
+export function createWebPageSchema({
+  name,
+  description,
+  path = "",
+  about = [],
+  parts = [],
+}: WebPageSchemaParams) {
+  const url = `${site.url}${path ? (path.startsWith("/") ? path : `/${path}`) : ""}`;
+  return {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "@id": url,
+    url,
+    name,
+    description,
+    about: about.map((topic) => ({ "@type": "Thing", name: topic })),
+    hasPart: parts.map((part) => ({
+      "@type": "WebPage",
+      name: part.name,
+      url: `${site.url}${part.path.startsWith("/") ? part.path : `/${part.path}`}`,
+    })),
+  };
+}
+
+

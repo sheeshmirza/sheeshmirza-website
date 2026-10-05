@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Contact } from "@/components/sections/Contact";
 import { site } from "@/data/site-config";
+import { JsonLd } from "@/components/ui/JsonLd";
+import { createContactSchema, createBreadcrumbSchema } from "@/lib/seo-schema";
 
 export const metadata: Metadata = {
   title: "Contact & Collaborations — Sheesh Mirza",
@@ -16,29 +18,20 @@ export const metadata: Metadata = {
   },
 };
 
-export default function ContactPage() {
-  const contactJsonLd = {
-    "@context": "https://schema.org",
-    "@type": "ContactPage",
-    name: "Contact Sheesh Mirza",
-    description: metadata.description,
-    url: `${site.url}/contact`,
-    mainEntity: {
-      "@type": "Person",
-      name: "Sheesh Mirza",
-      url: site.url,
-      email: "sheesh@smirza.in",
-    },
-  };
+const jsonLd = [
+  createBreadcrumbSchema([
+    { name: "Home", path: "/" },
+    { name: "Contact & Collaborations", path: "/contact" },
+  ]),
+  createContactSchema({
+    description: metadata.description as string,
+  }),
+];
 
+export default function ContactPage() {
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify(contactJsonLd),
-        }}
-      />
+      <JsonLd data={jsonLd} />
       <Contact />
     </>
   );

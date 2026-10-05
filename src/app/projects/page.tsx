@@ -3,6 +3,9 @@ import { ArrowUpRight, Code, GitFork, Star } from "lucide-react";
 import { projects } from "@/data/projects";
 import { site } from "@/data/site-config";
 
+import { JsonLd } from "@/components/ui/JsonLd";
+import { createCollectionSchema, createBreadcrumbSchema } from "@/lib/seo-schema";
+
 export const metadata: Metadata = {
   title: "Projects & Open Source Code: Systems, AI & Fullstack",
   description:
@@ -17,40 +20,36 @@ export const metadata: Metadata = {
   },
 };
 
-export default function ProjectsPage() {
-  const collectionJsonLd = {
-    "@context": "https://schema.org",
-    "@type": "CollectionPage",
+const jsonLd = [
+  createBreadcrumbSchema([
+    { name: "Home", path: "/" },
+    { name: "Projects & Open Source", path: "/projects" },
+  ]),
+  createCollectionSchema({
     name: "Open Source Projects by Sheesh Mirza",
-    description: metadata.description,
-    url: `${site.url}/projects`,
-    mainEntity: {
-      "@type": "ItemList",
-      itemListElement: projects.map((project, idx) => ({
-        "@type": "SoftwareSourceCode",
-        position: idx + 1,
-        name: project.name,
-        description: project.description,
-        codeRepository: project.href,
-        programmingLanguage: project.technologies[0] || "TypeScript",
-        keywords: project.technologies.join(", "),
-        author: {
-          "@type": "Person",
-          name: "Sheesh Mirza",
-          url: site.url,
-        },
-      })),
-    },
-  };
+    description: metadata.description as string,
+    path: "/projects",
+    items: projects.map((project, idx) => ({
+      "@type": "SoftwareSourceCode",
+      position: idx + 1,
+      name: project.name,
+      description: project.description,
+      codeRepository: project.href,
+      programmingLanguage: project.technologies[0] || "TypeScript",
+      keywords: project.technologies.join(", "),
+      author: {
+        "@type": "Person",
+        name: site.name,
+        url: site.url,
+      },
+    })),
+  }),
+];
 
+export default function ProjectsPage() {
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify(collectionJsonLd),
-        }}
-      />
+      <JsonLd data={jsonLd} />
       <section className="mx-auto max-w-7xl px-6 py-16 sm:px-10 sm:py-24 lg:px-12">
         <div className="max-w-3xl">
           <p className="text-[0.68rem] font-semibold uppercase tracking-[0.28em] text-muted">
