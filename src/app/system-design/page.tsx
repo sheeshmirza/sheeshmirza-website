@@ -1,32 +1,86 @@
 import type { Metadata } from "next";
 import { TopicPage } from "@/components/sections/TopicPage";
+import { site } from "@/data/site-config";
 
 export const metadata: Metadata = {
-  title: "System Design",
+  title: "System Design & Distributed Systems",
   description:
-    "System design notes by Sheesh Mirza on distributed systems, scalability, reliability, queues, retries, idempotency, APIs, and engineering trade-offs.",
+    "System design and distributed systems notes by Sheesh Mirza covering scalable architecture, event streaming, message queues, idempotency, caching, and engineering trade-offs.",
   alternates: { canonical: "/system-design" },
+  openGraph: {
+    title: "System Design & Distributed Systems | Sheesh Mirza",
+    description:
+      "Deep architectural notes on distributed systems, message queues, failure modes, and building reliable systems at scale.",
+    url: `${site.url}/system-design`,
+    type: "article",
+  },
 };
 
 export default function SystemDesignPage() {
+  const breadcrumbJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      {
+        "@type": "ListItem",
+        position: 1,
+        name: "Home",
+        item: site.url,
+      },
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: "System Design",
+        item: `${site.url}/system-design`,
+      },
+    ],
+  };
+
+  const articleJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "TechArticle",
+    headline: "System Design & Distributed Architecture at Scale",
+    description:
+      "A principled guide to designing distributed software: constraints, failure modes, message queues, caching tiers, and operational cost.",
+    author: {
+      "@type": "Person",
+      name: "Sheesh Mirza",
+      url: site.url,
+    },
+    publisher: {
+      "@type": "Person",
+      name: "Sheesh Mirza",
+    },
+    url: `${site.url}/system-design`,
+    inLanguage: "en-US",
+  };
+
   return (
-    <TopicPage
-      eyebrow="System Design"
-      title="Design for the real state of the system."
-      description="System design is not an architecture diagram competition. It is the discipline of understanding constraints, failure modes, data flow, operational cost, and what the system needs to guarantee."
-      points={[
-        "Start with the problem: who uses the system, what matters, and what constraints cannot be violated?",
-        "Design for failure: timeouts, retries, duplicate requests, partial outages, stale data, and dependency failures are normal states.",
-        "Make semantics explicit: queues, caches, databases, and services are tools; their meaning comes from the guarantees the product actually needs.",
-        "Observability is part of architecture: logs, metrics, traces, alerts, and useful diagnostic signals reduce the cost of operating a system.",
-        "Prefer the simplest architecture that satisfies the requirements, then add complexity only when evidence demands it."
-      ]}
-      related={[
-        { label: "Software Engineering", href: "/software-engineering" },
-        { label: "AI Engineering", href: "/ai-engineering" },
-        { label: "Projects", href: "/projects" },
-        { label: "Writing", href: "/blog" },
-      ]}
-    />
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify([breadcrumbJsonLd, articleJsonLd]),
+        }}
+      />
+      <TopicPage
+        eyebrow="System Design & Architecture"
+        title="Design for the messy reality of distributed failure."
+        description="System design is not an abstract architecture diagram competition. It is the practical discipline of understanding real-world constraints, failure modes, data flows, operational cost, and concrete system guarantees."
+        points={[
+          "Problem-first architecture: clarify read vs. write volumes, acceptable latency bounds, consistency requirements, and SLA invariants before choosing components.",
+          "Design for inevitable failure: network partitions, timeouts, duplicate requests, stale cache hits, cascading retries, and database failovers are normal states.",
+          "Explicit messaging semantics: understand the exact trade-offs between message queues (point-to-point, task distribution) and event streams (immutable logs, pub/sub replay).",
+          "Observability as an architectural pillar: end-to-end distributed tracing, high-cardinality metrics, structured logs, and proactive circuit breakers.",
+          "Simplicity over premature complexity: start monolithic or modular, profile bottlenecks with telemetry, and extract distributed services only when required by scale.",
+        ]}
+        related={[
+          { label: "Software Engineering", href: "/software-engineering" },
+          { label: "AI Engineering", href: "/ai-engineering" },
+          { label: "Technical Essays", href: "/blog" },
+          { label: "Source Code Repositories", href: "/projects" },
+        ]}
+      />
+    </>
   );
 }

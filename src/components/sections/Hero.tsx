@@ -27,9 +27,7 @@ export function Hero() {
         </h1>
 
         <p className="hero-enter hero-enter-3 max-w-md self-end text-base leading-relaxed text-muted sm:text-lg lg:pb-2">
-          I&apos;m a software engineer exploring where reliable systems, practical
-          AI, product building, and human behavior meet. I build, test, learn,
-          and share the work.
+          Software engineer focused on <strong className="font-semibold text-foreground">Software Engineering &amp; System Designing</strong>, <strong className="font-semibold text-foreground">Artificial Intelligence</strong>, and intelligent automation. Exploring startups, problem discovery, and human psychology.
         </p>
 
         <div className="hero-enter hero-enter-4 flex flex-wrap items-center gap-3">
@@ -81,12 +79,12 @@ export function Hero() {
           </p>
           <div className="mt-12 grid grid-cols-2 gap-5 border-t border-background/20 pt-5 text-xs text-background/60">
             <div>
-              <p className="text-background">01 / Build</p>
-              <p className="mt-1">Software, AI systems, and product experiments</p>
+              <p className="text-background font-semibold">01 / Systems &amp; AI</p>
+              <p className="mt-1">Software engineering, distributed systems &amp; intelligent automation</p>
             </div>
             <div>
-              <p className="text-background">02 / Share</p>
-              <p className="mt-1">Writing, videos, lessons, and the creator journey</p>
+              <p className="text-background font-semibold">02 / Startups &amp; Mindset</p>
+              <p className="mt-1">Problem discovery, business innovation &amp; human psychology</p>
             </div>
           </div>
         </aside>

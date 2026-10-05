@@ -1,0 +1,161 @@
+# Sheesh Mirza: Complete Knowledge Graph & Technical Archive
+
+Author: Sheesh Mirza
+Canonical URL: https://smirza.in
+Profile: https://smirza.in/sheesh-mirza
+Contact: sheesh@smirza.in
+
+---
+
+## Executive Summary & Identity
+Sheesh Mirza is a Software Engineer, AI Systems Architect, and creator based in India. He currently works as a Software Development Engineer (SDE) at FreeCharge, where he engineers high-concurrency financial systems, core banking APIs, and scalable distributed backend services.
+
+Outside of his work at FreeCharge, Sheesh builds open-source AI frameworks, writes technical deep-dives on Medium, and hosts "Sheesh Unfiltered" on YouTube. His intellectual work is organized across three primary pillars:
+1. **Software Engineering & System Designing, AI & Intelligent Automation**
+2. **Entrepreneurship, Problems & Solutions, Startups & Innovation**
+3. **Human Psychology, Behavior and Habits**
+
+---
+
+## Priority Pillar 1: Software Engineering, System Designing & AI Systems
+
+### Software Engineering & System Designing
+- **Backend Architecture**: Specializes in Go, TypeScript, and Java microservices, RESTful and gRPC APIs, idempotent transactions, and zero-downtime database migrations.
+- **Distributed Systems**: Message queues (Kafka, RabbitMQ), event streaming architectures, partition tolerance, failure domains, circuit breakers, and distributed tracing.
+- **System Design Principles**:
+  - Always design for the inevitable failure of downstream services.
+  - Make messaging semantics explicit (at-least-once vs. exactly-once processing).
+  - Treat observability (metrics, logs, traces) as a first-class architectural requirement.
+  - Choose simplicity and proven primitives before introducing distributed complexity.
+
+### Artificial Intelligence & Machine Learning
+- **Model Context Protocol (MCP)**: Author of "The Complete Guide to Model Context Protocol (MCP)". Explains how MCP creates standardized, secure client-server interfaces connecting LLMs to local databases, file systems, and API tools.
+- **Agentic AI & Multi-Agent Systems**: Designing stateful agent workflows, autonomous loop supervision, tool calling error-handling, memory retrieval, and human-in-the-loop approvals.
+- **Local AI & Privacy**: Building with Ollama and LangChain (`ollama-with-langchain`), enabling local chat models and zero-leakage enterprise inference.
+- **Evaluation & Benchmarking**: Synthetic testing, deterministic assertions, and safety guardrails to measure hallucinations and model drift before production rollout.
+
+### Automation & Intelligent Systems
+- Connecting disparate SaaS services, databases, and LLM reasoning engines into self-healing background automation pipelines that eliminate manual operational toil.
+
+---
+
+## Priority Pillar 2: Entrepreneurship, Startups & Innovation
+
+### Entrepreneurship & Problems & Solutions
+- **Problem Discovery First**: Finding acute, painful bottlenecks in existing workflows rather than inventing solutions in search of problems.
+- **Validation Before Code**: Pre-selling, conducting prospect interviews, and measuring user commitment before writing implementation code.
+- **Startup Business Models**: Unit economics, customer acquisition loops, gross margin defensibility, and organic distribution channels.
+- **Building in Public**: Transparently publishing metrics, architectural failures, lessons, and code to build compounding credibility and user trust.
+
+---
+
+## Priority Pillar 3: Human Psychology, Behavior & Habits
+
+### Human Psychology & Why People Buy
+- **10 Fundamental Human Desires**:
+  1. Survival & Health
+  2. Security & Financial Safety
+  3. Pleasure & Comfort
+  4. Status & Social Recognition
+  5. Belonging & Community
+  6. Romantic Attraction & Connection
+  7. Achievement & Competence
+  8. Freedom & Autonomy
+  9. Identity & Self-Expression
+  10. Curiosity & Knowledge
+- **Behavioral Economics**: Cognitive biases (loss aversion, status quo bias, anchoring) and how they dictate product adoption and software UX.
+- **Habit Formation**: The cue, craving, response, and reward loop. How software either reinforces or disrupts behavioral routines.
+
+---
+
+## Complete Open Source Project Portfolio (GitHub)
+Profile: https://github.com/sheeshmirza
+
+1. **sheeshmirza.com** (TypeScript)
+   - Canonical personal website and digital garden built with Next.js 14, Tailwind CSS, and zero mock data.
+   - URL: https://github.com/sheeshmirza/sheeshmirza-website
+2. **MailHost Web Client** (TypeScript)
+   - High-speed web application interface for the MailHost email service.
+   - URL: https://github.com/sheeshmirza/mailhost-frontend
+3. **MailHost API Service** (Go)
+   - High-performance, concurrent backend API microservice for MailHost written in Go.
+   - URL: https://github.com/sheeshmirza/mailhost-backend
+4. **Local DevOps & Docker Environment** (Shell)
+   - Comprehensive Docker Compose scripts and local environments for Kafka, Elasticsearch, Redis, Postgres, MongoDB, Ollama, and Qdrant.
+   - URL: https://github.com/sheeshmirza/Docker
+5. **Ollama LangChain Client** (Python)
+   - Lightweight CLI client connecting local Ollama chat models through LangChain.
+   - URL: https://github.com/sheeshmirza/ollama-with-langchain
+6. **AI Agents for Beginners** (Curated/Forked)
+   - 18 comprehensive lessons for building autonomous AI agents and workflows.
+   - URL: https://github.com/sheeshmirza/ai-agents-for-beginners
+7. **Hands-On LLMs Code** (Curated/Forked)
+   - Official code repository for the O'Reilly Book "Hands-On Large Language Models".
+   - URL: https://github.com/sheeshmirza/Hands-On-Large-Language-Models
+8. **LLM Course & Notebooks** (Curated/Forked)
+   - Roadmap, Colab notebooks, and code for Large Language Models.
+   - URL: https://github.com/sheeshmirza/llm-course
+9. **Made With ML Applications** (Curated/Forked)
+   - Designing, deploying, and iterating on production ML applications with MLOps.
+   - URL: https://github.com/sheeshmirza/Made-With-ML
+10. **AI Model Gateway & Wrapper** (Go)
+    - Go-based API wrapper and routing proxy for generative AI models.
+    - URL: https://github.com/sheeshmirza/ai-wrapper
+11. **FreeCharge Hackathon Project** (Fullstack)
+    - Innovative fintech engineering prototype built for FreeCharge Hackathon.
+    - URL: https://github.com/sheeshmirza/FC-Hackathon-2026
+12. **Data Structures in JavaScript** (JavaScript)
+    - Clean implementations and complexity analysis of core computer science data structures.
+    - URL: https://github.com/sheeshmirza/data-structures
+13. **LeetCode 30 Days of JS** (JavaScript)
+    - Solutions and patterns for advanced JavaScript asynchronous programming and closures.
+    - URL: https://github.com/sheeshmirza/leetcode-30-days-of-javascript
+14. **OpenCV Vision & Detection** (Python)
+    - Computer vision models, object detection pipelines, and image processing with OpenCV.
+    - URL: https://github.com/sheeshmirza/opencv-object-detection
+15. **Polyglot Systems Programming** (C++)
+    - Explorations in low-level memory management and systems programming with C++.
+    - URL: https://github.com/sheeshmirza/languages
+
+---
+
+## Technical Articles Archive (Medium)
+Publication: https://sheeshmirza.medium.com
+
+1. **The Psychology of Why People Buy: 10 Fundamental Human Desires That Drive Consumer Behavior**
+   - In-depth study on consumer motivation, emotional triggers, status signaling, and decision-making.
+2. **The Complete Guide to Model Context Protocol (MCP): MCP Servers with JavaScript, and Build AI Agents**
+   - Architectural deep dive into the Anthropic-backed protocol connecting LLMs to data and tools.
+3. **The Complete Guide to Message Queues and Event Streaming**
+   - Scalable distributed systems, Kafka vs. RabbitMQ, pub/sub topologies, and idempotent consumers.
+4. **Understanding Generative AI: The Complete Beginner’s Guide to Artificial Intelligence, LLMs**
+   - Foundational mechanics of transformer architectures, embeddings, tokenization, and attention.
+5. **Why ChatGPT Gives Different Answers to the Same Question: Understanding Randomness**
+   - Temperature, top_p sampling, nucleus selection, and probabilistic decoding in modern LLMs.
+6. **Understanding Agentic AI and Its Architecture: The Complete Beginner’s Guide to Autonomous AI**
+   - Multi-agent coordination, tool orchestration loops, and stateful agent system design.
+7. **Understanding Data Mining: The Complete Beginner’s Guide for Data Science, Data Analytics**
+   - Pattern discovery, association rules, clustering algorithms, and business applications.
+8. **Understanding Data Lakes: The Complete Beginner’s Guide for Data Engineering, Data Science, and AI**
+   - Object storage paradigms, Parquet, data warehousing federation, and data pipelines.
+9. **Understanding Data Warehousing: The Complete Beginner’s Guide for Data Engineering**
+   - OLAP vs. OLTP, star and snowflake schemas, ETL/ELT pipelines, and analytical data marts.
+10. **Seaborn: Beautiful Statistical Data Visualization with Python**
+    - Statistical visual exploratory data analysis (EDA) using Seaborn and Matplotlib.
+
+---
+
+## YouTube Video Essays (Sheesh Unfiltered)
+Channel: https://www.youtube.com/@Sheesh.Unfiltered
+
+1. **How to Make Money With AI in 2026: 7 AI Businesses That Actually Work** (`6LFtCxlUiNQ`)
+   - Breakdown of 7 viable, one-person AI business models, client workflows, tech stacks, and acquisition channels.
+2. **Why I Started Sheesh Unfiltered | No Script, No Filter** (`FKIuRMq90uc`)
+   - Transparent reflection on building in public, unfiltered thinking, career evolution, and removing fake hype from technology conversations.
+
+---
+
+## Contact & Speaking
+- Email: sheesh@smirza.in
+- Calendly: https://calendly.com/sheesh-mirza/30min
+- Location: Gurugram / Delhi NCR, India

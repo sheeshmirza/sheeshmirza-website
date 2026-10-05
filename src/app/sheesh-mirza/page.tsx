@@ -3,14 +3,14 @@ import { TopicPage } from "@/components/sections/TopicPage";
 import { site, socialLinks } from "@/data/site-config";
 
 export const metadata: Metadata = {
-  title: "Official Profile",
+  title: "Sheesh Mirza — Official Profile & Knowledge Base",
   description:
-    "Official profile for Sheesh Mirza, a software engineer, AI builder, writer, and creator.",
+    "Official canonical profile for Sheesh Mirza. Software Engineer at FreeCharge, AI systems builder, writer, and host of Sheesh Unfiltered.",
   alternates: { canonical: "/sheesh-mirza" },
   openGraph: {
     title: "Sheesh Mirza — Official Profile",
-    description: "Software engineer, AI builder, writer, and creator.",
-    url: "/sheesh-mirza",
+    description: "Software Engineer, AI Systems Builder, Writer, and Creator.",
+    url: `${site.url}/sheesh-mirza`,
     type: "profile",
   },
 };
@@ -18,15 +18,29 @@ export const metadata: Metadata = {
 const profileJsonLd = {
   "@context": "https://schema.org",
   "@type": "ProfilePage",
-  "@id": site.url + "/sheesh-mirza#profile",
+  "@id": `${site.url}/sheesh-mirza#profile`,
   mainEntity: {
     "@type": "Person",
-    "@id": site.url + "/#person",
+    "@id": `${site.url}/#person`,
     name: "Sheesh Mirza",
     alternateName: ["Sheesh", "Sheesh Mirza"],
     url: site.url,
-    jobTitle: "Software Engineer, AI Builder & Creator",
+    image: `${site.url}/og-image.png`,
+    jobTitle: "Software Engineer & AI Systems Architect",
+    worksFor: {
+      "@type": "Organization",
+      name: "FreeCharge",
+    },
     sameAs: socialLinks.map((s) => s.href),
+    knowsAbout: [
+      "Software Engineering & System Designing",
+      "Artificial Intelligence & Machine Learning",
+      "Automation and Intelligent Systems",
+      "Distributed Systems & Cloud Architecture",
+      "Entrepreneurship & Problem Discovery",
+      "Startups & Business Innovation",
+      "Human Psychology, Behavior & Habits",
+    ],
   },
 };
 
@@ -40,20 +54,20 @@ export default function SheeshMirzaPage() {
       <TopicPage
         eyebrow="Official Profile"
         title="Sheesh Mirza — Software Engineer, AI Builder & Creator"
-        description="This is the public home for Sheesh Mirza's work across software engineering, artificial intelligence, product experiments, entrepreneurship, writing, and creator projects. The operating idea is simple: do useful work, document it clearly, and keep improving."
+        description="This is the canonical public hub for Sheesh Mirza's work across software engineering, artificial intelligence, startups, product experiments, writing, and creator initiatives. The operating ethos: build dependable software, share honest evidence, and document compounding progress."
         points={[
-          "Software engineering is the foundation: backend systems, APIs, distributed systems, reliability, debugging, and the trade-offs behind production software.",
-          "AI is the current frontier: LLM applications, AI agents, automation, evaluation, and the engineering required to turn prototypes into dependable systems.",
-          "Building in public is the operating philosophy: share experiments, lessons, decisions, failures, and the evidence behind changing an opinion.",
-          "Writing is part of the craft: technical notes, practical explanations, product thinking, and observations from actually building things.",
-          "Sheesh Unfiltered is the creator layer: conversations, experiments, technology, career, business, stories, and unfiltered perspectives.",
+          "Software Engineering & System Designing: backend microservices, high concurrency, financial systems at FreeCharge, distributed reliability, and scalable architecture.",
+          "Artificial Intelligence & Machine Learning: Model Context Protocol (MCP), autonomous agent orchestration, local models via Ollama, and deterministic guardrails.",
+          "Automation & Intelligent Systems: converting high-friction human operations into autonomous background pipelines.",
+          "Entrepreneurship & Startups: uncovering acute user problems, building rapid validation prototypes, and engineering growth loops.",
+          "Human Psychology & Habits: understanding the 10 fundamental desires that dictate consumer behavior, decision-making biases, and habit formation.",
         ]}
         related={[
-          { label: "About", href: "/about" },
-          { label: "Projects", href: "/projects" },
-          { label: "Writing", href: "/blog" },
-          { label: "Videos", href: "/videos" },
-          { label: "Profiles", href: "/media" },
+          { label: "About Background", href: "/about" },
+          { label: "GitHub Repositories", href: "/projects" },
+          { label: "Technical Essays", href: "/blog" },
+          { label: "Video Essays", href: "/videos" },
+          { label: "Press Kit & Bio", href: "/press" },
         ]}
       />
     </>

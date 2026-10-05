@@ -1,32 +1,86 @@
 import type { Metadata } from "next";
 import { TopicPage } from "@/components/sections/TopicPage";
+import { site } from "@/data/site-config";
 
 export const metadata: Metadata = {
-  title: "AI Engineering",
+  title: "AI Engineering, Machine Learning & Intelligent Automation",
   description:
-    "Sheesh Mirza writes and builds around AI engineering, LLM applications, AI agents, evaluation, automation, and production systems.",
+    "Engineering insights by Sheesh Mirza on Artificial Intelligence, Machine Learning, Model Context Protocol (MCP), agentic AI architectures, LLM evaluation, and production intelligent systems.",
   alternates: { canonical: "/ai-engineering" },
+  openGraph: {
+    title: "AI Engineering & Machine Learning | Sheesh Mirza",
+    description:
+      "Building practical AI systems, Model Context Protocol servers, LLM orchestration, and intelligent automation frameworks.",
+    url: `${site.url}/ai-engineering`,
+    type: "article",
+  },
 };
 
 export default function AIEngineeringPage() {
+  const breadcrumbJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      {
+        "@type": "ListItem",
+        position: 1,
+        name: "Home",
+        item: site.url,
+      },
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: "AI Engineering & Machine Learning",
+        item: `${site.url}/ai-engineering`,
+      },
+    ],
+  };
+
+  const articleJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "TechArticle",
+    headline: "AI Engineering, Machine Learning & Intelligent Systems Architecture",
+    description:
+      "Deep exploration into Model Context Protocol (MCP), autonomous agent orchestration, LLM guardrails, structured evaluation, and production automation.",
+    author: {
+      "@type": "Person",
+      name: "Sheesh Mirza",
+      url: site.url,
+    },
+    publisher: {
+      "@type": "Person",
+      name: "Sheesh Mirza",
+    },
+    url: `${site.url}/ai-engineering`,
+    inLanguage: "en-US",
+  };
+
   return (
-    <TopicPage
-      eyebrow="AI Engineering"
-      title="Building useful AI systems, not AI theatre."
-      description="My AI work focuses on the engineering around the model: problem definition, structured outputs, tool use, state, evaluation, failure handling, observability, cost, and deployment."
-      points={[
-        "LLM applications: designing useful workflows around language models instead of treating the model as the entire product.",
-        "AI agents: tool use, state, orchestration, memory, guardrails, and recovery when an agent makes the wrong decision.",
-        "Evaluation: defining what success means, measuring failure, and testing AI behavior before trusting it in a real workflow.",
-        "Automation: identifying repetitive work where AI can remove friction without hiding important human judgment.",
-        "Production thinking: latency, cost, safety, monitoring, fallbacks, and graceful failure for systems that include probabilistic components."
-      ]}
-      related={[
-        { label: "Projects", href: "/projects" },
-        { label: "Software Engineering", href: "/software-engineering" },
-        { label: "Writing", href: "/blog" },
-        { label: "Videos", href: "/videos" },
-      ]}
-    />
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify([breadcrumbJsonLd, articleJsonLd]),
+        }}
+      />
+      <TopicPage
+        eyebrow="Artificial Intelligence & Machine Learning"
+        title="Building production AI systems, not conversational toys."
+        description="My AI engineering work focuses on the deterministic software surrounding probabilistic models: tool calling, Model Context Protocol (MCP), state machine orchestration, synthetic data evaluation, and automated agent workflows."
+        points={[
+          "Model Context Protocol (MCP): building standardized client-server interfaces that allow LLMs to safely read contexts, query databases, and execute verified tools.",
+          "Agentic AI architecture: stateful multi-agent execution loops, memory persistence, human-in-the-loop approvals, and automatic recovery from hallucinations.",
+          "Automation and intelligent systems: transforming repetitive human processes into robust, self-healing background automation pipelines.",
+          "Evaluation & benchmarks: creating ground-truth assertions, regression test suites, and quantitative metrics before deploying AI into mission-critical paths.",
+          "Production realities: optimizing token costs, latency caching, local inference via Ollama, structured JSON output validation, and graceful deterministic fallbacks.",
+        ]}
+        related={[
+          { label: "Software Engineering", href: "/software-engineering" },
+          { label: "System Design", href: "/system-design" },
+          { label: "GitHub Repositories", href: "/projects" },
+          { label: "Technical Articles", href: "/blog" },
+        ]}
+      />
+    </>
   );
 }

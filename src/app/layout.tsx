@@ -30,19 +30,49 @@ export const metadata: Metadata = {
   authors: [{ name: "Sheesh Mirza", url: site.url }],
   creator: "Sheesh Mirza",
   publisher: "Sheesh Mirza",
+  icons: {
+    icon: "/icon.svg",
+    shortcut: "/favicon.ico",
+    apple: "/apple-touch-icon.png",
+  },
   keywords: [
+    // Priority Tier 1: Engineering, AI & Automation
+    "Software Engineering & System Designing",
+    "Software Engineering",
+    "System Design",
+    "Distributed Systems",
+    "Backend Architecture",
+    "API Design",
+    "High Concurrency",
+    "Artificial Intelligence & Machine Learning",
+    "AI Engineering",
+    "Large Language Models",
+    "LLMs",
+    "AI Agents",
+    "Agentic AI",
+    "Model Context Protocol",
+    "MCP",
+    "Automation and Intelligent Systems",
+    "Intelligent Automation",
+    "Autonomous Systems",
+    // Priority Tier 2: Entrepreneurship, Startups & Innovation
+    "Entrepreneurship",
+    "Problems & Solutions",
+    "Startups & Business",
+    "Innovation & Growth",
+    "Product Validation",
+    "Building in Public",
+    "Venture Building",
+    // Priority Tier 3: Human Psychology & Behavior
+    "Human Psychology",
+    "Behavior and Habits",
+    "Consumer Behavior",
+    "Decision Making",
+    "Cognitive Biases",
+    "Mental Models",
+    // Personal Brand
     "Sheesh Mirza",
     "Sheesh Unfiltered",
-    "software engineer",
-    "software engineering",
-    "AI engineer",
-    "artificial intelligence",
-    "AI agents",
-    "LLMs",
-    "system design",
-    "product building",
-    "entrepreneurship",
-    "building in public",
   ],
   category: "technology",
   robots: {
@@ -62,15 +92,29 @@ export const metadata: Metadata = {
     url: site.url,
     siteName: "Sheesh Mirza",
     type: "website",
-    locale: "en_IN",
-    images: [{ url: site.image, width: 512, height: 512, alt: "Sheesh Mirza" }],
+    locale: "en_US",
+    images: [
+      {
+        url: `${site.url}/og-image.png`,
+        width: 1200,
+        height: 630,
+        alt: "Sheesh Mirza — Software Engineering & System Designing, Artificial Intelligence, Startups & Psychology",
+      },
+      {
+        url: site.avatar,
+        width: 512,
+        height: 512,
+        alt: "Sheesh Mirza",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: site.title,
     description: site.description,
     creator: "@SheeshUnfiltered",
-    images: [site.image],
+    site: "@sheeshmirza",
+    images: [`${site.url}/og-image.png`],
   },
 };
 
@@ -79,24 +123,35 @@ const personJsonLd = {
   "@type": "Person",
   "@id": `${site.url}/#person`,
   name: "Sheesh Mirza",
+  givenName: "Sheesh",
+  familyName: "Mirza",
   url: site.url,
-  image: site.image,
-  jobTitle: "Software Engineer, AI Builder & Creator",
+  image: `${site.url}/og-image.png`,
+  jobTitle: "Software Engineer & AI Systems Architect",
   description: site.description,
+  worksFor: {
+    "@type": "Organization",
+    name: "FreeCharge",
+  },
   sameAs: socialLinks.map((s) => s.href),
   knowsAbout: [
-    "Software Engineering",
-    "Artificial Intelligence",
-    "AI Engineering",
-    "Large Language Models",
-    "AI Agents",
-    "System Design",
-    "Distributed Systems",
-    "Product Building",
-    "Entrepreneurship",
-    "Building in Public",
-    "Content Creation",
+    "Software Engineering & System Designing",
+    "Artificial Intelligence & Machine Learning",
+    "Automation and Intelligent Systems",
+    "Distributed Systems & Cloud Architecture",
+    "Model Context Protocol (MCP)",
+    "AI Agents & Agentic Workflows",
+    "Entrepreneurship & Problem Discovery",
+    "Startups & Business Innovation",
+    "Growth & Distribution Strategy",
+    "Human Psychology",
+    "Behavior and Habits",
+    "Consumer Decision Making",
   ],
+  mainEntityOfPage: {
+    "@type": "WebPage",
+    "@id": site.url,
+  },
 };
 
 const websiteJsonLd = {
@@ -107,7 +162,12 @@ const websiteJsonLd = {
   url: site.url,
   description: site.description,
   publisher: { "@id": `${site.url}/#person` },
-  inLanguage: "en-IN",
+  inLanguage: "en-US",
+  potentialAction: {
+    "@type": "SearchAction",
+    target: `${site.url}/blog?q={search_term_string}`,
+    "query-input": "required name=search_term_string",
+  },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
@@ -117,6 +177,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       suppressHydrationWarning
       className={`${inter.variable} ${fraunces.variable} h-full antialiased`}
     >
+      <head>
+        <link rel="icon" href="/icon.svg" type="image/svg+xml" />
+        <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+      </head>
       <body className="min-h-full flex flex-col">
         <a
           href="#main-content"
@@ -134,10 +198,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           dangerouslySetInnerHTML={{
             __html: JSON.stringify({
               "@context": "https://schema.org",
-              "@graph": [
-                personJsonLd,
-                websiteJsonLd,
-              ],
+              "@graph": [personJsonLd, websiteJsonLd],
             }),
           }}
         />
