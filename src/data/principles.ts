@@ -2,20 +2,19 @@ export interface Principle {
   quote: string;
 }
 
-// Editable personal principles — not verified quotations from third parties.
 export const principles: Principle[] = [
-  { quote: "Build the smallest honest test before defending the biggest idea." },
-  { quote: "Technology earns its keep when it removes human friction, not when it shows off." },
-  { quote: "People don't buy specifications; they buy what grants them status, safety, or relief." },
-  { quote: "The most scalable backend means nothing if the interface demands exhausting cognitive load." },
-  { quote: "Execution is a feedback engine, not a trophy race to ship noise." },
-  { quote: "Every feature is a liability. Only keep what actively protects a core user outcome." },
-  { quote: "AI doesn't replace thinking; it penalizes sloppy thinking by multiplying mistakes at scale." },
-  { quote: "Understand the customer's unstated emotional context, not just their functional ticket." },
-  { quote: "Simplicity is not a beginning; it is the clarity left after all the hard trade-offs are settled." },
-  { quote: "Constraints breed elegant engineering; unconstrained budgets breed bloated architecture." },
-  { quote: "High-conviction bets require rapid invalidation loops, not endless theoretical debate." },
-  { quote: "Trust compounds through predictable reliability and evaporates in a single dark pattern." },
-  { quote: "Master memory layouts, protocols, and fundamental primitives before chasing abstractions." },
-  { quote: "A single builder with automated leverage can outpace an entire organization paralyzed by process." },
+  { quote: "Test a small version of your idea today before spending months on an unproven plan." },
+  { quote: "Great software removes effort for people. It never shows off complexity." },
+  { quote: "People don't buy technical specs; they buy safety, status, and peace of mind." },
+  { quote: "A fast backend means nothing if the interface is confusing and hard to use." },
+  { quote: "Shipping fast only helps when you listen closely to real user feedback." },
+  { quote: "Every extra feature brings bugs. Only keep what directly solves an important problem." },
+  { quote: "AI doesn't replace clear thinking; it magnifies sloppy thinking at lightning speed." },
+  { quote: "Understand how the customer feels, not just the technical bug they reported." },
+  { quote: "Simple systems are hard to design, but they are the easiest to trust and maintain." },
+  { quote: "Tight constraints create clean code. Big budgets create slow, bloated software." },
+  { quote: "Prove your idea with real users instead of endless theoretical debates." },
+  { quote: "User trust takes months of reliability to build and one bad design trick to destroy." },
+  { quote: "Master the fundamentals of databases, networks, and memory before chasing trends." },
+  { quote: "One focused builder using modern automated tools can outpace a team stuck in meetings." },
 ];

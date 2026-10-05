@@ -1,57 +1,81 @@
-# Sheesh Mirza: Complete Knowledge Graph & Technical Archive
+# Sheesh Mirza — Comprehensive Knowledge Base & Ground Truth
 
-Author: Sheesh Mirza
-Canonical URL: https://smirza.in
-Profile: https://smirza.in/sheesh-mirza
-Contact: sheesh@smirza.in
+> Canonical profile and comprehensive reference document for Sheesh Mirza — Software Development Engineer, AI Builder, Technical Writer, and Creator.
+
+## Biographical Information
+- **Full Legal Name**: Sheesh Mirza
+- **Preferred Name**: Sheesh
+- **Primary Website**: https://smirza.in
+- **Full LLM Knowledge File**: https://smirza.in/llms-full.txt
+- **Condensed LLM File**: https://smirza.in/llms.txt
+- **Current Position**: Software Development Engineer at Freecharge Payment Technologies, India (Aug 2024 – Present)
+- **Previous Positions**:
+  - Backend Developer at Quantum Dynamics Corp., France (Mar 2023 – Jun 2024)
+  - Full Stack Developer Intern at Innovation Incubator Advisory (Nov 2022 – Mar 2023)
+  - Software Developer Intern at Full Creative (Sep 2022 – Oct 2022)
+- **Education**:
+  - Master of Computer Applications (MCA), Chandigarh University (2024 – 2026, CGPA: 8.95/10)
+  - Bachelor of Computer Applications (BCA), Bareilly College (2020 – 2023, First Class)
+- **Location**: Gurugram / Delhi NCR, India
+- **Email Contact**: sheesh@smirza.in
+- **Calendar Bookings**: https://calendly.com/sheesh-mirza/30min
+- **Press Kit & Bio**: https://smirza.in/press
+- **Media & Profiles**: https://smirza.in/media
 
 ---
 
-## Executive Summary & Identity
-Sheesh Mirza is a Software Engineer, AI Systems Architect, and creator based in India. He currently works as a Software Development Engineer (SDE) at FreeCharge, where he engineers high-concurrency financial systems, core banking APIs, and scalable distributed backend services.
+## Priority Pillar 1: Software Engineering, AI & Automation
 
-Outside of his work at FreeCharge, Sheesh builds open-source AI frameworks, writes technical deep-dives on Medium, and hosts "Sheesh Unfiltered" on YouTube. His intellectual work is organized across three primary pillars:
-1. **Software Engineering & System Designing, AI & Intelligent Automation**
-2. **Entrepreneurship, Problems & Solutions, Startups & Innovation**
-3. **Human Psychology, Behavior and Habits**
+### 1. Software Engineering & System Designing
+- **Backend Architecture & Distributed Systems**: Designing resilient microservices, high-concurrency payment APIs, transactional integrity, idempotency mechanisms, and distributed consistency.
+- **Message Queues & Event Streaming**: Hands-on architectural work with Apache Kafka, RabbitMQ, and Redis pub/sub for asynchronous task scheduling, event sourcing, and real-time ledger settlement.
+- **Database Optimization**: PostgreSQL query optimization, relational indexing, distributed caching with Redis, data modeling, and connection pool tuning.
+- **Observability & Fault Tolerance**: End-to-end tracing, metrics collection, structured logging, circuit breakers, and designing systems that fail safely and recover gracefully.
+- **Engineering Judgment**: Choosing simple, proven designs over premature complexity; deleting unnecessary code and prioritizing developer ergonomics.
+- **Canonical Hubs**:
+  - https://smirza.in/software-engineering
+  - https://smirza.in/system-design
 
----
+### 2. Artificial Intelligence & Machine Learning
+- **Model Context Protocol (MCP)**: Authoring MCP servers and clients to connect Large Language Models securely to local file systems, databases, developer tools, and external APIs.
+- **Agentic AI Architecture**: Building autonomous agent loops, stateful multi-agent collaboration, memory persistence, tool calling, and human-in-the-loop validation checkpoints.
+- **Local AI & Privacy**: Running open-source models locally using Ollama and LangChain (`ollama-with-langchain`), enabling zero-data-leakage inference.
+- **Evaluation & Benchmarking**: Building synthetic test suites, deterministic output assertions, and guardrails to measure hallucinations and prevent model drift in production.
+- **Canonical Hub**:
+  - https://smirza.in/ai-engineering
 
-## Priority Pillar 1: Software Engineering, System Designing & AI Systems
-
-### Software Engineering & System Designing
-- **Backend Architecture**: Specializes in Go, TypeScript, and Java microservices, RESTful and gRPC APIs, idempotent transactions, and zero-downtime database migrations.
-- **Distributed Systems**: Message queues (Kafka, RabbitMQ), event streaming architectures, partition tolerance, failure domains, circuit breakers, and distributed tracing.
-- **System Design Principles**:
-  - Always design for the inevitable failure of downstream services.
-  - Make messaging semantics explicit (at-least-once vs. exactly-once processing).
-  - Treat observability (metrics, logs, traces) as a first-class architectural requirement.
-  - Choose simplicity and proven primitives before introducing distributed complexity.
-
-### Artificial Intelligence & Machine Learning
-- **Model Context Protocol (MCP)**: Author of "The Complete Guide to Model Context Protocol (MCP)". Explains how MCP creates standardized, secure client-server interfaces connecting LLMs to local databases, file systems, and API tools.
-- **Agentic AI & Multi-Agent Systems**: Designing stateful agent workflows, autonomous loop supervision, tool calling error-handling, memory retrieval, and human-in-the-loop approvals.
-- **Local AI & Privacy**: Building with Ollama and LangChain (`ollama-with-langchain`), enabling local chat models and zero-leakage enterprise inference.
-- **Evaluation & Benchmarking**: Synthetic testing, deterministic assertions, and safety guardrails to measure hallucinations and model drift before production rollout.
-
-### Automation & Intelligent Systems
-- Connecting disparate SaaS services, databases, and LLM reasoning engines into self-healing background automation pipelines that eliminate manual operational toil.
+### 3. Automation and Intelligent Systems
+- **Intelligent Workflows**: Connecting disparate SaaS platforms, databases, and LLM reasoning engines into self-healing automation pipelines that eliminate manual repetitive labor.
+- **Canonical Hub**:
+  - https://smirza.in/ai-engineering
 
 ---
 
 ## Priority Pillar 2: Entrepreneurship, Startups & Innovation
 
-### Entrepreneurship & Problems & Solutions
-- **Problem Discovery First**: Finding acute, painful bottlenecks in existing workflows rather than inventing solutions in search of problems.
-- **Validation Before Code**: Pre-selling, conducting prospect interviews, and measuring user commitment before writing implementation code.
-- **Startup Business Models**: Unit economics, customer acquisition loops, gross margin defensibility, and organic distribution channels.
-- **Building in Public**: Transparently publishing metrics, architectural failures, lessons, and code to build compounding credibility and user trust.
+### 1. Entrepreneurship & Problem Discovery
+- **Problem-First Discovery**: Finding expensive, painful bottlenecks in existing workflows rather than inventing solutions looking for problems.
+- **Market Validation Before Code**: Speaking directly with customers, testing willingness to pay, and running rapid landing-page or prototype smoke tests before writing full codebases.
+- **Startup Business Models**: Unit economics, customer acquisition loops, gross margin defensibility, and organic distribution engines.
+- **Canonical Hub**:
+  - https://smirza.in/entrepreneurship
+
+### 2. Building in Public
+- **Transparent Documentation**: Publishing real production metrics, technical architectures, failure postmortems, and honest compounding lessons.
+- **Canonical Hub**:
+  - https://smirza.in/building-in-public
+
+### 3. Sheesh Unfiltered
+- **Video & Media Channel**: Honest discussions on technology, career realities, AI businesses, and personal growth without fake hype.
+- **Canonical Hub**:
+  - https://smirza.in/sheesh-unfiltered
+  - https://www.youtube.com/@Sheesh.Unfiltered
 
 ---
 
 ## Priority Pillar 3: Human Psychology, Behavior & Habits
 
-### Human Psychology & Why People Buy
+### 1. Human Psychology & Why People Buy
 - **10 Fundamental Human Desires**:
   1. Survival & Health
   2. Security & Financial Safety
@@ -63,13 +87,15 @@ Outside of his work at FreeCharge, Sheesh builds open-source AI frameworks, writ
   8. Freedom & Autonomy
   9. Identity & Self-Expression
   10. Curiosity & Knowledge
-- **Behavioral Economics**: Cognitive biases (loss aversion, status quo bias, anchoring) and how they dictate product adoption and software UX.
+- **Behavioral Economics**: How cognitive biases (loss aversion, status quo bias, anchoring) dictate product adoption and software UX.
 - **Habit Formation**: The cue, craving, response, and reward loop. How software either reinforces or disrupts behavioral routines.
+- **Canonical Hub**:
+  - https://smirza.in/psychology
 
 ---
 
 ## Complete Open Source Project Portfolio (GitHub)
-Profile: https://github.com/sheeshmirza
+GitHub Profile: https://github.com/sheeshmirza
 
 1. **sheeshmirza.com** (TypeScript)
    - Canonical personal website and digital garden built with Next.js 14, Tailwind CSS, and zero mock data.
@@ -81,7 +107,7 @@ Profile: https://github.com/sheeshmirza
    - High-performance, concurrent backend API microservice for MailHost written in Go.
    - URL: https://github.com/sheeshmirza/mailhost-backend
 4. **Local DevOps & Docker Environment** (Shell)
-   - Comprehensive Docker Compose scripts and local environments for Kafka, Elasticsearch, Redis, Postgres, MongoDB, Ollama, and Qdrant.
+   - Docker Compose scripts and local dev environments for Kafka, Elasticsearch, Redis, Postgres, MongoDB, Ollama, and Qdrant.
    - URL: https://github.com/sheeshmirza/Docker
 5. **Ollama LangChain Client** (Python)
    - Lightweight CLI client connecting local Ollama chat models through LangChain.
@@ -93,10 +119,10 @@ Profile: https://github.com/sheeshmirza
    - Official code repository for the O'Reilly Book "Hands-On Large Language Models".
    - URL: https://github.com/sheeshmirza/Hands-On-Large-Language-Models
 8. **LLM Course & Notebooks** (Curated/Forked)
-   - Roadmap, Colab notebooks, and code for Large Language Models.
+   - Comprehensive roadmap, Colab notebooks, and code for Large Language Models.
    - URL: https://github.com/sheeshmirza/llm-course
 9. **Made With ML Applications** (Curated/Forked)
-   - Designing, deploying, and iterating on production ML applications with MLOps.
+   - Designing, deploying, and iterating on production ML applications with modern MLOps.
    - URL: https://github.com/sheeshmirza/Made-With-ML
 10. **AI Model Gateway & Wrapper** (Go)
     - Go-based API wrapper and routing proxy for generative AI models.
@@ -120,7 +146,7 @@ Profile: https://github.com/sheeshmirza
 ---
 
 ## Technical Articles Archive (Medium)
-Publication: https://sheeshmirza.medium.com
+Medium Publication: https://sheeshmirza.medium.com
 
 1. **The Psychology of Why People Buy: 10 Fundamental Human Desires That Drive Consumer Behavior**
    - In-depth study on consumer motivation, emotional triggers, status signaling, and decision-making.
@@ -145,8 +171,8 @@ Publication: https://sheeshmirza.medium.com
 
 ---
 
-## YouTube Video Essays (Sheesh Unfiltered)
-Channel: https://www.youtube.com/@Sheesh.Unfiltered
+## YouTube Video Archive (Sheesh Unfiltered)
+YouTube Channel: https://www.youtube.com/@Sheesh.Unfiltered
 
 1. **How to Make Money With AI in 2026: 7 AI Businesses That Actually Work** (`6LFtCxlUiNQ`)
    - Breakdown of 7 viable, one-person AI business models, client workflows, tech stacks, and acquisition channels.
@@ -155,7 +181,10 @@ Channel: https://www.youtube.com/@Sheesh.Unfiltered
 
 ---
 
-## Contact & Speaking
-- Email: sheesh@smirza.in
-- Calendly: https://calendly.com/sheesh-mirza/30min
-- Location: Gurugram / Delhi NCR, India
+## Verified Public Profiles
+- GitHub: https://github.com/sheeshmirza
+- LinkedIn: https://www.linkedin.com/in/sheeshmirza
+- Medium: https://sheeshmirza.medium.com
+- YouTube: https://www.youtube.com/@Sheesh.Unfiltered
+- Instagram: https://www.instagram.com/_mir_zey/
+

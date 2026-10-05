@@ -1,5 +1,3 @@
-//Reviewed
-
 export interface ExperienceEntry {
   role: string;
   company: string;
@@ -15,10 +13,10 @@ export const experience: ExperienceEntry[] = [
     company: "Freecharge Payment Technologies, IN",
     dates: "Aug 2024 - Present",
     responsibilities: [
-      "Design and maintain core payment processing microservices ensuring 99.99% transaction reliability and idempotency across high-volume merchant flows.",
-      "Architect asynchronous event-driven pipelines using Kafka and Redis to decouple settlement, reconciliation, and ledger operations under peak throughput.",
-      "Optimize distributed database queries and caching layers in PostgreSQL and Redis, cutting P99 latency by over 35% on critical payment APIs.",
-      "Collaborate with product managers and risk teams to implement real-time fraud mitigation checks without introducing friction to the checkout flow.",
+      "Build and maintain reliable payment systems processing high transaction volumes with 99.99% uptime.",
+      "Design fast event pipelines with Kafka and Redis for real-time settlements and ledger balance updates.",
+      "Speed up payment APIs by 35% through smart PostgreSQL database indexing and Redis caching tiers.",
+      "Partner with product and security teams to stop fraud in real-time without slowing down user checkout.",
     ],
     technologies: ["Java", "Spring Boot", "TypeScript", "Node.js", "Kafka", "PostgreSQL", "Redis", "Docker", "Kubernetes", "AWS"],
     projects: [
@@ -32,10 +30,10 @@ export const experience: ExperienceEntry[] = [
     company: "Quantum Dynamics Corp., FR",
     dates: "Mar 2023 - Jun 2024",
     responsibilities: [
-      "Engineered resilient RESTful and GraphQL APIs for client enterprise applications, standardizing contract schemas and validation pipelines.",
-      "Designed and executed database migration strategies, normalizing complex data models and establishing indexing strategies for analytical workloads.",
-      "Implemented comprehensive automated testing suites (unit, integration, contract tests), elevating test coverage from 45% to over 85%.",
-      "Containerized backend services with Docker and set up CI/CD deployment pipelines on GCP, slashing deployment cycle times in half.",
+      "Built clean, high-performance RESTful and GraphQL APIs for enterprise client applications.",
+      "Migrated databases, improved table structures, and added indexes to make slow queries run fast.",
+      "Wrote comprehensive automated test suites, lifting test coverage from 45% to over 85%.",
+      "Containerized microservices with Docker and set up automated CI/CD pipelines on Google Cloud.",
     ],
     technologies: ["Python", "FastAPI", "Node.js", "PostgreSQL", "GraphQL", "Docker", "GCP", "Redis", "CI/CD"],
     projects: [
@@ -48,9 +46,9 @@ export const experience: ExperienceEntry[] = [
     company: "Innovation Incubator Advisory, IN",
     dates: "Nov 2022 - Mar 2023",
     responsibilities: [
-      "Developed end-to-end features for early-stage startup MVPs, turning wireframes and product specs into responsive production web apps.",
-      "Built interactive dashboard interfaces with React and Tailwind CSS, integrating with third-party analytics and payment APIs.",
-      "Assisted senior engineers with relational database schema design, API endpoint specification, and bug triage during beta launches.",
+      "Turned startup ideas and design mockups into working, responsive web applications.",
+      "Built modern dashboards with React and Tailwind CSS, integrating live payments and analytics.",
+      "Assisted senior engineers with relational database design and API testing before public launches.",
     ],
     technologies: ["React", "TypeScript", "Node.js", "Express", "PostgreSQL", "Tailwind CSS", "REST APIs"],
     projects: ["Startup Incubation Portal", "Portfolio Venture Analytics Dashboard"],
@@ -60,9 +58,9 @@ export const experience: ExperienceEntry[] = [
     company: "Full Creative, IN",
     dates: "Sep 2022 - Oct 2022",
     responsibilities: [
-      "Contributed to modular UI component libraries adhering to accessibility and design system standards across team products.",
-      "Investigated and resolved frontend state synchronization bottlenecks, enhancing page render performance and user experience.",
-      "Participated in daily standups, sprint reviews, and pair programming sessions with senior software engineers.",
+      "Created reusable UI components following accessible design system guidelines.",
+      "Found and fixed frontend performance bottlenecks to make pages load and respond smoothly.",
+      "Participated in agile sprints, code reviews, and pair programming sessions with senior engineers.",
     ],
     technologies: ["JavaScript (ES6+)", "React", "HTML5/CSS3", "Git", "Jest"],
     projects: ["Internal Collaboration Tools", "Reusable Design System Components"],
@@ -79,26 +77,21 @@ export interface EducationEntry {
 
 export const education: EducationEntry[] = [
   {
-    degree: "Master of Computer Applications",
+    degree: "Master of Computer Applications (MCA)",
     institution: "Chandigarh University, IN",
     dates: "2024 - 2026",
     cgpa: "8.95/10",
     coursework: [
       "Machine Learning in Python",
       "Deep Learning and NLP",
-      "Statistics and Python in Machine Learning",
-      "Business Application of Machine Learning",
-      "Web, Social Analytics and Visualization",
-      "Advanced Database Management System",
+      "Statistics and Data Science",
+      "Business Applications of AI",
+      "Advanced Database Systems",
       "Design and Analysis of Algorithms",
-      "Python Programming",
-      "Advanced Internet Programming",
-      "Web Application Development",
-      "Big Data Hadoop",
-      "IoT, Cloud and Watson Analytics",
-      "Cyber Security",
-      "Network Security and Cryptography",
-      "Software Testing",
+      "Web Applications Development",
+      "Cloud Computing and Analytics",
+      "Cybersecurity and Cryptography",
+      "Software Testing and Quality",
     ],
   },
 ];
