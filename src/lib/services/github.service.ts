@@ -1,89 +1,12 @@
 import { projects as fallbackProjects, type Project } from "@/data/projects";
+import {
+  cleanRepoName,
+  categorizeRepo,
+  getRepoDescription,
+} from "@/lib/utils/repo-metadata";
 
 const GITHUB_USERNAME = "sheeshmirza";
 const GITHUB_REPOS_URL = `https://api.github.com/users/${GITHUB_USERNAME}/repos?sort=updated&per_page=100`;
-
-function cleanRepoName(raw: string): string {
-  const overrides: Record<string, string> = {
-    "sheeshmirza-website": "sheeshmirza.com",
-    "mailhost-frontend": "MailHost Web Client",
-    "mailhost-backend": "MailHost API Service",
-    "ollama-with-langchain": "Ollama LangChain Client",
-    "ai-agents-for-beginners": "AI Agents for Beginners",
-    "Hands-On-Large-Language-Models": "Hands-On LLMs Code",
-    "llm-course": "LLM Course & Notebooks",
-    "Made-With-ML": "Made With ML Applications",
-    "ai-wrapper": "AI Model Gateway & Wrapper",
-    "FC-Hackathon-2026": "FreeCharge Hackathon Project",
-    "Docker": "Local DevOps & Docker Environment",
-    "data-structures": "Data Structures in JavaScript",
-    "leetcode-30-days-of-javascript": "LeetCode 30 Days of JS",
-    "opencv-object-detection": "OpenCV Vision & Detection",
-    "languages": "Polyglot Systems Programming",
-  };
-  if (overrides[raw]) return overrides[raw];
-  return raw
-    .replace(/-/g, " ")
-    .replace(/\b\w/g, (char) => char.toUpperCase());
-}
-
-function categorizeRepo(
-  name: string,
-  desc: string,
-  lang: string | null,
-  topics: string[],
-): string {
-  const n = name.toLowerCase();
-  if (n === "docker") return "Systems & Backend";
-  if (n.includes("leetcode") || n.includes("data-structures")) return "Algorithms & Learning";
-  if (n.includes("languages")) return "Systems & Backend";
-  if (n.includes("mailhost-backend") || n.includes("backend")) return "Systems & Backend";
-  if (n.includes("mailhost-frontend") || n.includes("website") || n.includes("hackathon")) return "Web & Engineering";
-
-  const combined = `${name} ${desc} ${lang || ""} ${topics.join(" ")}`.toLowerCase();
-
-  if (
-    /\b(ai|agentic|agents?|llm|llms|gpt|langchain|ollama|machine-learning|ml|deep-learning|vision|opencv|pytorch)\b/i.test(
-      combined,
-    )
-  ) {
-    return "AI & Machine Learning";
-  }
-  if (
-    /\b(go|golang|docker|backend|c\+\+|systems?|microservice|server|kafka|redis|elasticsearch|postgresql)\b/i.test(
-      combined,
-    )
-  ) {
-    return "Systems & Backend";
-  }
-  return "Web & Engineering";
-}
-
-function getRepoDescription(name: string, rawDesc: string | null): string {
-  if (rawDesc && rawDesc.trim().length > 0) {
-    return rawDesc.trim();
-  }
-  const lower = name.toLowerCase();
-  if (lower.includes("mailhost-frontend")) {
-    return "Web application interface for the MailHost email service.";
-  }
-  if (lower.includes("mailhost-backend")) {
-    return "High-performance backend API and microservice for MailHost.";
-  }
-  if (lower.includes("ai-wrapper")) {
-    return "Go-based generative AI wrapper and integration proxy.";
-  }
-  if (lower.includes("website")) {
-    return "Personal website and digital garden built with Next.js, React, and Tailwind CSS.";
-  }
-  if (lower.includes("languages")) {
-    return "Polyglot programming explorations in C++ and systems languages.";
-  }
-  if (lower.includes("fc-hackathon")) {
-    return "FreeCharge Hackathon engineering project and prototype.";
-  }
-  return "Public software repository and open source exploration by Sheesh Mirza.";
-}
 
 export async function fetchGitHubProjects(): Promise<{
   projects: Project[];
@@ -100,38 +23,36 @@ export async function fetchGitHubProjects(): Promise<{
       headers.Authorization = `Bearer ${process.env.GITHUB_TOKEN}`;
     }
 
-    const response = await fetch(GITHUB_REPOS_URL, {
+    const res = await fetch(GITHUB_REPOS_URL, {
       headers,
       next: { revalidate: 3600 },
     });
 
-    if (!response.ok) {
-      throw new Error(`GitHub API returned HTTP ${response.status}`);
+    if (!res.ok) {
+      throw new Error(`GitHub API returned HTTP ${res.status}`);
     }
 
-    const repos = await response.json();
+    const repos = await res.json();
     if (!Array.isArray(repos) || repos.length === 0) {
-      throw new Error("No repositories returned from GitHub API");
+      throw new Error("No repositories found in GitHub API response");
     }
 
-    const categoriesSet = new Set<string>();
-    const projects: Project[] = repos
-      .filter((repo: any) => repo.name !== "sheeshmirza") // omit the special profile README repository
-      .map((repo: any) => {
+    const parsedProjects: Project[] = repos
+      .filter((r) => r.name !== GITHUB_USERNAME) // omit special profile README repo
+      .map((repo) => {
         const lang = repo.language || null;
         const topics = Array.isArray(repo.topics) ? repo.topics : [];
-        const description = getRepoDescription(repo.name, repo.description);
-        const category = categorizeRepo(repo.name, description, lang, topics);
-        categoriesSet.add(category);
+        const desc = getRepoDescription(repo.name, repo.description);
+        const category = categorizeRepo(repo.name, desc, lang, topics);
 
-        const technologies = [lang, ...topics].filter(Boolean) as string[];
+        const technologies = [lang, ...topics].filter(Boolean);
         if (technologies.length === 0) {
           technologies.push(category === "AI & Machine Learning" ? "AI" : "Software");
         }
 
         return {
           name: cleanRepoName(repo.name),
-          description,
+          description: desc,
           category,
           technologies: Array.from(new Set(technologies)),
           href: repo.html_url,
@@ -141,13 +62,15 @@ export async function fetchGitHubProjects(): Promise<{
         };
       });
 
+    const categories = Array.from(new Set(parsedProjects.map((p) => p.category))).sort();
+
     return {
-      projects,
-      categories: Array.from(categoriesSet).sort(),
+      projects: parsedProjects,
+      categories,
       fallback: false,
     };
   } catch (err) {
-    console.warn("GitHub fetch failed, falling back to local dataset:", err);
+    console.warn("GitHub repos fetch failed, using fallback projects:", err);
     const categories = Array.from(new Set(fallbackProjects.map((p) => p.category))).sort();
     return {
       projects: fallbackProjects,
