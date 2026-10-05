@@ -8,7 +8,9 @@ import { Business } from "@/components/sections/Business";
 import { CurrentlyExploring } from "@/components/sections/CurrentlyExploring";
 import { Books } from "@/components/sections/Books";
 import { Principles } from "@/components/sections/Principles";
-import { site, socialLinks } from "@/data/site-config";
+import { site } from "@/data/site-config";
+import { JsonLd } from "@/components/ui/JsonLd";
+import { createProfileSchema } from "@/lib/seo-schema";
 
 export const metadata: Metadata = {
   title: "About Sheesh Mirza — Engineering, AI & Entrepreneurship",
@@ -24,41 +26,15 @@ export const metadata: Metadata = {
   },
 };
 
-export default function AboutPage() {
-  const profileJsonLd = {
-    "@context": "https://schema.org",
-    "@type": "ProfilePage",
-    name: "About Sheesh Mirza",
-    url: `${site.url}/about`,
-    mainEntity: {
-      "@type": "Person",
-      name: "Sheesh Mirza",
-      url: site.url,
-      jobTitle: "Software Engineer, AI Builder & Systems Architect",
-      worksFor: {
-        "@type": "Organization",
-        name: "FreeCharge",
-      },
-      sameAs: socialLinks.map((s) => s.href),
-      knowsAbout: [
-        "Software Engineering & System Designing",
-        "Artificial Intelligence & Machine Learning",
-        "Automation and Intelligent Systems",
-        "Entrepreneurship & Problem Discovery",
-        "Startups & Business Innovation",
-        "Human Psychology & Habits",
-      ],
-    },
-  };
+const profileJsonLd = createProfileSchema({
+  path: "/about",
+  jobTitle: "Software Engineer, AI Builder & Systems Architect",
+});
 
+export default function AboutPage() {
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify(profileJsonLd),
-        }}
-      />
+      <JsonLd data={profileJsonLd} />
       <About />
       <ExperienceEducation />
       <MentalModel />

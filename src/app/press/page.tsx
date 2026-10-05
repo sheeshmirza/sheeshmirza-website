@@ -4,6 +4,9 @@ import { ArrowUpRight, Mail, Calendar } from "lucide-react";
 import { site, socialLinks, calendlyUrl } from "@/data/site-config";
 import { ExternalLink } from "@/components/ui/ExternalLink";
 
+import { JsonLd } from "@/components/ui/JsonLd";
+import { createBreadcrumbSchema, createProfileSchema } from "@/lib/seo-schema";
+
 export const metadata: Metadata = {
   title: "Press Kit & Official Bio",
   description:
@@ -18,59 +21,21 @@ export const metadata: Metadata = {
   },
 };
 
+const jsonLd = [
+  createProfileSchema({
+    path: "/press",
+    description: "Official press kit, speaking topics, approved photos, and media guidelines for Sheesh Mirza.",
+  }),
+  createBreadcrumbSchema([
+    { name: "Home", path: "/" },
+    { name: "Press Kit & Bio", path: "/press" },
+  ]),
+];
+
 export default function PressPage() {
-  const personJsonLd = {
-    "@context": "https://schema.org",
-    "@type": "ProfilePage",
-    mainEntity: {
-      "@type": "Person",
-      name: "Sheesh Mirza",
-      alternateName: "Sheesh",
-      jobTitle: "Software Development Engineer",
-      worksFor: {
-        "@type": "Organization",
-        name: "Freecharge Payment Technologies",
-      },
-      url: site.url,
-      sameAs: [
-        "https://www.linkedin.com/in/sheeshmirza",
-        "https://github.com/sheeshmirza",
-        "https://sheeshmirza.medium.com",
-        "https://www.youtube.com/@Sheesh.Unfiltered",
-        "https://www.instagram.com/_mir_zey/",
-      ],
-      description:
-        "Software engineer, AI builder, and writer working across backend engineering, distributed systems, machine learning, and human behavior.",
-    },
-  };
-
-  const breadcrumbJsonLd = {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    itemListElement: [
-      {
-        "@type": "ListItem",
-        position: 1,
-        name: "Home",
-        item: site.url,
-      },
-      {
-        "@type": "ListItem",
-        position: 2,
-        name: "Press Kit & Bio",
-        item: `${site.url}/press`,
-      },
-    ],
-  };
-
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify([personJsonLd, breadcrumbJsonLd]),
-        }}
-      />
+      <JsonLd data={jsonLd} />
 
       <section className="mx-auto max-w-5xl px-6 py-16 sm:px-10 sm:py-24">
         <header className="max-w-3xl">

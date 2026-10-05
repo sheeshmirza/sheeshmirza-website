@@ -46,14 +46,10 @@ const profileJsonLd = {
 
 export default function SheeshMirzaPage() {
   return (
-    <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(profileJsonLd) }}
-      />
-      <TopicPage
-        eyebrow="Official Profile"
-        title="Sheesh Mirza — Software Engineer, AI Builder & Creator"
+    <TopicPage
+      jsonLd={profileJsonLd}
+      eyebrow="Official Profile"
+      title="Sheesh Mirza — Software Engineer, AI Builder & Creator"
         description="This is the canonical public hub for Sheesh Mirza's work across software engineering, artificial intelligence, startups, product experiments, writing, and creator initiatives. The operating ethos: build dependable software, share honest evidence, and document compounding progress."
         points={[
           "Software Engineering & System Designing: backend microservices, high concurrency, financial systems at FreeCharge, distributed reliability, and scalable architecture.",
@@ -70,6 +66,5 @@ export default function SheeshMirzaPage() {
           { label: "Press Kit & Bio", href: "/press" },
         ]}
       />
-    </>
   );
 }
