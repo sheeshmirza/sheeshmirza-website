@@ -1,9 +1,13 @@
 import { articles as fallbackArticles, type Article } from "@/data/articles";
 import { sanitizeHtmlToPlainText } from "@/lib/utils/sanitize";
+import {
+  formatDate,
+  estimateReadingTime,
+  truncateText,
+  getSlugFromUrl,
+} from "@/lib/utils/format";
 
 const MEDIUM_FEED_URL = "https://medium.com/feed/@sheeshmirza";
-const WORDS_PER_MINUTE = 200;
-const DESCRIPTION_MAX_LENGTH = 200;
 
 function getXmlValue(xml: string, tag: string): string {
   const regex = new RegExp(
@@ -24,57 +28,6 @@ function getXmlValues(xml: string, tag: string): string[] {
     .filter(Boolean);
 }
 
-function createDescription(content: string): string {
-  const text = sanitizeHtmlToPlainText(content);
-  if (text.length <= DESCRIPTION_MAX_LENGTH) {
-    return text;
-  }
-  const truncated = text.slice(0, DESCRIPTION_MAX_LENGTH);
-  const lastSpace = truncated.lastIndexOf(" ");
-  return `${truncated.slice(0, lastSpace > 0 ? lastSpace : DESCRIPTION_MAX_LENGTH)}…`;
-}
-
-function createSlug(title: string): string {
-  const slug = title
-    .toLowerCase()
-    .trim()
-    .replace(/[^\w\s-]/g, "")
-    .replace(/\s+/g, "-")
-    .replace(/-+/g, "-")
-    .replace(/^-+|-+$/g, "");
-  return slug || "article";
-}
-
-function getSlug(link: string, title: string): string {
-  try {
-    const url = new URL(link);
-    const segments = url.pathname.split("/").filter(Boolean);
-    return segments.at(-1) || createSlug(title);
-  } catch {
-    return createSlug(title);
-  }
-}
-
-function estimateReadingTime(content: string): string {
-  const text = sanitizeHtmlToPlainText(content);
-  if (!text) return "1 min";
-  const wordCount = text.split(/\s+/).filter(Boolean).length;
-  const minutes = Math.max(1, Math.ceil(wordCount / WORDS_PER_MINUTE));
-  return `${minutes} min`;
-}
-
-function formatDate(dateString: string): string {
-  const date = new Date(dateString);
-  if (Number.isNaN(date.getTime())) {
-    return dateString;
-  }
-  return new Intl.DateTimeFormat("en-US", {
-    year: "numeric",
-    month: "long",
-    day: "numeric",
-  }).format(date);
-}
-
 async function fetchFromRss2Json(): Promise<Article[] | null> {
   try {
     const res = await fetch(
@@ -88,14 +41,14 @@ async function fetchFromRss2Json(): Promise<Article[] | null> {
 
     return json.items.map((item: any, index: number) => {
       const title = sanitizeHtmlToPlainText(item.title || "Untitled");
-      const desc = createDescription(item.description || item.content || "");
+      const desc = truncateText(item.description || item.content || "");
       const link = item.link || "";
       const categories: string[] = Array.isArray(item.categories)
         ? item.categories.map((c: string) => sanitizeHtmlToPlainText(c))
         : [];
 
       return {
-        slug: getSlug(link, title),
+        slug: getSlugFromUrl(link, title),
         title,
         description: desc,
         category: categories[0] || "Engineering",
@@ -160,9 +113,9 @@ export async function fetchMediumArticles(): Promise<{
       }
 
       parsedArticles.push({
-        slug: getSlug(link, title),
+        slug: getSlugFromUrl(link, title),
         title,
-        description: createDescription(descriptionXml || contentXml),
+        description: truncateText(descriptionXml || contentXml),
         category: categoryTags[0] || "Engineering",
         tags: categoryTags,
         date: formatDate(pubDate || new Date().toISOString()),
