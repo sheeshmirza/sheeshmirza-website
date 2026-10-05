@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { site, socialLinks, topicLinks } from "@/data/site-config";
 import { ExternalLink } from "@/components/ui/ExternalLink";
+import { SocialIcon } from "@/components/ui/SocialIcon";
 
 export function Footer() {
   const currentYear = new Date().getFullYear();
@@ -104,9 +105,10 @@ export function Footer() {
                 <li key={s.label}>
                   <ExternalLink
                     href={s.href}
-                    className="transition-colors hover:text-signal"
+                    className="inline-flex items-center gap-2 transition-colors hover:text-signal"
                   >
-                    {s.label}
+                    <SocialIcon platform={s.label} size={14} />
+                    <span>{s.label}</span>
                   </ExternalLink>
                 </li>
               ))}

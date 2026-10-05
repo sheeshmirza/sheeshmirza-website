@@ -2,6 +2,18 @@
 
 import { useCallback, useEffect, useRef, useState } from "react";
 import type { ZodType } from "zod";
+import {
+  cleanRepoName,
+  categorizeRepo,
+  getRepoDescription,
+} from "@/lib/utils/repo-metadata";
+import {
+  formatDate,
+  estimateReadingTime,
+  truncateText,
+  getSlugFromUrl,
+} from "@/lib/utils/format";
+import { sanitizeHtmlToPlainText } from "@/lib/utils/sanitize";
 
 type RemoteState<T> = {
   data: T | null;
@@ -59,16 +71,12 @@ async function fetchDirectFallback(targetUrl: string, signal?: AbortSignal): Pro
         .map((r) => {
           const lang = r.language || null;
           const topics = Array.isArray(r.topics) ? r.topics : [];
-          const name = r.name.replace(/-/g, " ").replace(/\b\w/g, (c: string) => c.toUpperCase());
-          const description = r.description || "Public software repository and code exploration by Sheesh Mirza.";
-          const combined = `${r.name} ${description} ${lang || ""}`.toLowerCase();
-          let category = "Web & Engineering";
-          if (/\b(ai|llm|agents?|gpt|langchain|ollama|vision|ml)\b/i.test(combined)) category = "AI & Machine Learning";
-          else if (/\b(docker|backend|go|c\+\+|systems?)\b/i.test(combined)) category = "Systems & Backend";
-          else if (/\b(leetcode|data-structures?)\b/i.test(combined)) category = "Algorithms & Learning";
+          const name = cleanRepoName(r.name);
+          const description = getRepoDescription(r.name, r.description);
+          const category = categorizeRepo(r.name, description, lang, topics);
 
           const technologies = [lang, ...topics].filter(Boolean) as string[];
-          if (!technologies.length) technologies.push("Software");
+          if (!technologies.length) technologies.push(category === "AI & Machine Learning" ? "AI" : "Software");
 
           return {
             name,
@@ -93,25 +101,26 @@ async function fetchDirectFallback(targetUrl: string, signal?: AbortSignal): Pro
       if (json.status !== "ok" || !Array.isArray(json.items) || json.items.length === 0) return null;
 
       const articles = json.items.map((item: any, idx: number) => {
-        const rawContent = (item.description || item.content || "").replace(/<[^>]+>/g, " ").trim();
-        const description = rawContent.length > 200 ? `${rawContent.slice(0, 200)}…` : rawContent;
+        const title = sanitizeHtmlToPlainText(item.title || "Untitled");
+        const rawContent = item.description || item.content || "";
+        const description = truncateText(rawContent);
         const categories = Array.isArray(item.categories) ? item.categories : [];
-        let category = "Engineering";
-        const text = `${item.title} ${categories.join(" ")}`.toLowerCase();
+        let category = categories[0] || "Engineering";
+        const text = `${title} ${categories.join(" ")}`.toLowerCase();
         if (/\b(psychology|behavior|buy)\b/.test(text)) category = "Psychology";
         else if (/\b(ai|llm|agent|mcp)\b/.test(text)) category = "AI";
         else if (/\b(data|mining|seaborn)\b/.test(text)) category = "Data";
         else if (/\b(queues|streaming|distributed)\b/.test(text)) category = "Systems";
 
         return {
-          slug: item.link?.split("/").pop() || `article-${idx}`,
+          slug: getSlugFromUrl(item.link || "", title),
           category,
-          title: item.title,
+          title,
           description,
-          date: new Date(item.pubDate || Date.now()).toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" }),
-          readingTime: `${Math.max(1, Math.ceil(rawContent.split(/\s+/).length / 200))} min`,
+          date: formatDate(item.pubDate || new Date().toISOString()),
+          readingTime: estimateReadingTime(rawContent),
           featured: idx < 3,
-          href: item.link,
+          href: item.link || "",
           tags: categories,
         };
       });
@@ -129,21 +138,21 @@ async function fetchDirectFallback(targetUrl: string, signal?: AbortSignal): Pro
       const videos = json.items.map((item: any, idx: number) => {
         const videoIdMatch = item.link?.match(/v=([a-zA-Z0-9_-]{11})/);
         const videoId = videoIdMatch ? videoIdMatch[1] : "";
-        const rawContent = (item.description || item.content || "").replace(/<[^>]+>/g, " ").trim();
-        const description = rawContent.length > 200 ? `${rawContent.slice(0, 200)}…` : rawContent;
+        const title = sanitizeHtmlToPlainText(item.title || "Untitled");
+        const description = truncateText(item.description || item.content || "");
         let category = "Ideas";
-        const text = `${item.title} ${description}`.toLowerCase();
+        const text = `${title} ${description}`.toLowerCase();
         if (/\b(ai|llm|agent|business)\b/.test(text)) category = "AI";
         else if (/\b(tech|code|system)\b/.test(text)) category = "Tech";
 
         return {
           slug: videoId || `video-${idx}`,
           category,
-          title: item.title,
+          title,
           description,
-          date: new Date(item.pubDate || Date.now()).toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" }),
+          date: formatDate(item.pubDate || new Date().toISOString()),
           featured: idx < 3,
-          href: item.link,
+          href: item.link || "",
           thumbnail: item.thumbnail || (videoId ? `https://img.youtube.com/vi/${videoId}/hqdefault.jpg` : undefined),
         };
       });
