@@ -1,13 +1,7 @@
 import Link from "next/link";
-import { ArrowDownRight, ArrowUpRight, Code, Briefcase, Play, BookOpen } from "lucide-react";
+import { ArrowDownRight, ArrowUpRight } from "lucide-react";
 import { socialLinks } from "@/data/site-config";
-
-const iconMap: Record<string, React.ComponentType<{ size?: string | number }>> = {
-  LinkedIn: Briefcase,
-  GitHub: Code,
-  YouTube: Play,
-  Medium: BookOpen,
-};
+import { SocialIcon } from "@/components/ui/SocialIcon";
 
 export function Hero() {
   return (
@@ -53,19 +47,16 @@ export function Hero() {
 
         <div className="hero-enter hero-enter-5 flex flex-wrap items-center gap-3 border-t border-border pt-5 lg:col-start-1">
           <span className="mr-2 text-xs uppercase tracking-[0.18em] text-muted">Find me in</span>
-          {socialLinks.map((s) => {
-            const Icon = iconMap[s.label];
-            return (
-              <a
-                key={s.label}
-                href={s.href}
-                aria-label={s.label}
-                className="flex h-9 w-9 items-center justify-center border border-border bg-surface/60 text-muted transition-colors hover:border-signal hover:text-signal"
-              >
-                {Icon ? <Icon size={16} /> : <span className="text-xs">{s.label[0]}</span>}
-              </a>
-            );
-          })}
+          {socialLinks.map((s) => (
+            <a
+              key={s.label}
+              href={s.href}
+              aria-label={s.label}
+              className="flex h-9 w-9 items-center justify-center border border-border bg-surface/60 text-muted transition-colors hover:border-signal hover:text-signal"
+            >
+              <SocialIcon platform={s.label} size={16} />
+            </a>
+          ))}
         </div>
 
         <aside className="hero-enter hero-enter-4 relative overflow-hidden border border-foreground bg-foreground p-6 text-background shadow-[12px_12px_0_var(--signal)] sm:p-8 lg:mb-2">

@@ -1,14 +1,17 @@
 "use client";
 
 import { useMemo } from "react";
-import { ArrowUpRight, RefreshCw } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
 import { articles as fallbackArticles } from "@/data/articles";
 import { Section } from "@/components/ui/Section";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Reveal } from "@/components/ui/Reveal";
 import { ExternalLink } from "@/components/ui/ExternalLink";
-import { useRemoteData } from "@/hooks/useRemoteData";
 import { Card } from "@/components/ui/Card";
+import { ErrorRetryBanner } from "@/components/ui/ErrorRetryBanner";
+import { CardSkeletonGrid } from "@/components/ui/CardSkeletonGrid";
+import { EmptyState } from "@/components/ui/EmptyState";
+import { useRemoteData } from "@/hooks/useRemoteData";
 import { ErrorBoundary } from "@/components/ui/ErrorBoundary";
 import { ArticlesResponseSchema, type ValidatedArticlesResponse } from "@/lib/schemas";
 
@@ -46,32 +49,19 @@ function FeaturedWritingContent() {
       </Reveal>
 
       {error && !articles.length && (
-        <div className="mt-12 border border-border bg-surface p-6">
-          <p className="text-sm text-signal">Failed to load articles from remote feed.</p>
-          <button
-            type="button"
-            onClick={() => refetch()}
-            className="mt-3 inline-flex items-center gap-2 border border-border px-4 py-2 text-xs font-semibold uppercase tracking-wider text-foreground hover:border-signal"
-          >
-            <RefreshCw size={13} /> Retry Loading
-          </button>
-        </div>
+        <ErrorRetryBanner
+          message="Failed to load articles from remote feed."
+          onRetry={refetch}
+        />
       )}
 
       {loading && !articles.length ? (
-        <div className="mt-12 grid grid-cols-1 gap-6 lg:grid-cols-3">
-          {[1, 2, 3].map((i) => (
-            <div key={i} className="h-72 border border-border bg-surface p-7 animate-pulse">
-              <div className="h-3 w-16 bg-border/60 rounded" />
-              <div className="mt-4 h-6 w-3/4 bg-border/60 rounded" />
-              <div className="mt-4 h-16 w-full bg-border/30 rounded" />
-            </div>
-          ))}
-        </div>
+        <CardSkeletonGrid count={3} />
       ) : featured.length === 0 ? (
-        <p className="mt-12 border border-border bg-surface p-6 text-sm text-muted">
-          New essays are in progress. In the meantime, explore notes directly on Medium.
-        </p>
+        <EmptyState
+          message="New essays are in progress. In the meantime, explore notes directly on Medium."
+          className="mt-12 border border-border bg-surface p-6 text-sm text-muted"
+        />
       ) : (
         <div className="mt-12 grid grid-cols-1 gap-6 lg:grid-cols-3">
           {featured.map((article, i) => (

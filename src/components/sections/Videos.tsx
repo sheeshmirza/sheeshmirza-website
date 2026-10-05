@@ -2,13 +2,16 @@
 
 import { useMemo, useState } from "react";
 import Image from "next/image";
-import { ArrowUpRight, Play, RefreshCw } from "lucide-react";
+import { ArrowUpRight, Play } from "lucide-react";
 import { videos as fallbackVideos } from "@/data/videos";
 import { Section } from "@/components/ui/Section";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Reveal } from "@/components/ui/Reveal";
 import { FilterTabs } from "@/components/ui/FilterTabs";
 import { ExternalLink } from "@/components/ui/ExternalLink";
+import { ErrorRetryBanner } from "@/components/ui/ErrorRetryBanner";
+import { CardSkeletonGrid } from "@/components/ui/CardSkeletonGrid";
+import { EmptyState } from "@/components/ui/EmptyState";
 import { useRemoteData } from "@/hooks/useRemoteData";
 import { ErrorBoundary } from "@/components/ui/ErrorBoundary";
 import { VideosResponseSchema, type ValidatedVideosResponse } from "@/lib/schemas";
@@ -69,35 +72,16 @@ function VideosContent() {
       </Reveal>
 
       {error && !videos.length && (
-        <div className="mt-12 border border-border bg-surface p-6">
-          <p className="text-sm text-signal">Failed to load conversations from remote feed.</p>
-          <button
-            type="button"
-            onClick={() => refetch()}
-            className="mt-3 inline-flex items-center gap-2 border border-border px-4 py-2 text-xs font-semibold uppercase tracking-wider text-foreground hover:border-signal"
-          >
-            <RefreshCw size={13} /> Retry Loading
-          </button>
-        </div>
+        <ErrorRetryBanner
+          message="Failed to load conversations from remote feed."
+          onRetry={refetch}
+        />
       )}
 
       {loading && !videos.length ? (
-        <div className="mt-10 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {[1, 2, 3].map((i) => (
-            <div key={i} className="border border-border bg-surface p-0 animate-pulse">
-              <div className="aspect-video w-full bg-border/40" />
-              <div className="p-6">
-                <div className="h-3 w-16 bg-border/60 rounded" />
-                <div className="mt-4 h-6 w-3/4 bg-border/60 rounded" />
-                <div className="mt-4 h-12 w-full bg-border/30 rounded" />
-              </div>
-            </div>
-          ))}
-        </div>
+        <CardSkeletonGrid count={3} hasThumbnail />
       ) : filtered.length === 0 ? (
-        <p className="mt-12 text-muted">
-          No conversations in {active} yet. The next one is still being shaped.
-        </p>
+        <EmptyState message={`No conversations in ${active} yet. The next one is still being shaped.`} />
       ) : (
         <div className="mt-10 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {filtered.map((video, i) => (
@@ -152,7 +136,7 @@ function VideosContent() {
 
 export function Videos() {
   return (
-    <ErrorBoundary fallbackTitle="Videos Unavailable">
+    <ErrorBoundary fallbackTitle="Videos Feed Unavailable">
       <VideosContent />
     </ErrorBoundary>
   );

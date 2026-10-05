@@ -1,7 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { Code, GitFork, RefreshCw, Star } from "lucide-react";
+import { Code, Star } from "lucide-react";
 import { projects as fallbackProjects, projectCategories as fallbackCategories } from "@/data/projects";
 import { Section } from "@/components/ui/Section";
 import { SectionHeading } from "@/components/ui/SectionHeading";
@@ -9,6 +9,9 @@ import { Reveal } from "@/components/ui/Reveal";
 import { FilterTabs } from "@/components/ui/FilterTabs";
 import { Card } from "@/components/ui/Card";
 import { ExternalLink } from "@/components/ui/ExternalLink";
+import { ErrorRetryBanner } from "@/components/ui/ErrorRetryBanner";
+import { CardSkeletonGrid } from "@/components/ui/CardSkeletonGrid";
+import { EmptyState } from "@/components/ui/EmptyState";
 import { useRemoteData } from "@/hooks/useRemoteData";
 import { ErrorBoundary } from "@/components/ui/ErrorBoundary";
 import { ProjectsResponseSchema, type ValidatedProjectsResponse } from "@/lib/schemas";
@@ -65,32 +68,16 @@ function ProjectsContent() {
       </Reveal>
 
       {error && !projects.length && (
-        <div className="mt-12 border border-border bg-surface p-6">
-          <p className="text-sm text-signal">Failed to load projects from GitHub.</p>
-          <button
-            type="button"
-            onClick={() => refetch()}
-            className="mt-3 inline-flex items-center gap-2 border border-border px-4 py-2 text-xs font-semibold uppercase tracking-wider text-foreground hover:border-signal"
-          >
-            <RefreshCw size={13} /> Retry Loading
-          </button>
-        </div>
+        <ErrorRetryBanner
+          message="Failed to load projects from GitHub."
+          onRetry={refetch}
+        />
       )}
 
       {loading && !projects.length ? (
-        <div className="mt-10 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {[1, 2, 3].map((i) => (
-            <div key={i} className="h-64 border border-border bg-surface p-6 animate-pulse">
-              <div className="h-3 w-20 bg-border/60 rounded" />
-              <div className="mt-4 h-6 w-3/4 bg-border/60 rounded" />
-              <div className="mt-4 h-16 w-full bg-border/30 rounded" />
-            </div>
-          ))}
-        </div>
+        <CardSkeletonGrid count={3} />
       ) : filtered.length === 0 ? (
-        <p className="mt-12 text-muted">
-          Nothing to show in {active} yet. The next experiment is underway.
-        </p>
+        <EmptyState message={`Nothing to show in ${active} yet. The next experiment is underway.`} />
       ) : (
         <div className="mt-10 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {filtered.map((project, i) => (
@@ -139,12 +126,6 @@ function ProjectsContent() {
                       <Code size={14} /> View on GitHub
                     </ExternalLink>
                   )}
-                  {project.forks !== undefined && project.forks > 0 && (
-                    <span className="inline-flex items-center gap-1 text-xs text-muted">
-                      <GitFork size={12} />
-                      {project.forks}
-                    </span>
-                  )}
                 </div>
               </Card>
             </Reveal>
@@ -157,7 +138,7 @@ function ProjectsContent() {
 
 export function Projects() {
   return (
-    <ErrorBoundary fallbackTitle="Projects Unavailable">
+    <ErrorBoundary fallbackTitle="Projects Feed Unavailable">
       <ProjectsContent />
     </ErrorBoundary>
   );
