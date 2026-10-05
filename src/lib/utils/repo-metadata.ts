@@ -1,5 +1,5 @@
 const REPO_NAME_OVERRIDES: Record<string, string> = {
-  "sheeshmirza-website": "sheeshmirza.com",
+  "sheeshmirza-website": "smirza.in",
   "mailhost-frontend": "MailHost Web Client",
   "mailhost-backend": "MailHost API Service",
   "ollama-with-langchain": "Ollama LangChain Client",

@@ -12,7 +12,7 @@ export type Project = {
 
 export const projects: Project[] = [
   {
-    "name": "sheeshmirza.com",
+    "name": "smirza.in",
     "description": "Personal website and digital garden built with Next.js, React, and Tailwind CSS.",
     "category": "Web & Engineering",
     "technologies": [
@@ -21,7 +21,7 @@ export const projects: Project[] = [
     "href": "https://github.com/sheeshmirza/sheeshmirza-website",
     "stars": 0,
     "forks": 0,
-    "updatedAt": "2026-10-05T05:02:47Z"
+    "updatedAt": "2026-10-05T05:12:38Z"
   },
   {
     "name": "MailHost Web Client",

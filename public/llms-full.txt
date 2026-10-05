@@ -97,7 +97,7 @@
 ## Complete Open Source Project Portfolio (GitHub)
 GitHub Profile: https://github.com/sheeshmirza
 
-1. **sheeshmirza.com** (TypeScript)
+1. **smirza.in** (TypeScript)
    - Canonical personal website and digital garden built with Next.js 14, Tailwind CSS, and zero mock data.
    - URL: https://github.com/sheeshmirza/sheeshmirza-website
 2. **MailHost Web Client** (TypeScript)
