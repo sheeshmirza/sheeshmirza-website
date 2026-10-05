@@ -1,8 +1,9 @@
 import { videos as fallbackVideos, type Video } from "@/data/videos";
 import { sanitizeHtmlToPlainText } from "@/lib/utils/sanitize";
+import { formatDate, truncateText } from "@/lib/utils/format";
 
-const YOUTUBE_HANDLE = "Sheesh.Unfiltered";
 const MANUAL_CHANNEL_ID = process.env.YOUTUBE_CHANNEL_ID;
+const VERIFIED_CHANNEL_ID = "UCqTAh-n3Tqg0Ui9joxAcfCA";
 
 const categoryKeywords: Record<string, string[]> = {
   AI: ["ai", "llm", "generative", "chatgpt", "machine learning", "neural", "model", "agent"],
@@ -51,22 +52,6 @@ function detectCategory(title: string, description: string): string {
   return "Ideas";
 }
 
-function formatDate(dateString: string): string {
-  try {
-    const date = new Date(dateString);
-    if (Number.isNaN(date.getTime())) return dateString;
-    return date.toLocaleDateString("en-US", {
-      year: "numeric",
-      month: "long",
-      day: "numeric",
-    });
-  } catch {
-    return dateString;
-  }
-}
-
-const VERIFIED_CHANNEL_ID = "UCqTAh-n3Tqg0Ui9joxAcfCA";
-
 async function resolveChannelId(): Promise<string | null> {
   if (MANUAL_CHANNEL_ID) return MANUAL_CHANNEL_ID;
   return VERIFIED_CHANNEL_ID;
@@ -89,9 +74,7 @@ async function fetchFromRss2Json(channelId: string): Promise<Video[] | null> {
       const link = item.link || "";
       const videoIdMatch = link.match(/v=([a-zA-Z0-9_-]{11})/);
       const videoId = videoIdMatch ? videoIdMatch[1] : "";
-      const description = sanitizeHtmlToPlainText(
-        item.description || item.content || "",
-      ).slice(0, 200);
+      const description = truncateText(item.description || item.content || "");
       const category = detectCategory(title, description);
       const thumbnail =
         item.thumbnail ||
@@ -100,7 +83,7 @@ async function fetchFromRss2Json(channelId: string): Promise<Video[] | null> {
       return {
         slug: videoId || title.toLowerCase().replace(/\s+/g, "-"),
         title,
-        description: description ? `${description}…` : "",
+        description,
         category,
         date: formatDate(item.pubDate || new Date().toISOString()),
         thumbnail,
@@ -149,7 +132,7 @@ export async function fetchYouTubeVideos(): Promise<{
       const title = sanitizeHtmlToPlainText(titleMatch ? titleMatch[1] : "Untitled");
 
       const summaryMatch = entryXml.match(/<summary>([\s\S]*?)<\/summary>/);
-      const description = sanitizeHtmlToPlainText(summaryMatch ? summaryMatch[1] : "").slice(0, 200);
+      const description = truncateText(summaryMatch ? summaryMatch[1] : "");
 
       const linkMatch = entryXml.match(/<link rel="alternate" href="(.*?)"/);
       const link = linkMatch ? linkMatch[1].trim() : "";
@@ -172,7 +155,7 @@ export async function fetchYouTubeVideos(): Promise<{
       videos.push({
         slug: videoId || title.toLowerCase().replace(/\s+/g, "-"),
         title,
-        description: description ? `${description}…` : "",
+        description,
         category,
         date: formatDate(pubDate),
         thumbnail,
@@ -199,7 +182,7 @@ export async function fetchYouTubeVideos(): Promise<{
       };
     }
 
-    console.warn("YouTube fetch failed, using fallback videos:", err);
+    console.warn("YouTube feed fetch failed, using verified fallback videos:", err);
     return {
       videos: fallbackVideos,
       categories: fallbackCategories,
